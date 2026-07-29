@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBDBUWzaDkp36gKtux6LuaT46rgPfD56kc",
@@ -12,37 +12,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const auth = getAuth(app);
 
-
-// 회원가입
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
-
-async function signUp(email, password) {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log("가입 완료:", userCredential.user.uid);
-  } catch (error) {
-    console.error(error.code, error.message);
-  }
-}
-
-
-// 로그인
-import { signInWithEmailAndPassword } from "firebase/auth";
-
-async function logIn(email, password) {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log("로그인 성공:", userCredential.user.uid);
-  } catch (error) {
-    console.error(error.code);
-  }
-}
-
-// 로그아웃
-/*
-import { signOut } from "firebase/auth";
-signOut(auth);
-*/

@@ -1,0 +1,98 @@
+.title {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.title > div {
+    position: relative;
+    height: 30px;
+    width: fit-content;;
+
+    display: flex;
+    flex-direction: row;
+
+    background-color: #34C75920;
+    border-radius: 15px;
+}
+.title > div > p {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    height: 17px;
+    display: flex;
+    flex-direction: row;
+
+    margin-right: 10px;
+    margin-left: 5px;
+
+    font-size: 14px;
+    font-weight: 400;
+    
+    color: #34C759
+}
+.title > div > svg {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    margin-left: 10px;
+}
+.title > p:nth-child(2) {
+    font-size: 32px;
+    font-weight: 600;
+}
+.title > p:nth-child(3) {
+    font-size: 14px;
+    font-weight: 300;
+    color: #6D6D6D;
+}
+.middle {
+    align-items: center;
+}
+.right {
+    align-items: flex-end;
+}
+.left {
+    align-items: flex-start;
+}
+.inputArea {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.inputArea > p:nth-child(1) {
+    font-size: 20px;
+    font-weight: 500;
+
+    margin-left: 3px;
+}
+.inputArea > p:nth-child(3) {
+    font-size: 16px;
+    font-weight: 400;
+
+    margin-left: 3px;
+
+    color: #6D6D6D;
+}
+.inputArea > input {
+    height: 50px;
+    width: 400px;
+    
+    padding-left: 15px;
+
+    border-radius: 15px;
+    border: 2px solid #6D6D6D;
+}
+.inputArea > input::placeholder {
+    font-size: 16px;
+    font-weight: 400;
+
+    color: red;
+}

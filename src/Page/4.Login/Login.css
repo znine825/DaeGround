@@ -1,0 +1,26 @@
+.loginButton {
+    position: absolute;
+    top: 660px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    width: 520px;
+    height: 70px;
+
+    border-radius: 15px;
+    border: 1px solid #6D6D6D;
+    background-color: #1DB443;
+}
+.loginButton:hover {
+    cursor: pointer;
+}
+.loginButton > p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    font-weight: 500;
+
+    color: white;
+}
