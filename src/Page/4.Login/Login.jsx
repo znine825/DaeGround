@@ -22,18 +22,18 @@ function Login() {
                 title = '로그인 하기' 
                 subtitle = '데그라운드에 다시오신걸 환영합니다' 
                 locate = 'middle'/>
-            <div className = 'inputGrid'>
+            <div className = 'loginputGrid'>
                 <Input  className = 'id'
                         value = { id } setValue = { setId }
-                        title = '아이디' warning = '아이디를 입력해 주세요.'
+                        title = '이메일' warning = '이메일을 입력해 주세요.'
                         condition = ''/>
                 <Input  className = 'name'
                         value = { password } setValue = { setPassword }
-                        title = '이름' warning = '이름을 입력해 주세요.'
+                        title = '비밀번호' warning = '비밀번호를 입력해 주세요.'
                         condition = ''/>
-            </div>
-            <div className = 'loginButton' onClick = {LoginButton}>
-                <p>로그인</p>
+                <div className = 'loginButton' onClick = {LoginButton}>
+                    <p>로그인</p>
+                </div>
             </div>
         </div>
     )

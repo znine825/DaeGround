@@ -1,31 +1,39 @@
+import { createUserWithEmailAndPassword, sendEmailVerification, signOut  } from "firebase/auth";
+import { auth, db } from "./firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from 'firebase/firestore';
 // 회원가입
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
+export async function signUp(email, password, name, nickname, phonenumber) {
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-export async function signUp(email, password) {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log("가입 완료:", userCredential.user.uid);
-  } catch (error) {
-    console.error(error.code, error.message);
-  }
+        const uid = userCredential.user.uid;
+        await setDoc(doc(db, 'users', uid), {
+          email: email,
+          name: name,
+          nickname: nickname,
+          phonenumber: phonenumber,
+          createdAt: new Date(),
+        });
+
+        await sendEmailVerification(userCredential.user);
+        await signOut(auth);
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
 
 // 로그인
-import { signInWithEmailAndPassword } from "firebase/auth";
-
 export async function logIn(email, password) {
-  try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log("로그인 성공:", userCredential.user.uid);
-  } catch (error) {
-    console.error(error.code);
-  }
-}
+    const user = userCredential.user;
 
-// 로그아웃
-/*
-import { signOut } from "firebase/auth";
-signOut(auth);
-*/
+    if (!user.emailVerified) {
+      await signOut(auth);
+      alert('이메일 인증을 먼저 완료해주세요.');
+      return;
+    }
+
+    console.log('로그인 성공');
+}

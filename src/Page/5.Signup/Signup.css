@@ -10,7 +10,7 @@
     transform: translate(-50%, 0);
 
 }
-.inputGrid {
+.signinputGrid {
     position: absolute;
     top: 275px;
     left: 50%;
@@ -23,7 +23,7 @@
 }
 .signButton {
     position: absolute;
-    top: 660px;
+    top: 860px;
     left: 50%;
     transform: translate(-50%, 0);
 
