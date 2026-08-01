@@ -1,0 +1,15 @@
+.MyPage > div:nth-child(2) {
+    position: absolute;
+    height: fit-content;
+    width: 1300px;
+
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.MyPage > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    
+}

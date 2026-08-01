@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./../../Javascript/firebase.js";
 import { Link } from 'react-router-dom';
+import { iconMap } from './../Icons/Icons.jsx'
 import './Header.css'
 
 function Header() {
@@ -18,11 +19,13 @@ function Header() {
         signOut(auth);
     };
 
+    const ProfileIcon = iconMap['profile'];
+
     return (
         <header className = 'header'>
             <div>
                 <div></div>
-                <p>데그라운드</p>
+                <p>대그라운드</p>
             </div>
             <div>
                 <div>
@@ -54,9 +57,9 @@ function Header() {
                     </div>
                 )}
                 <div>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 21C20 18.2386 16.4183 16 12 16C7.58172 16 4 18.2386 4 21M12 13C9.23858 13 7 10.7614 7 8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8C17 10.7614 14.7614 13 12 13Z" stroke="#6D6D6D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <Link to = '/Mypage/MyInfo'>
+                        <ProfileIcon color = '#6D6D6D' />
+                    </Link>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 11V16M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21ZM12.0498 8V8.1L11.9502 8.1002V8H12.0498Z" stroke="#6D6D6D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
