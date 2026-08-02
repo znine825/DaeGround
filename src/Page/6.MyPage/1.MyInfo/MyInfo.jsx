@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import './MyInfo.css'
 
 function MyInfo() {
 
     return (
-        <div>
+        <div className = 'myinfo'>
             
         </div>
     )

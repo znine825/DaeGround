@@ -1,15 +1,62 @@
 .MyPage > div:nth-child(2) {
-    position: absolute;
+    position: relative;
     height: fit-content;
     width: 1300px;
 
-    top: 200px;
+    top: 170px;
     left: 50%;
     transform: translate(-50%, 0);
 }
-.MyPage > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) {
-    position: absolute;
-    width: 250px;
-    height: 250px;
+.MyPage > div:nth-child(2) > div:nth-child(1) {
+    position: relative;
+    width: fit-content;
+    margin-top: auto;
+    margin-right: auto;
+}
+.MyPage > div:nth-child(2) > div:nth-child(2) {
+    position: relative;
     
+    top: 45px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.menu {
+    position: relative;
+    width: 270px;
+    height: 50px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+}
+.menu > p {
+    position: relative;
+    top: 16px;
+    left: 24px;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+.menu > svg {
+    z-index: 5;
+    position: relative;
+    top: 14px;
+    left: 14px;
+}
+.Myon {
+    border: 0px solid #6D6D6D;
+    background-color: #1DB443;
+}
+.Myon {
+    color: #FFFFFF;
+}
+.Myoff {
+    border: 1px solid #6D6D6D80;
+}
+.Myoff > p {
+    color: #6D6D6D50;
+}
+.outlet {
+    position: relative;
 }

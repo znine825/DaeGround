@@ -3,7 +3,7 @@
     left: 50%;
     transform: translate(-50%, 0);
 }
-.title {
+.signup > div:nth-child(2) {
     position: absolute;
     top: 120px;
     left: 50%;

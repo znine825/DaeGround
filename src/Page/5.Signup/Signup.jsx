@@ -22,7 +22,7 @@ function Signup() {
    
 
     return (
-        <div>
+        <div className = 'signup'>
             <Header />
             <Title 
                 icon = 'flag' 

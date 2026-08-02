@@ -14,7 +14,7 @@ function Login() {
     };
 
     return (
-        <div>
+        <div className = 'login'>
             <Header />
             <Title 
                 icon = 'flag' 
