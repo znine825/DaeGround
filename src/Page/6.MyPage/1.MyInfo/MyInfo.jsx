@@ -5,7 +5,12 @@ function MyInfo() {
 
     return (
         <div className = 'myinfo'>
-            
+            <div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div></div>
         </div>
     )
 }

@@ -2,8 +2,13 @@
     height: 70px;
     width: 1300px;
 
+    border-bottom: 2px solid #767676;
+
     display: flex;
     flex-direction: row;
+
+    background-color: white;
+    z-index: 100;
 }
 .header > div:nth-child(1) {
     position: relative;
