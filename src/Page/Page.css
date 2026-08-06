@@ -1,3 +1,14 @@
+:root {
+    --LM-main-color: #34C759;
+    --LM-background-color: #FFFFFF;
+    --LM-line-color: #767676;
+    --LM-subtext-color: #6D6D6D;
+    --LM-mainintext-color: #FFFFFF;
+    --LM-mainouttext-color: #000000;
+
+    --BM-background-color: #020202;
+}
+
 @font-face {
     font-family: 'A2z';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-1Thin.woff2') format('woff2');
@@ -91,8 +102,17 @@ input, textarea, select, button {
   font: inherit;
   color: inherit;
 }
-
+input[type = "checkbox"] {
+    appearance: none;
+}
 p {
     white-space: normal;
     font-family: 'A2z';
+}
+
+.header {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 0;
 }

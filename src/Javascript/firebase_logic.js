@@ -3,7 +3,7 @@ import { auth, db } from "./firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from 'firebase/firestore';
 // 회원가입
-export async function signUp(email, password, name, nickname, phonenumber) {
+export async function signUp(email, password, name ) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -11,8 +11,6 @@ export async function signUp(email, password, name, nickname, phonenumber) {
         await setDoc(doc(db, 'users', uid), {
           email: email,
           name: name,
-          nickname: nickname,
-          phonenumber: phonenumber,
           createdAt: new Date(),
         });
 

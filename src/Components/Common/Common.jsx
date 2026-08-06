@@ -17,7 +17,7 @@ export function Title({icon, text, title, subtitle, locate}) {
     )
 }
 
-export function Input({value, setValue, title, warning, condition}) {
+export function Input({value, setValue, title, warning, condition, errch, showPassword}) {
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -26,8 +26,8 @@ export function Input({value, setValue, title, warning, condition}) {
     return (
         <div className = 'inputArea'>
             <p>{title}</p>
-            <input
-                type = "text"
+            <input className = {errch ? 'inputT' : 'inputF'}
+                type = {showPassword ? 'text' : 'password'}
                 placeholder = {warning}
                 value = {value}
                 onChange = {handleChange}
@@ -35,4 +35,17 @@ export function Input({value, setValue, title, warning, condition}) {
             <p>{condition}</p>
         </div>
     );
+}
+
+
+export function Button({ width, height, text, fsize, fweight }) {
+    return (
+        <div className = 'ButtonComponent'
+             style = {{ width: `${width}px`, 
+                        height: `${height}px`,
+                        fontSize: `${fsize}px`,
+                        fontWeight: fweight}}>
+            <p>{ text }</p>
+        </div>
+    )
 }

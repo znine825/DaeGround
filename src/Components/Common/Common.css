@@ -1,9 +1,9 @@
 .title {
-    position: absolute;
+    position: relative;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     gap: 10px;
-
 }
 .title > div {
     position: relative;
@@ -64,22 +64,22 @@
     gap: 10px;
 }
 .inputArea > p:nth-child(1) {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
 
     margin-left: 3px;
 }
 .inputArea > p:nth-child(3) {
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 300;
 
     margin-left: 3px;
 
     color: #6D6D6D;
 }
 .inputArea > input {
-    height: 50px;
-    width: 400px;
+    height: 40px;
+    width: 350px;
     
     padding-left: 15px;
 
@@ -87,8 +87,37 @@
     border: 2px solid #6D6D6D;
 }
 .inputArea > input::placeholder {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 
+}
+.inputT::placeholder {
+    color: var(--LM-subtext-color);
+}
+.inputF::placeholder {
     color: red;
+}
+.ButtonComponent {
+    text-align: center;
+
+    border: 5px solid color-mix(in srgb, var(--LM-main-color) 30%, var(--LM-background-color) 70%);
+    border-radius: 15px;
+    background-color: var(--LM-main-color);
+
+    transition: border 0.3s ease, 
+                background-color 0.3s ease;
+}
+.ButtonComponent:hover {
+    cursor: pointer;
+
+    border: 5px solid color-mix(in srgb, var(--LM-main-color) 100%, var(--LM-background-color) 0%);
+    background-color: color-mix(in srgb, var(--LM-main-color) 80%, var(--LM-background-color) 20%);
+}
+
+.ButtonComponent > p {
+    position: relative;
+    height: auto;
+    top: 50%;
+    transform: translate(0, -50%);
+    color: var(--LM-mainintext-color);
 }

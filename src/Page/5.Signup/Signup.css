@@ -1,49 +1,56 @@
-.header {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
-.signup > div:nth-child(2) {
+.signup {
     position: absolute;
     top: 120px;
     left: 50%;
     transform: translate(-50%, 0);
 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.signup > div:nth-child(3) {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.signup > div:nth-child(3) > div {
+    display: flex;
+    flex-direction: row;
+}
+.signup > div:nth-child(3) > div > input {
+    position: relative;
+    top: 5px;
+
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+
+    border: 1px solid var(--LM-main-color);
+    border-radius: 5px;
+}
+.signup > div:nth-child(3) > div > input:checked {
+    background-color: var(--LM-main-color);
+}
+.signup > div:nth-child(3) > div > p {
+    margin-left: auto;
+    border-bottom: 1px solid var(--LM-line-color);
+}
+.signup > div:nth-child(3) > div > p:hover {
+    cursor: pointer;
 }
 .signinputGrid {
-    position: absolute;
-    top: 275px;
-    left: 50%;
-    transform: translate(-50%, 0);
+    position: relative;
+
     width: fit-content;
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 80px;
     row-gap: 40px;
+
 }
 .signButton {
-    position: absolute;
-    top: 860px;
-    left: 50%;
-    transform: translate(-50%, 0);
+    position: relative;
 
-    width: 520px;
-    height: 70px;
-
-    border-radius: 15px;
-    border: 1px solid #6D6D6D;
-    background-color: #1DB443;
-}
-.signButton:hover {
-    cursor: pointer;
-}
-.signButton > p {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 22px;
-    font-weight: 500;
-
-    color: white;
 }

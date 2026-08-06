@@ -11,11 +11,14 @@ import MyInfo from './6.MyPage/1.MyInfo/MyInfo.jsx'
 import MyPlan from './6.MyPage/2.MyPlan/MyPlan.jsx'
 import MySaving from './6.MyPage/3.MySaving/MySaving.jsx'
 
+import Header from '../Components/Header/Header.jsx'
+
 import './Page.css'
 
 createRoot(document.getElementById('root')).render(
-    <div className='App'>
+    <div>
         <BrowserRouter>
+            <Header />
             <Routes>
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/Product" element={<MakePlan />}></Route>
