@@ -121,3 +121,79 @@
     transform: translate(0, -50%);
     color: var(--LM-mainintext-color);
 }
+
+.loadMap {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+
+}
+.loadMap > div {
+    display: flex;
+    flex-direction: row;
+}
+.loadMap > div > div {
+    position: relative;
+    width: 110px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+.loadMap > div > div > div {
+    position: relative;
+}
+.loadMap > div> div > div > div {
+    position: absolute;
+    top: -5px;
+    left: 35px;
+    width: 20px;
+    height: 20px;
+
+    border-radius: 10px;
+    background-color: var(--LM-main-color);
+}
+.loadMap > div > div > div > div > p {
+    position: relative;
+    width: 13px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--LM-mainintext-color);
+}
+.loadMap > div > div > div {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    border: 1px solid var(--LM-subtext-color);
+}
+.loadMap > div> div > div > svg {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.loadMap > div > div > p:nth-child(2) {
+    margin-top: 10px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: var(--LM-mainouttext-color);
+}
+.loadMap > div > div > p:nth-child(3) {
+    margin-top: 10px;
+    
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+    color: var(--LM-subtext-color);
+}
+.loadMap > div > p {
+    position: relative;
+    top: 15px;
+}

@@ -103,4 +103,9 @@
     margin-right: 8px;
     background-color: #6D6D6D90;
 }
+.state_login > p {
+    font-size: 16px;
+    font-weight: 400;
 
+    color: #6D6D6D;
+}

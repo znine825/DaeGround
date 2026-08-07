@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import privacyPolicy from './privacy.md?raw';
+import { createPortal } from 'react-dom';
 import { iconMap } from './../../../Components/Icons/Icons.jsx'
 import 'github-markdown-css/github-markdown-light.css';
 import './PrivacyPolicy.css'
@@ -9,7 +10,7 @@ function PrivacyPage({setShowprivate}) {
 
     const CloseIcon = iconMap['close'];
 
-    return (
+    return createPortal(
         <div className = 'private'>
             <div>
                 <div onClick = {() => setShowprivate(false)}>
@@ -19,7 +20,8 @@ function PrivacyPage({setShowprivate}) {
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{privacyPolicy}</ReactMarkdown>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }
 

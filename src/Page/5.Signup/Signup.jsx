@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import Header from '../../Components/Header/Header.jsx'
-import { Title, Input, Button } from '../../Components/Common/Common.jsx'
+import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { signUp } from '../../Javascript/firebase_logic.js'
 import PrivacyPage from '../../Components/Files/PrivacyPolicy/PrivacyPolicy.jsx'
+import { iconMap } from './../../Components/Icons/Icons.jsx'
 
 import './Signup.css'
 
@@ -26,6 +27,32 @@ const inputText = {
 
 }
 
+const loadMapText = [
+    {
+        Icon: iconMap['mapPin'],
+        title: '회원가입 완료',
+        subtitle: '가입을 완료하면\n대기 상태가 됩니다',
+        line: true
+    },
+    {
+        Icon: iconMap['calendarCheck'],
+        title: '이메일함 확인',
+        subtitle: '가입한 이메일 주소로\n메일이 도착해요',
+        line: true
+    },
+    {
+        Icon: iconMap['terminal'],
+        title: '인증 링크 클릭',
+        subtitle: '메일의 링크를 누르면\n인증이 완료됩니다',
+        line: true
+    },
+    {
+        Icon: iconMap['map'],
+        title: '로그인 완료',
+        subtitle: '인증 완료 후 로그인을\n통해 모든 기능을\n이용할 수 있습니다',
+        line: false
+    }
+]
 function Signup() {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
@@ -33,9 +60,11 @@ function Signup() {
     const [check, setCheck] = useState('');
     
     const [signCheck, setSignCheck] = useState([true, true, true, true]);
-
+    const [privacyCheck, setPrivacyCheck] = useState(false);
+    const [termsofservice, setTermsofservice] = useState(false);
     let tempCheck = [true, true, true, true];
     let lastCheck = true;
+    
 
     // 비밀번호 양식
     function isValidPassword(pw) {
@@ -78,13 +107,23 @@ function Signup() {
             setCheck('');
             lastCheck = false;
         }
-        
+        // 개인정보 확인
+        if (!privacyCheck) {
+            lastCheck = false;
+        }
+        // 이용약관 확인
+        if (!termsofservice) {
+            lastCheck = false;
+        }
+
         if(lastCheck) {
             signUp(email, password, name);
         } else {
+            lastCheck = true;
             setSignCheck(tempCheck);
+            alert('');
+                navigate('/');
         }
-
     }
 
     const [showprivate, setShowprivate] = useState(false);
@@ -97,7 +136,7 @@ function Signup() {
                 title = '대그라운드 시작하기' 
                 subtitle = '회원가입을 통해 서비스를 이용해보세요' 
                 locate = 'middle'/>
-            
+            <LoadMap contents = {loadMapText}/>
             <div className = 'signinputGrid'>
                 <Input  value = { email } setValue = { setEmail } showPassword = { true } errch = {signCheck[0]}
                         title = '이메일' warning = { signCheck[0] ? inputText['email']['basic'] : inputText['email']['wrong'] }
@@ -113,12 +152,15 @@ function Signup() {
                         condition = ''/>
             </div>
             <div>
-                <div><input type="checkbox" />[ 필수 ] 개인정보 처리방침<p onClick = {() => setShowprivate(true)}>자세히</p></div>
-                <div><input type="checkbox" />[ 필수 ] 이용약관<p>자세히</p></div>
+                <div><input type="checkbox" checked = {privacyCheck} onChange = {(e) => setPrivacyCheck(e.target.checked)}/>[ 필수 ] 개인정보 처리방침<p onClick = {() => setShowprivate(true)}>자세히</p></div>
+                <div><input type="checkbox" checked = {termsofservice} onChange = {(e) => setTermsofservice(e.target.checked)}/>[ 필수 ] 이용약관<p>자세히</p></div>
+                <p style = {{display: (privacyCheck && termsofservice) ? 'none' : 'block'}}>필수항목에 동의해주세요.</p>
             </div>
             <div className = 'signButton' onClick = {() => signButton()}>
                 <Button width = '360' height = '50' text = '회원가입' fsize = '16' fweight = '500'/>
             </div>
+
+            
 
             {/* 문서 */}
             {showprivate && <PrivacyPage setShowprivate = { setShowprivate }/>}

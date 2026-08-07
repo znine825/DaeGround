@@ -49,3 +49,27 @@ export function Button({ width, height, text, fsize, fweight }) {
         </div>
     )
 }
+
+export function LoadMap({contents}) {    
+    return (
+        <div className = "loadMap">
+            {contents.map((item, index) => {
+                const Icon = item.Icon;
+                return (
+                    <div key = {index}>
+                        <div>
+                            <div>
+                                <div><p>0{index + 1}</p></div>
+                                <Icon color = 'var(--LM-main-color)' />
+                            </div>
+                            <p>{item['title']}</p>
+                            <p>{item['subtitle']}</p>
+                            
+                        </div>
+                        {item.line && <p>----------------</p>}
+                    </div>
+                )
+            })}
+        </div>
+    )
+}

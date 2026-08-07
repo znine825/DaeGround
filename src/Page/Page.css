@@ -106,13 +106,32 @@ input[type = "checkbox"] {
     appearance: none;
 }
 p {
-    white-space: normal;
+    white-space: pre-line;
     font-family: 'A2z';
+}
+html, body {
+    margin: 0;
+    height: 100%;
 }
 
 .header {
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
-    z-index: 0;
+    z-index: 1;
+}
+
+.footer {
+    position: relative;
+    z-index: 1;
+}
+.pages {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main {
+    flex: 1;
+    margin-top: 120px;
+    margin-bottom: 50px;
 }

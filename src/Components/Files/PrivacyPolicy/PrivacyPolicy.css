@@ -1,8 +1,8 @@
 .private {
-    position: absolute;
-    top: -120px;
-    width: 100vw;
-    height: 100vh;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 100%;
 
     background-color: color-mix(in srgb, var(--BM-background-color) 20%);
     backdrop-filter: blur(4px);
@@ -17,6 +17,7 @@
 
     width: 700px;
     height: 750px;
+    background-color: var(--LM-background-color);
 }
 .private > div > div:nth-child(2) {
     width: 100%;

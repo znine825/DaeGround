@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./../../Javascript/firebase.js";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { iconMap } from './../Icons/Icons.jsx'
 import './Header.css'
 
 function Header() {
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -15,7 +16,8 @@ function Header() {
         return () => unsubscribe();
     }, []);
 
-    const logOutButton = () => {    
+    const logOutButton = () => {
+        navigate('/');
         signOut(auth);
     };
 
@@ -34,16 +36,19 @@ function Header() {
                     </div>
                     <div>
                         <Link to = '/MakePlan'><p>나만의 여행 만들기</p></Link>
-                        </div>
+                    </div>
                     <div>
                         <Link to = '/NoticeBoard'><p>여행 게시판</p></Link>
-                        </div>
+                    </div>
+                    <div>
+                        <Link to = '/Contact'><p>문의하기</p></Link>
+                    </div>
                 </div>
                 <div>
                     {user ? (
                         // 로그인 상태
-                        <div onClick = {logOutButton}>
-                            로그아웃
+                        <div className = 'state_login' onClick = {logOutButton}>
+                            <p>로그아웃</p>
                         </div>
                     ) : (
                         // 로그아웃 상태

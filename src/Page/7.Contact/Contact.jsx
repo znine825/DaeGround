@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import './Home.css'
-function Home() {
+
+function Contact() {
 
     return (
         <div>
+            
         </div>
     )
 }
 
-export default Home
+export default Contact

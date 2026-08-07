@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react";
-import Header from '../../Components/Header/Header.jsx'
 import { Title, Input, Button } from '../../Components/Common/Common.jsx'
 import { logIn } from '../../Javascript/firebase_logic.js'
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'
 
 function Login() {
 
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const LoginButton = () => {
-        logIn(id, password)
+        if (logIn(id, password)) {
+            navigate('/');
+        } 
     };
 
     return (
         <div className = 'login'>
-            <Header />
             <Title 
                 icon = 'flag' 
                 text = '로그인' 
@@ -24,14 +26,16 @@ function Login() {
                 locate = 'middle'/>
             <div className = 'loginputGrid'>
                 <Input  className = 'id'
-                        value = { id } setValue = { setId }
+                        value = { id } setValue = { setId } showPassword = { true } errch = {1}
                         title = '이메일' warning = '이메일을 입력해 주세요.'
                         condition = ''/>
                 <Input  className = 'name'
-                        value = { password } setValue = { setPassword }
+                        value = { password } setValue = { setPassword } showPassword = { false } errch = {1}
                         title = '비밀번호' warning = '비밀번호를 입력해 주세요.'
                         condition = ''/>
-                <Button width = '360' height = '50' text = '로그인' fsize = '16' fweight = '500'/>
+                <div onClick = {() => LoginButton()}>
+                    <Button width = '360' height = '50' text = '로그인' fsize = '16' fweight = '500'/>
+                </div>
             </div>
         </div>
     )
