@@ -10,9 +10,13 @@ export async function signUp(email, password, name) {
 
         const uid = userCredential.user.uid;
         await setDoc(doc(db, 'users', uid), {
-          email: email,
-          name: name,
-          createdAt: new Date(),
+            email: email,
+            name: name,
+            createdAt: new Date(),
+            realname: '미등록',
+            phonenumber: '미등록',
+            residentialarea: '미등록',
+            gender: '미등록'
         });
 
         await sendEmailVerification(userCredential.user);

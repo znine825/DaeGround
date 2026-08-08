@@ -197,3 +197,40 @@
     position: relative;
     top: 15px;
 }
+.infoComponent {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.infoComponent > div:nth-child(1) > div:nth-child(1) {
+    position: absolute; 
+    width: 40px;
+    height: 40px;
+
+    border-radius: 15px;
+    background-color: color-mix(in srgb, var(--LM-main-color) 20%, var(--LM-background-color) 80%)
+}
+.infoComponent > div:nth-child(1) > svg {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.infoComponent > div:nth-child(2) {
+    position: relative;
+    left: 55px;
+}
+.infoComponent > div:nth-child(2) > p:nth-child(1) {
+    font-size: 12px;
+    font-weight: 500;
+
+    color: var(--LM-subtext-color);
+}
+.infoComponent > div:nth-child(2) > p:nth-child(2) {
+    position: relative;
+    top: 7px;
+    font-size: 16px;
+    font-weight: 500;
+
+    color: var(--LM-mainouttext-color);
+}

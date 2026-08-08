@@ -118,11 +118,12 @@ function Signup() {
 
         if(lastCheck) {
             signUp(email, password, name);
+            navigate('/Login');
         } else {
             lastCheck = true;
             setSignCheck(tempCheck);
-            alert('');
-                navigate('/');
+            alert('잘못된 정보가 있습니다.');
+            navigate('/');
         }
     }
 

@@ -73,3 +73,27 @@ export function LoadMap({contents}) {
         </div>
     )
 }
+
+export function Info({ title, subtitle, icon }) {
+    const IconComponent = iconMap[icon];
+    return (
+        <div className = 'infoComponent'>
+             <div>
+                <div></div>
+                <IconComponent color = 'var(--LM-main-color)'/>
+             </div>
+             <div>
+                <p>{title}</p>
+                <p>{subtitle}</p>
+             </div>
+        </div>
+    )
+}
+
+export function InfoHeader({contents}) {
+    return (
+        <div>
+            
+        </div>
+    )
+}
