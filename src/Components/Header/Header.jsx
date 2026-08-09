@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./../../Javascript/firebase.js";
 import { Link, useNavigate } from 'react-router-dom';
-import { iconMap } from './../Icons/Icons.jsx'
+import { Icon } from './../Icons/Icons.jsx'
 import './Header.css'
 
 function Header() {
@@ -21,7 +21,6 @@ function Header() {
         signOut(auth);
     };
 
-    const ProfileIcon = iconMap['profile'];
 
     return (
         <header className = 'header'>
@@ -64,7 +63,7 @@ function Header() {
                     )}
                     <div>
                         <Link to = '/Mypage/MyInfo'>
-                            <ProfileIcon color = '#6D6D6D' />
+                            <Icon name = 'profile' color = '#6D6D6D' />
                         </Link>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 11V16M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21ZM12.0498 8V8.1L11.9502 8.1002V8H12.0498Z" stroke="#6D6D6D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

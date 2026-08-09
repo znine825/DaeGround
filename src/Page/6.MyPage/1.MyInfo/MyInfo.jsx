@@ -1,25 +1,22 @@
 import { useState, useEffect } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app, auth } from "./../../../Javascript/firebase.js";
-import { Info } from "./../../../Components/Common/Common.jsx"
+import { getPostsByUid, getCommentsByUid, addComment } from "./../../../Javascript/firebase_logic.js";
+import { Info, InfoHeader } from "./../../../Components/Common/Common.jsx"
 
 import './MyInfo.css'
 
-async function getUserData(uid) {
-    const docRef = doc(db, "users", uid);  
-    const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-        return docSnap.data();   
-    } else {
-        console.log("문서가 존재하지 않습니다.");
-        return null;
-    }
-}
 
 function MyInfo() {
 
+    
+
     const [userData, setUserData] = useState(null);
+    const [postCount, setPostCount] = useState([]);
+    const [commentCount, setCommentCount] = useState([]);
+
+    
 
     useEffect(() => {
         const uid = auth.currentUser.uid;   // 안전하게 바로 사용 가능
@@ -31,40 +28,43 @@ function MyInfo() {
             if (docSnap.exists()) {
                 setUserData(docSnap.data());
             }
-        }
 
+            const [posts, comments] = await Promise.all([
+                getPostsByUid(uid),
+                getCommentsByUid(uid)
+            ]);
+
+            setPostCount(posts.length);
+            setCommentCount(comments.length);
+        }
         fetchData();
     }, []);
 
+    
     if (!userData) {
         return <div>로딩중...</div>;
     }
 
+
+    const headerInfo = {
+        icon: userData.info.icon,
+        name: userData.info.name,
+        date: userData.info.createdAt,
+        postCount: postCount,
+        commentCount: commentCount
+    }
+
+
     return (
         <div className = 'myinfo'>
+            <InfoHeader contents = {headerInfo}/>
             <div>
-                <div>
-                    <div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    <div>
-                        <p></p>
-                        <p></p>
-                    </div>
-
-                </div>
-                <div></div>
-                <div></div>
-            </div>
-            <div></div>
-            <div>
-                <Info title = '아이디' subtitle = {userData.name} icon = 'profile'/>
-                <Info title = '이름' subtitle = {userData.realname} icon = 'profile'/>
-                <Info title = '이메일' subtitle = {userData.email} icon = 'profile'/>
-                <Info title = '전화번호' subtitle = {userData.phonenumber} icon = 'profile'/>
-                <Info title = '거주지역' subtitle = {userData.residentialarea} icon = 'profile'/>
-                <Info title = '성별' subtitle = {userData.gender} icon = 'profile'/>
+                <Info title = '아이디' subtitle = {userData.info.name} icon = 'profile'/>
+                <Info title = '이름' subtitle = {userData.info.realname} icon = 'profile'/>
+                <Info title = '이메일' subtitle = {userData.info.email} icon = 'profile'/>
+                <Info title = '전화번호' subtitle = {userData.info.phonenumber} icon = 'profile'/>
+                <Info title = '거주지역' subtitle = {userData.info.residentialarea} icon = 'profile'/>
+                <Info title = '성별' subtitle = {userData.info.gender} icon = 'profile'/>
             </div>
         </div>
     )

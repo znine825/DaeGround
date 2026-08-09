@@ -9,7 +9,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 70px;
 
 }
 .signup > div:nth-child(4) {

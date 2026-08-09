@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header/Header.jsx'
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { signUp } from '../../Javascript/firebase_logic.js'
 import PrivacyPage from '../../Components/Files/PrivacyPolicy/PrivacyPolicy.jsx'
-import { iconMap } from './../../Components/Icons/Icons.jsx'
+import { Icon } from './../../Components/Icons/Icons.jsx'
 
 import './Signup.css'
 
@@ -29,25 +30,25 @@ const inputText = {
 
 const loadMapText = [
     {
-        Icon: iconMap['mapPin'],
+        icon: 'mapPin',
         title: '회원가입 완료',
         subtitle: '가입을 완료하면\n대기 상태가 됩니다',
         line: true
     },
     {
-        Icon: iconMap['calendarCheck'],
+        icon: 'calendarCheck',
         title: '이메일함 확인',
         subtitle: '가입한 이메일 주소로\n메일이 도착해요',
         line: true
     },
     {
-        Icon: iconMap['terminal'],
+        icon: 'terminal',
         title: '인증 링크 클릭',
         subtitle: '메일의 링크를 누르면\n인증이 완료됩니다',
         line: true
     },
     {
-        Icon: iconMap['map'],
+        icon: 'map',
         title: '로그인 완료',
         subtitle: '인증 완료 후 로그인을\n통해 모든 기능을\n이용할 수 있습니다',
         line: false
@@ -65,6 +66,7 @@ function Signup() {
     let tempCheck = [true, true, true, true];
     let lastCheck = true;
     
+    const navigate = useNavigate();
 
     // 비밀번호 양식
     function isValidPassword(pw) {
@@ -118,12 +120,12 @@ function Signup() {
 
         if(lastCheck) {
             signUp(email, password, name);
+            alert('회원가입이 완료되었습니다!');
             navigate('/Login');
         } else {
             lastCheck = true;
             setSignCheck(tempCheck);
             alert('잘못된 정보가 있습니다.');
-            navigate('/');
         }
     }
 
