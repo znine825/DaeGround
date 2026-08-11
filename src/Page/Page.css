@@ -106,7 +106,7 @@ input[type = "checkbox"] {
     appearance: none;
 }
 p {
-    white-space: pre-line;
+    white-space: pre;
     font-family: 'A2z';
 }
 html, body {

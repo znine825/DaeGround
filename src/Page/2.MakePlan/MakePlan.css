@@ -1,0 +1,45 @@
+.makePlan {
+    position: relative;
+    height: fit-content;
+    width: 1300px;
+    
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.makePlan > div:nth-child(2) {
+    position: relative;
+    left: 50%;
+    top: 100px;
+    transform: translate(-50%, 0);
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+}
+.makePlan > div:nth-child(2) > div:hover {
+    cursor: pointer;
+}
+.makePlan > div:nth-child(2) > div:nth-child(2) {
+    margin-left: auto;
+}
+.makePlan > div:nth-child(2) > div > p {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    height: fit-content;
+
+    margin-left: 10px;
+    margin-right: 10px;
+    color: var(--LM-line-color);
+}
+.makePlan > div:nth-child(1) {
+    position: relative;
+    width: 1300px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    gap: 50px;
+}
+

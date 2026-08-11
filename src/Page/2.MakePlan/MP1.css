@@ -1,0 +1,15 @@
+.MP1 {
+    position: relative;
+    width: 1000px;
+}
+.MP1 > p:nth-child(1) {
+    font-size: 24px;
+    font-weight: 600;
+}
+.MP1 > p:nth-child(2) {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 300;
+
+    color: var(--LM-subtext-color);
+}

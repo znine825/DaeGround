@@ -64,7 +64,7 @@ export function LoadMap({contents}) {
                             <p>{item['subtitle']}</p>
                             
                         </div>
-                        {item.line && <p>----------------</p>}
+                        {item.line && <p>- - - - - - - - - -</p>}
                     </div>
                 )
             })}
