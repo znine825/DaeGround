@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
+
+import { ko } from "date-fns/locale/ko";
+registerLocale("ko", ko);
+
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
+import "react-datepicker/dist/react-datepicker.css";
 import './MakePlan.css'
 import './MP1.css'
 
@@ -58,24 +64,29 @@ async function testCall() {
 }
 
 function MakePlan() {
-
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
     const [pageNum, setPageNum] = useState(1);
 
-    const moveLeftPage = () => {
-    setPageNum((prev) => {
-        if (prev > 1) return prev - 1;
-        return prev;
-    });
-    console.log(pageNum);
-};
+    const days = startDate && endDate
+        ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1
+        : 0;
 
-const moveRightPage = () => {
-    setPageNum((prev) => {
-        if (prev < 5) return prev + 1;
-        return prev;
-    });
-    console.log(pageNum);
-};
+    const moveLeftPage = () => {
+        setPageNum((prev) => {
+            if (prev > 1) return prev - 1;
+            return prev;
+        });
+        console.log(pageNum);
+    };
+
+    const moveRightPage = () => {
+        setPageNum((prev) => {
+            if (prev < 5) return prev + 1;
+            return prev;
+        });
+        console.log(pageNum);
+    };
 
     return (
         <div className = 'makePlan'>
@@ -93,7 +104,35 @@ const moveRightPage = () => {
                         <p>누구와, 언제 떠나요?</p>
                         <p>인원과 여행 날짜를 알려주세요</p>
                         <div>
-
+                            <div>
+                                
+                                <div>
+                                    <Icon name = 'profile' color = 'var(--LM-main-color)' />
+                                    <p>여행 시작일</p>
+                                </div>
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={(dates) => {
+                                        const [start, end] = dates;
+                                        setStartDate(start);
+                                        setEndDate(end);
+                                    }}
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    selectsRange
+                                    inline
+                                    minDate={new Date()}
+                                    locale="ko"
+                                    calendarStartDay={1}
+                                />
+                            </div>
+                            <div>
+                                <div>
+                                    <Icon name = 'profile' color = 'var(--LM-main-color)' />
+                                    <p>인원</p>
+                                </div>
+                                <div></div>
+                            </div>
                         </div>
 
                     </div>}
@@ -112,7 +151,6 @@ const moveRightPage = () => {
                     <Button width = '150' height = '50' text = '다음단계' fsize = '16' fweight = '500' />
                 </div>}
             </div>
-            
         </div>
     )
 }
