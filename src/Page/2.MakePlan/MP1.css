@@ -5,18 +5,8 @@
 
     margin-top: 100px;
 }
-.MP1 > p:nth-child(1) {
-    font-size: 24px;
-    font-weight: 600;
-}
-.MP1 > p:nth-child(2) {
-    margin-top: 5px;
-    font-size: 16px;
-    font-weight: 300;
 
-    color: var(--LM-subtext-color);
-}
-.MP1 > div:nth-child(3) {
+.MP1 > div:nth-child(2) {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
@@ -30,55 +20,141 @@
     row-gap: 40px;
     column-gap: 50px;
 }
-.MP1 > div:nth-child(3) > div {
+.MP1 > div:nth-child(2) > div {
     position: relative;
     width: fit-content;
     height: fit-content;
 }
-.MP1 > div:nth-child(3) > div > div:nth-child(1) {
+.MP1 > div:nth-child(2) > div:nth-child(2) > div > div,
+.MP1 > div:nth-child(2) > div > div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.MP1 > div:nth-child(2) > div > div:nth-child(1) {
     position: relative;
     height: fit-content;
 
     margin-bottom: 10px;
 
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
+
 }
-.MP1 > div:nth-child(3) > div > div:nth-child(1) > p {
+.MP1 > div:nth-child(2) > div:nth-child(2) > div > div > p:nth-child(2),
+.MP1 > div:nth-child(2) > div > div:nth-child(1) > p:nth-child(2) {
     position: relative;
     top: 2px;
 
     height: fit-content ;
 }
-.MP1 > div:nth-child(3) > div > div:nth-child(2) {
+.MP1 > div:nth-child(2) > div:nth-child(2) > div > div > p:nth-child(3),
+.MP1 > div:nth-child(2) > div > div:nth-child(1) > p:nth-child(3) {
     position: relative;
-    height: 50px;
+    top: 7px;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    color: var(--LM-subtext-color);
+}
+.MP1 > div:nth-child(2) > div:nth-child(2) > div {
+    display: flex;
+    flex-direction: column;
+}
+.MP1 > div:nth-child(2) > div:nth-child(2) > div > div:not(:nth-child(1)) {
+    position: relative;
+    height: 60px;
     width: 450px;
 
-    border-radius: 5px;
-    border: 1px solid color-mix(in srgb, var(--LM-line-color) 60%, var(--LM-background-color) 40%)
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--LM-line-color) 60%, transparent);
+}
+.MP1 > div:nth-child(2) > div:nth-child(2) > div > div:not(:nth-child(1)) > svg {
+    position: relative;
+    margin-left: 20px;
+    margin-top: 18px;
+}
+.MP1 > div:nth-child(2) > div:nth-child(2) > div > div:not(:nth-child(1)) > p {
+    position: relative;
+    margin-top: 18px;
+}
+
+.peopleSelecte > div:not(:nth-child(1)) > div:nth-child(3) {
+    position: relative;
+    margin-top: 18px;
+    margin-right: 20px;
+    margin-left: auto;
+    
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.peopleSelecte > div:not(:nth-child(1)) > div:nth-child(3) > div {
+    position: relative;
+    top: -5px;
+    width: 29px;
+    height: 29px;
+
+    border-radius: 15px;
+    background-color: color-mix(in srgb, var(--LM-line-color) 15%, transparent);
+}
+.peopleSelecte > div:not(:nth-child(1)) > div:nth-child(3) > div > svg {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .react-datepicker {
     width: 450px;
     height: 450px;
 
     font-family: 'A2z';
-    font-size: 1.3rem;
-    
+    border-radius: 10px;
 }
+.react-datepicker__day,
+.react-datepicker__day-name {
+    width: 3rem;      
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 13px;
+}
+.react-datepicker__navigation {
+    top: 20px;
+}
+.react-datepicker__navigation-icon::before {
+    border-color: var(--LM-mainouttext-color);
+    border-width: 1.5px 1.5px 0 0;
+    width: 7px;
+    height: 7px;
+}
+.react-datepicker__navigation {
+    top: 20px;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+}
+.react-datepicker__navigation--previous {
+    left: 12px;
+}
+.react-datepicker__navigation--next {
+    right: 12px;
+}
+
 .react-datepicker__month-container {
     width: 100%;
     height: 100%;
 }
-
-
-
-
 .react-datepicker__day--in-range {
     background-color: color-mix(in srgb, #34C759 20%, transparent) !important;
     color: var(--LM-mainouttext-color) !important;
-    border-radius: 0 !important;
+    border-radius: 5 !important;
 }
 
 .react-datepicker__day--in-selecting-range {
@@ -106,4 +182,26 @@
 .react-datepicker__day--selecting-range-end {
     background-color: #34C759 !important;
     color: white !important;
+}
+
+.react-datepicker__day--in-selecting-range {
+    background-color: color-mix(in srgb, #34C759 20%, transparent) !important;
+    color: var(--LM-mainouttext-color) !important;
+    border-radius: 5px !important;
+}
+
+.react-datepicker__day--selecting-range-start {
+    background-color: #34C759 !important;
+    color: white !important;
+}
+
+.react-datepicker__day--selecting-range-end {
+    background-color: #34C759 !important;
+    color: white !important;
+}
+/* 헤더 (년/월 + 화살표) */
+.react-datepicker__header {
+    background-color: #FFFFFF00;
+    border-bottom: none;
+    padding-top: 30px;
 }

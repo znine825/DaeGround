@@ -108,12 +108,20 @@ input[type = "checkbox"] {
 p {
     white-space: pre;
     font-family: 'A2z';
+
+    -webkit-user-select: none;   
+    -moz-user-select: none;      
+    -ms-user-select: none;       
+    user-select: none;           
+
 }
 html, body {
     margin: 0;
     height: 100%;
 }
-
+.hover:hover {
+    cursor: pointer;
+}
 .header {
     position: fixed;
     left: 50%;
