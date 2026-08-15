@@ -4,7 +4,6 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { ko } from "date-fns/locale/ko";
 registerLocale("ko", ko);
 
-import { getFunctions, httpsCallable } from "firebase/functions";
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import "react-datepicker/dist/react-datepicker.css";
@@ -162,3 +161,5 @@ function MP1() {
 }
 
 export default MP1
+
+

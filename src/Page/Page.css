@@ -97,7 +97,13 @@ button {
   background: none;
   cursor: pointer;
 }
+svg {
+    pointer-events: none;   /* 기본적으로 다 무시 */
+}
 
+svg path {
+    pointer-events: auto;   /* 실제 도형(path)만 이벤트 받게 */
+}
 input, textarea, select, button {
   font: inherit;
   color: inherit;

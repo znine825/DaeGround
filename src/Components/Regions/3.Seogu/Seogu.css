@@ -1,0 +1,104 @@
+.Seogu {
+    position: relative;
+    width: 450px;
+    height: 450px;
+}
+.Seogu > p {
+    position: absolute;
+    z-index: 100;
+
+    transition: color 0.3s ease;
+}
+
+.Seogu > p:nth-child(1) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 281px;
+    top: 145px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Seogu > p:nth-child(2) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 377px;
+    top: 88px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Seogu > p:nth-child(3) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 255px;
+    top: 224px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000
+}
+.Seogu > p:nth-child(4) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 266px;
+    top: 313px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Seogu > p:nth-child(5) {
+    position: absolute;
+    width: 59px;
+    height: 19px;
+
+    left: 109px;
+    top: 230px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+
+.Seogu > div {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 391px;
+    height: 301px;
+}
+.Seogu > div > svg {
+    position: absolute;
+}
+.outline {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.dong {
+    transition: fill 0.3s ease;
+}
+
+
+

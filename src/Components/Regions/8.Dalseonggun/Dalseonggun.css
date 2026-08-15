@@ -1,0 +1,160 @@
+.Dalseonggun {
+    position: relative;
+    top: 5px;
+    width: 450px;
+    height: 450px;
+}
+.Dalseonggun > p {
+    position: absolute;
+    z-index: 100;
+
+    transition: color 0.3s ease;
+}
+
+.Dalseonggun > p:nth-child(1) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 54px;
+    top: 35px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseonggun > p:nth-child(2) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 141px;
+    top: 90px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseonggun > p:nth-child(3) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 215px;
+    top: 144px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseonggun > p:nth-child(4) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 302px;
+    top: 224px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+} 
+.Dalseonggun > p:nth-child(5) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 118px;
+    top: 242px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseonggun > p:nth-child(6) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 191px;
+    top: 247px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseonggun > p:nth-child(7) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 65px;
+    top: 279px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseonggun > p:nth-child(8) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 172px;
+    top: 305px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseonggun > p:nth-child(9) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 107px;
+    top: 367px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+
+
+.Dalseonggun > div {
+    position: relative;
+    top: 16px;
+    left: 53px;
+    width: 391px;
+    height: 301px;
+}
+.Dalseonggun > div > svg {
+    position: absolute;
+}
+.outline {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.dong {
+    transition: fill 0.3s ease;
+}
+
+
+

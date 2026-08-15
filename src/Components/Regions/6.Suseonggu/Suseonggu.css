@@ -1,0 +1,189 @@
+.Suseonggu {
+    position: relative;
+    left: 10px;
+    top: -10px;
+    width: 450px;
+    height: 450px;
+}
+.Suseonggu > p {
+    position: absolute;
+    z-index: 100;
+
+    transition: color 0.3s ease;
+}
+
+.Suseonggu > p:nth-child(1) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 32px;
+    top: 88px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(2) {
+    position: absolute;
+    width: 30px;
+    height: 19px;
+
+    left: 25px;
+    top: 155px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(3) {
+    position: absolute;
+    width: 30px;
+    height: 19px;
+
+    left: 18px;
+    top: 202px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(4) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 3px;
+    top: 254px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(5) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 176px;
+    top: 91px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(6) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 123px;
+    top: 139px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(7) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 139px;
+    top: 186px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(8) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 275px;
+    top: 217px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(9) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 132px;
+    top: 247px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(10) {
+    position: absolute;
+    width: 30px;
+    height: 19px;
+
+    left: 75px;
+    top: 297px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Suseonggu > p:nth-child(11) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 191px;
+    top: 301px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+
+
+.Suseonggu > div {
+    position: relative;
+    top: 61px;
+    left: 20px;
+    width: 391px;
+    height: 301px;
+}
+.Suseonggu > div > svg {
+    position: absolute;
+}
+.outline {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.dong {
+    transition: fill 0.3s ease;
+}
+
+
+

@@ -1,0 +1,243 @@
+.Dalseogu {
+    position: relative;
+    top: 5px;
+    width: 450px;
+    height: 450px;
+}
+.Dalseogu > p {
+    position: absolute;
+    z-index: 100;
+
+    transition: color 0.3s ease;
+}
+
+.Dalseogu > p:nth-child(1) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 231px;
+    top: 33px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(2) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 292px;
+    top: 43px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(3) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 350px;
+    top: 34px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(4) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 380px;
+    top: 106px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(5) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 337px;
+    top: 143px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(6) {
+    position: absolute;
+    width: 30px;
+    height: 19px;
+
+    left: 338px;
+    top: 175px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(7) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 191px;
+    top: 84px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(8) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 140px;
+    top: 85px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(9) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 70px;
+    top: 108px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(10) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 171px;
+    top: 139px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(11) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 150px;
+    top: 190px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(12) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 277px;
+    top: 194px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(13) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 267px;
+    top: 241px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(14) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 205px;
+    top: 308px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Dalseogu > p:nth-child(15) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 284px;
+    top: 318px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+
+.Dalseogu > div {
+    position: relative;
+    top: 36px;
+    left: 35px;
+    width: 391px;
+    height: 301px;
+}
+.Dalseogu > div > svg {
+    position: absolute;
+}
+.outline {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.dong {
+    transition: fill 0.3s ease;
+}
+
+
+

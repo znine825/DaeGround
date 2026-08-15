@@ -1,0 +1,16 @@
+.MP2 {
+    position: relative;
+    width: 1000px;
+    height: fit-content;
+
+    margin-top: 100px;
+}
+.MP2 > div:nth-child(2) {
+    position: relative;
+    width: 450px;
+    height: 450px;
+
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--LM-line-color) 60%, transparent);;
+    top: 50px;
+}

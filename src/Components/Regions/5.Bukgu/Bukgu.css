@@ -1,0 +1,259 @@
+.Bukgu {
+    position: relative;
+    left: -20px;
+    top: -10px;
+    width: 450px;
+    height: 450px;
+}
+.Bukgu > p {
+    position: absolute;
+    z-index: 100;
+
+    transition: color 0.3s ease;
+}
+
+.Bukgu > p:nth-child(1) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 43px;
+    top: 26px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(2) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 49px;
+    top: 127px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(3) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 49px;
+    top: 200px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(4) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+    left: 243px;
+    top: 421px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(5) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 362px;
+    top: 424px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(6) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 377px;
+    top: 384px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(7) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 412px;
+    top: 317px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(8) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 224px;
+    top: 108px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(9) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 206px;
+    top: 204px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(10) {
+    position: absolute;
+    width: 74px;
+    height: 19px;
+
+    left: 281px;
+    top: 213px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(11) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 132px;
+    top: 250px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(12) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 352px;
+    top: 261px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(13) {
+
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 177px;
+    top: 395px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(14) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 92px;
+    top: 319px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(15) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 305px;
+    top: 321px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+.Bukgu > p:nth-child(16) {
+    position: absolute;
+    width: 45px;
+    height: 19px;
+
+    left: 203px;
+    top: 347px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+
+.Bukgu > div {
+    position: relative;
+    top: 22px;
+    left: 40px;
+
+    width: 391px;
+    height: 301px;
+}
+.Bukgu > div > svg {
+    position: absolute;
+}
+.outline {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.dong {
+    transition: fill 0.3s ease;
+}
+
+
+

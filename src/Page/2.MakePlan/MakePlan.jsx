@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import MP1 from './MP1.jsx'
+import MP2 from './MP2.jsx'
 
 import './MakePlan.css'
 
@@ -88,7 +89,7 @@ function MakePlan() {
                     locate = 'middle'/>
                 <LoadMap contents = {loadMapText}/>
                 {pageNum == 1 && <MP1 />}
-                {pageNum == 2 && <div>2page</div>}
+                {pageNum == 2 && <MP2 />}
                 {pageNum == 3 && <div>3page</div>}
                 {pageNum == 4 && <div>4page</div>}
                 {pageNum == 5 && <div>5page</div>}
