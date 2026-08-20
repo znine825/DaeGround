@@ -112,7 +112,7 @@ input[type = "checkbox"] {
     appearance: none;
 }
 p {
-    white-space: pre;
+    white-space: normal;
     font-family: 'A2z';
 
     -webkit-user-select: none;   

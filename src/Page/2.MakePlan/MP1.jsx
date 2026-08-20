@@ -11,38 +11,36 @@ import './MP1.css'
 import './MakePlan.css'
 
 function MP1({info, setInfo, page, pageSet}) {
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
 
-    const [people, setPeople] = useState([1, 0, 0, 0]);
-    const [selectPeople, setSelectPeople] = useState([true, false, false, false]);
-
-    const [allPeople, setAllPeoplr] = useState(people[0]);
-
-    
     const changePeople = (e, count) => {
         let tempPeople = [false, false, false, false];
         tempPeople[e] = true;
-        setSelectPeople(tempPeople);
-        setAllPeoplr(count);   
+
+        const temp = {...info};
+        temp['peopleType'] = tempPeople;
+        temp['peopleNum'] = count;
+        setInfo(temp); 
+
+        console.log(info);
     }
 
     const addPeople = (e) => {
-        setPeople(prev => {
-            const tempPeoples = [...prev];
-            tempPeoples[e] = prev[e] + 1;
-            changePeople(e, tempPeoples[e]);
-            return tempPeoples;
+        setInfo(prev => {
+            const temp = {...prev};
+            temp['peopleNumArray'][e] = prev['peopleNumArray'][e] + 1;
+            changePeople(e, temp['peopleNumArray'][e]);
+            return temp;
         });
     }
 
     const minusPeople = (e) => {
-        setPeople(prev => {
-            if (prev[e] === 0) return prev;   
-            const tempPeoples = [...prev];
-            tempPeoples[e] = prev[e] - 1;
-            changePeople(e, tempPeoples[e]);
-            return tempPeoples;
+        setInfo(prev => {
+            if (prev['peopleNumArray'][e] === 0) return prev;   
+
+            const temp = {...prev};
+            temp['peopleNumArray'][e] = prev['peopleNumArray'][e] - 1;
+            changePeople(e, temp['peopleNumArray'][e]);
+            return temp;
         });
     }
 
@@ -55,47 +53,26 @@ function MP1({info, setInfo, page, pageSet}) {
 
     const moveRightPage = () => {
 
-        if (startDate == null) {
+        if (info['startDay'] == null) {
             alert('여행 시작일을 선택해주세요');
             return false;
         }
 
-        if (endDate == null) {
+        if (info['endDay'] == null) {
             alert('여행 종료일을 선택해주세요');
             return false;
         }
 
-        if (allPeople == 0) {
+        if (info['peopleNum'] == 0) {
             alert('옮바른 인원을 선택해주세요');
             return false
         }
 
         const tempInfo = {...info};
 
-        tempInfo['startDay'] = startDate;
-        tempInfo['endDat'] = endDate;
-        tempInfo['allDay'] = startDate && endDate ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1 : 0;
-
-        if (selectPeople[0] == true) {
-            tempInfo['peopleType'] = '혼자';
-            tempInfo['peopleNum'] = people[0];
-        }
-
-        if (selectPeople[1] == true) {
-            tempInfo['peopleType'] = '친구과';
-            tempInfo['peopleNum'] = people[1];
-        }
-
-        if (selectPeople[2] == true) {
-            tempInfo['peopleType'] = '가족과';
-            tempInfo['peopleNum'] = people[2];
-        }
-
-        if (selectPeople[3] == true) {
-            tempInfo['peopleType'] = '연인과';
-            tempInfo['peopleNum'] = people[3];
-        }
-
+       
+        tempInfo['allDay'] = info['startDay'] && info['endDay'] ? Math.round((info['endDay'] - info['startDay']) / (1000 * 60 * 60 * 24)) + 1 : 0;
+        tempInfo['selectRegions'] = Array(tempInfo['allDay']).fill('미등록');
         setInfo(tempInfo);
 
         pageSet((prev) => {
@@ -118,17 +95,19 @@ function MP1({info, setInfo, page, pageSet}) {
                     <div>
                         <Icon name = 'calendarCheck' color = 'var(--LM-main-color)' />
                         <p>여행 기간</p>
-                        <p>{(startDate == null) ? '시작일' : `${startDate.getMonth() + 1}월 ${startDate.getDate()}일`} ~ {(endDate == null) ? '마지막일' : `${endDate.getMonth() + 1}월 ${endDate.getDate()}일`}</p>
+                        <p>{(info['startDay'] == null) ? '시작일' : `${info['startDay'].getMonth() + 1}월 ${info['startDay'].getDate()}일`} ~ {(info['endDay'] == null) ? '마지막일' : `${info['endDay'].getMonth() + 1}월 ${info['endDay'].getDate()}일`}</p>
                     </div>
                     <DatePicker
-                        selected={startDate}
+                        selected={info['startDay']}
                         onChange={(dates) => {
                             const [start, end] = dates;
-                            setStartDate(start);
-                            setEndDate(end);
+                            const temp = {...info}
+                            temp['startDay'] = start;
+                            temp['endDay'] = end;
+                            setInfo(temp);
                         }}
-                        startDate={startDate}
-                        endDate={endDate}
+                        startDate={info['startDay']}
+                        endDate={info['endDay']}
                         selectsRange
                         inline
                         minDate={new Date()}
@@ -142,77 +121,77 @@ function MP1({info, setInfo, page, pageSet}) {
                         <div>
                             <Icon name = 'profile' color = 'var(--LM-main-color)' />
                             <p>인원</p>
-                            <p>총 {allPeople} 명</p>
+                            <p>총 {info['peopleNum']} 명</p>
                         </div>
-                        <div onClick = {() => changePeople(0, people[0])} className = {`${(selectPeople[0] == true) ? '' : 'hover'}`}
+                        <div onClick = {() => changePeople(0, info['peopleNumArray'][0])} className = {`${(info['peopleType'][0] == true) ? '' : 'hover'}`}
                                 style = {{
-                                border: `1px solid ${(selectPeople[0] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
-                                backgroundColor: `${(selectPeople[0] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
-                                boxShadow: `${(selectPeople[0] == true) ? '0px 0px 20px rgba(52, 199, 89, 0.25)' : '0px 0px 0px #FFFFFF00'}`}}>
-                            <Icon name = 'profile' color = {`${(selectPeople[0] == true) ? 'var(--LM-main-color)' : 'var(--LM-subtext-color)'}`}/>
+                                border: `1px solid ${(info['peopleType'][0] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
+                                backgroundColor: `${(info['peopleType'][0] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
+                                boxShadow: `${(info['peopleType'][0] == true) ? '0px 0px 20px rgba(52, 199, 89, 0.25)' : '0px 0px 0px #FFFFFF00'}`}}>
+                            <Icon name = 'profile' color = {`${(info['peopleType'][0] == true) ? 'var(--LM-main-color)' : 'var(--LM-subtext-color)'}`}/>
                             <p style = {{
-                                color: `${(selectPeople[0] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
+                                color: `${(info['peopleType'][0] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
                             }}>혼자</p>
                         </div>
-                        <div onClick = {() => changePeople(1, people[1])} className = {`${(selectPeople[1] == true) ? '' : 'hover'}`}
+                        <div onClick = {() => changePeople(1, info['peopleNumArray'][1])} className = {`${(info['peopleType'][1] == true) ? '' : 'hover'}`}
                                 style = {{
-                                border: `1px solid ${(selectPeople[1] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
-                                backgroundColor: `${(selectPeople[1] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
-                                boxShadow: `${(selectPeople[1] == true) ? '0px 0px 20px rgba(52, 199, 89, 0.25)' : '0px 0px 0px #FFFFFF00'}`}}>
-                            <Icon name = 'users' color = {`${(selectPeople[1] == true) ? 'var(--LM-main-color)' : 'var(--LM-subtext-color)'}`}/>
+                                border: `1px solid ${(info['peopleType'][1] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
+                                backgroundColor: `${(info['peopleType'][1] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
+                                boxShadow: `${(info['peopleType'][1] == true) ? '0px 0px 20px rgba(52, 199, 89, 0.25)' : '0px 0px 0px #FFFFFF00'}`}}>
+                            <Icon name = 'users' color = {`${(info['peopleType'][1] == true) ? 'var(--LM-main-color)' : 'var(--LM-subtext-color)'}`}/>
                             <p style = {{
-                                color: `${(selectPeople[1] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
+                                color: `${(info['peopleType'][1] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
                             }}>친구와</p>
                             <div>
-                                <div onClick = {() => minusPeople(1)} className = {`${(selectPeople[1] == true) ? 'hover' : ''}`}>
+                                <div onClick = {() => minusPeople(1)} className = {`${(info['peopleType'][1] == true) ? 'hover' : ''}`}>
                                     <Icon name = 'minus' color = 'var(--LM-subtext-color)'/>
                                 </div>
                                 <p style = {{
-                                    color: `${(selectPeople[1] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
-                                }}>{people[1]}</p>
-                                <div onClick = {() => addPeople(1)} className = {`${(selectPeople[1] == true) ? 'hover' : ''}`}>
+                                    color: `${(info['peopleType'][1] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
+                                }}>{info['peopleNumArray'][1]}</p>
+                                <div onClick = {() => addPeople(1)} className = {`${(info['peopleType'][1] == true) ? 'hover' : ''}`}>
                                     <Icon name = 'plus' color = 'var(--LM-subtext-color)'/>
                                 </div>
                             </div>
                         </div>
-                        <div onClick = {() => changePeople(2, people[2])} className = {`${(selectPeople[2] == true) ? '' : 'hover'}`}
+                        <div onClick = {() => changePeople(2, info['peopleNumArray'][2])} className = {`${(info['peopleType'][2] == true) ? '' : 'hover'}`}
                                 style = {{
-                                border: `1px solid ${(selectPeople[2] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
-                                backgroundColor: `${(selectPeople[2] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
-                                boxShadow: `${(selectPeople[2] == true) ? '0px 0px 20px rgba(52, 199, 89, 0.25)' : '0px 0px 0px #FFFFFF00'}`}}>
-                            <Icon name = 'users' color = {`${(selectPeople[2] == true) ? 'var(--LM-main-color)' : 'var(--LM-subtext-color)'}`}/>
+                                border: `1px solid ${(info['peopleType'][2] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
+                                backgroundColor: `${(info['peopleType'][2] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
+                                boxShadow: `${(info['peopleType'][2] == true) ? '0px 0px 20px rgba(52, 199, 89, 0.25)' : '0px 0px 0px #FFFFFF00'}`}}>
+                            <Icon name = 'users' color = {`${(info['peopleType'][2] == true) ? 'var(--LM-main-color)' : 'var(--LM-subtext-color)'}`}/>
                             <p style = {{
-                                color: `${(selectPeople[2] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
+                                color: `${(info['peopleType'][2] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
                             }}>가족과</p>
                             <div>
-                                <div onClick = {() => minusPeople(2)} className = {`${(selectPeople[2] == true) ? 'hover' : ''}`}>
+                                <div onClick = {() => minusPeople(2)} className = {`${(info['peopleType'][2] == true) ? 'hover' : ''}`}>
                                     <Icon name = 'minus' color = 'var(--LM-subtext-color)'/>
                                 </div>
                                 <p style = {{
-                                    color: `${(selectPeople[2] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
-                                }}>{people[2]}</p>
-                                <div onClick = {() => addPeople(2)} className = {`${(selectPeople[2] == true) ? 'hover' : ''}`}>
+                                    color: `${(info['peopleType'][2] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
+                                }}>{info['peopleNumArray'][2]}</p>
+                                <div onClick = {() => addPeople(2)} className = {`${(info['peopleType'][2] == true) ? 'hover' : ''}`}>
                                     <Icon name = 'plus' color = 'var(--LM-subtext-color)'/>
                                 </div >
                             </div>
                         </div>
-                        <div onClick = {() => changePeople(3, people[3])} className = {`${(selectPeople[3] == true) ? '' : 'hover'}`}
+                        <div onClick = {() => changePeople(3, info['peopleNumArray'][3])} className = {`${(info['peopleType'][3] == true) ? '' : 'hover'}`}
                                 style = {{
-                                border: `1px solid ${(selectPeople[3] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
-                                backgroundColor: `${(selectPeople[3] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
-                                boxShadow: `${(selectPeople[3] == true) ? '0px 0px 20px rgba(52, 199, 89, 0.25)' : '0px 0px 0px #FFFFFF00'}`}}>
-                            <Icon name = 'users' color = {`${(selectPeople[3] == true) ? 'var(--LM-main-color)' : 'var(--LM-subtext-color)'}`}/>
+                                border: `1px solid ${(info['peopleType'][3] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
+                                backgroundColor: `${(info['peopleType'][3] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
+                                boxShadow: `${(info['peopleType'][3] == true) ? '0px 0px 20px rgba(52, 199, 89, 0.25)' : '0px 0px 0px #FFFFFF00'}`}}>
+                            <Icon name = 'users' color = {`${(info['peopleType'][3] == true) ? 'var(--LM-main-color)' : 'var(--LM-subtext-color)'}`}/>
                             <p style = {{
-                                color: `${(selectPeople[3] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
+                                color: `${(info['peopleType'][3] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
                             }}>연인과</p>
                             <div>
-                                <div onClick = {() => minusPeople(3)} className = {`${(selectPeople[3] == true) ? 'hover' : ''}`}>
+                                <div onClick = {() => minusPeople(3)} className = {`${(info['peopleType'][3] == true) ? 'hover' : ''}`}>
                                     <Icon name = 'minus' color = 'var(--LM-subtext-color)'/>
                                 </div>
                                 <p style = {{
-                                    color: `${(selectPeople[3] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
-                                }}>{people[3]}</p>
-                                <div onClick = {() => addPeople(3)} className = {`${(selectPeople[3] == true) ? 'hover' : ''}`}>
+                                    color: `${(info['peopleType'][3] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
+                                }}>{info['peopleNumArray'][3]}</p>
+                                <div onClick = {() => addPeople(3)} className = {`${(info['peopleType'][3] == true) ? 'hover' : ''}`}>
                                     <Icon name = 'plus' color = 'var(--LM-subtext-color)'/>
                                 </div>
                             </div>

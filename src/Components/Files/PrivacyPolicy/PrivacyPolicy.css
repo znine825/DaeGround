@@ -17,6 +17,9 @@
 
     width: 700px;
     height: 750px;
+    
+    
+
     background-color: var(--LM-background-color);
 }
 .private > div > div:nth-child(2) {
@@ -24,10 +27,9 @@
     height: 100%;
 
     padding: 50px;
-
-    overflow: scroll;
     scrollbar-width: none;
-
+    overflow: scroll;
+    
     border: 2px solid var(--LM-line-color);
     border-radius: 20px;
     background-color: var(--LM-background-color);

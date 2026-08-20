@@ -65,7 +65,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         <div className = {regions == 8 ? 'select' : ''} onClick = {() => changeRegionMap(8)}><p>달성군</p></div>
                     </div>
                     {regions === 1 && 
-                    <Donggu
+                    <Donggu info = {info} setInfo = {setInfo} day = {day}
                         outline = '2'
                         inline = '2'
                         hovercolor = 'color-mix(in srgb, var(--LM-main-color) 15%, transparent)' 
@@ -73,7 +73,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         incolor = 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'
                         outcolor = '#000000'/>}
                     {regions === 2 && 
-                    <Junggu
+                    <Junggu info = {info} setInfo = {setInfo} day = {day}
                         outline = '2'
                         inline = '2'
                         hovercolor = 'color-mix(in srgb, var(--LM-main-color) 15%, transparent)' 
@@ -81,7 +81,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         incolor = 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'
                         outcolor = '#000000'/>}
                     {regions === 3 && 
-                    <Seogu
+                    <Seogu info = {info} setInfo = {setInfo} day = {day}
                         outline = '2'
                         inline = '2'
                         hovercolor = 'color-mix(in srgb, var(--LM-main-color) 15%, transparent)' 
@@ -89,7 +89,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         incolor = 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'
                         outcolor = '#000000'/>}
                     {regions === 4 && 
-                    <Namgu
+                    <Namgu info = {info} setInfo = {setInfo} day = {day}
                         outline = '2'
                         inline = '2'
                         hovercolor = 'color-mix(in srgb, var(--LM-main-color) 15%, transparent)' 
@@ -97,7 +97,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         incolor = 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'
                         outcolor = '#000000'/>}
                     {regions === 5 && 
-                    <Bukgu
+                    <Bukgu info = {info} setInfo = {setInfo} day = {day}
                         outline = '2'
                         inline = '2'
                         hovercolor = 'color-mix(in srgb, var(--LM-main-color) 15%, transparent)' 
@@ -105,7 +105,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         incolor = 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'
                         outcolor = '#000000'/>}
                     {regions === 6 && 
-                    <Suseonggu
+                    <Suseonggu info = {info} setInfo = {setInfo} day = {day}
                         outline = '2'
                         inline = '2'
                         hovercolor = 'color-mix(in srgb, var(--LM-main-color) 15%, transparent)' 
@@ -113,7 +113,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         incolor = 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'
                         outcolor = '#000000'/>}
                     {regions === 7 && 
-                    <Dalseogu
+                    <Dalseogu info = {info} setInfo = {setInfo} day = {day}
                         outline = '2'
                         inline = '2'
                         hovercolor = 'color-mix(in srgb, var(--LM-main-color) 15%, transparent)' 
@@ -121,7 +121,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         incolor = 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'
                         outcolor = '#000000'/>}
                     {regions === 8 && 
-                    <Dalseonggun
+                    <Dalseonggun info = {info} setInfo = {setInfo} day = {day}
                         outline = '2'
                         inline = '2'
                         hovercolor = 'color-mix(in srgb, var(--LM-main-color) 15%, transparent)' 
@@ -138,11 +138,12 @@ function MP2({info, setInfo, page, pageSet}) {
                     <div>
                         {Array.from({ length: info['allDay'] }, (_, i) => (
                             <div onClick = {() => changeDay(i)} key={i + 1} className = {day == i ? 'selectDay select' : 'selectDay'}>
-                                <div></div>
-                                <p>{i + 1}</p>
+                                <div>
+                                    <p>{i + 1}</p>
+                                </div>
                                 <div>
                                     <p>{i + 1}일차</p>
-                                    <p>미등록</p>
+                                    <p>{info['selectRegions'][i]}</p>
                                 </div>
                             </div>
                         ))}

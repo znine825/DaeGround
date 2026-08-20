@@ -71,8 +71,11 @@ function MakePlan() {
         endDay: null,
         allDay: 0,
 
-        peopleType: null,
-        peopleNum: 0,
+        peopleType: [true, false, false, false],
+        peopleNumArray: [1, 0, 0, 0],
+        peopleNum: 1,
+
+        selectRegions: null,
 
         theme1: null,
         theme2: null
