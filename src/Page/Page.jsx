@@ -17,7 +17,6 @@ import Footer from './../Components/Footer/Footer.jsx'
 import Lodding from './../Components/Lodding/Lodding.jsx';
 
 import './Page.css'
-
 createRoot(document.getElementById('root')).render(
     <div className = 'pages'>
         <BrowserRouter >

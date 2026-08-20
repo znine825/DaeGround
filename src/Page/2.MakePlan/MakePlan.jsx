@@ -3,8 +3,13 @@ import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.js
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import MP1 from './MP1.jsx'
 import MP2 from './MP2.jsx'
+import MP3 from './MP3.jsx'
+import MP4 from './MP4.jsx'
+import MP5 from './MP5.jsx'
 
 import './MakePlan.css'
+
+
 
 const loadMapText = [
     {
@@ -61,7 +66,17 @@ async function testCall() {
 function MakePlan() {
     const [pageNum, setPageNum] = useState(1);
 
-    
+    const [tripInfo, setTripInfo] = useState({
+        startDay: null,
+        endDay: null,
+        allDay: 0,
+
+        peopleType: null,
+        peopleNum: 0,
+
+        theme1: null,
+        theme2: null
+    });
 
     const moveLeftPage = () => {
         setPageNum((prev) => {
@@ -88,20 +103,11 @@ function MakePlan() {
                     subtitle = {loadMapText[pageNum - 1].subtitle}
                     locate = 'middle'/>
                 <LoadMap contents = {loadMapText}/>
-                {pageNum == 1 && <MP1 />}
-                {pageNum == 2 && <MP2 />}
-                {pageNum == 3 && <div>3page</div>}
-                {pageNum == 4 && <div>4page</div>}
-                {pageNum == 5 && <div>5page</div>}
-            </div>
-            <div>
-                {pageNum != 1 && <div onClick = {() => moveLeftPage()}>
-                    <Button width = '150' height = '50' text = '이전단계' fsize = '16' fweight = '500' />
-                </div>}
-                <div></div>
-                {pageNum != 5 &&<div onClick = {() => moveRightPage()}>
-                    <Button width = '150' height = '50' text = '다음단계' fsize = '16' fweight = '500' />
-                </div>}
+                {pageNum == 1 && <MP1 info = {tripInfo} setInfo = {setTripInfo} page = {pageNum} pageSet = {setPageNum} />}
+                {pageNum == 2 && <MP2 info = {tripInfo} setInfo = {setTripInfo} page = {pageNum} pageSet = {setPageNum} />}
+                {pageNum == 3 && <MP3 info = {tripInfo} setInfo = {setTripInfo} page = {pageNum} pageSet = {setPageNum} />}
+                {pageNum == 4 && <MP4 info = {tripInfo} setInfo = {setTripInfo} page = {pageNum} pageSet = {setPageNum} />}
+                {pageNum == 5 && <MP5 info = {tripInfo} setInfo = {setTripInfo} page = {pageNum} pageSet = {setPageNum} />}
             </div>
         </div>
     )

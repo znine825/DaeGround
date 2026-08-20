@@ -8,37 +8,101 @@ import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.js
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import "react-datepicker/dist/react-datepicker.css";
 import './MP1.css'
+import './MakePlan.css'
 
-function MP1() {
+function MP1({info, setInfo, page, pageSet}) {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
     const [people, setPeople] = useState([1, 0, 0, 0]);
     const [selectPeople, setSelectPeople] = useState([true, false, false, false]);
 
-    const days = startDate && endDate ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1 : 0;
+    const [allPeople, setAllPeoplr] = useState(people[0]);
 
-    let [allPeople, setAllPeoplr] = useState(people[0]);
-    const changePeople = (e) => {
+    
+    const changePeople = (e, count) => {
         let tempPeople = [false, false, false, false];
         tempPeople[e] = true;
         setSelectPeople(tempPeople);
-        setAllPeoplr(people[e]);
+        setAllPeoplr(count);   
     }
 
     const addPeople = (e) => {
-        const tempPeoples = [...people];
-        tempPeoples[e] = people[e] + 1;
-        setPeople(tempPeoples);
+        setPeople(prev => {
+            const tempPeoples = [...prev];
+            tempPeoples[e] = prev[e] + 1;
+            changePeople(e, tempPeoples[e]);
+            return tempPeoples;
+        });
     }
 
     const minusPeople = (e) => {
-        if (people[e] != 0) {
-            const tempPeoples = [...people];
-            tempPeoples[e] = people[e] - 1;
-            setPeople(tempPeoples);
-        }
+        setPeople(prev => {
+            if (prev[e] === 0) return prev;   
+            const tempPeoples = [...prev];
+            tempPeoples[e] = prev[e] - 1;
+            changePeople(e, tempPeoples[e]);
+            return tempPeoples;
+        });
     }
+
+    const moveLeftPage = () => {
+        pageSet((prev) => {
+            if (prev > 1) return prev - 1;
+            return prev;
+        });
+    };
+
+    const moveRightPage = () => {
+
+        if (startDate == null) {
+            alert('여행 시작일을 선택해주세요');
+            return false;
+        }
+
+        if (endDate == null) {
+            alert('여행 종료일을 선택해주세요');
+            return false;
+        }
+
+        if (allPeople == 0) {
+            alert('옮바른 인원을 선택해주세요');
+            return false
+        }
+
+        const tempInfo = {...info};
+
+        tempInfo['startDay'] = startDate;
+        tempInfo['endDat'] = endDate;
+        tempInfo['allDay'] = startDate && endDate ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1 : 0;
+
+        if (selectPeople[0] == true) {
+            tempInfo['peopleType'] = '혼자';
+            tempInfo['peopleNum'] = people[0];
+        }
+
+        if (selectPeople[1] == true) {
+            tempInfo['peopleType'] = '친구과';
+            tempInfo['peopleNum'] = people[1];
+        }
+
+        if (selectPeople[2] == true) {
+            tempInfo['peopleType'] = '가족과';
+            tempInfo['peopleNum'] = people[2];
+        }
+
+        if (selectPeople[3] == true) {
+            tempInfo['peopleType'] = '연인과';
+            tempInfo['peopleNum'] = people[3];
+        }
+
+        setInfo(tempInfo);
+
+        pageSet((prev) => {
+            if (prev < 5) return prev + 1;
+            return prev;
+        });
+    }; 
 
 
     return (
@@ -80,7 +144,7 @@ function MP1() {
                             <p>인원</p>
                             <p>총 {allPeople} 명</p>
                         </div>
-                        <div onClick = {() => changePeople(0)} className = {`${(selectPeople[0] == true) ? '' : 'hover'}`}
+                        <div onClick = {() => changePeople(0, people[0])} className = {`${(selectPeople[0] == true) ? '' : 'hover'}`}
                                 style = {{
                                 border: `1px solid ${(selectPeople[0] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
                                 backgroundColor: `${(selectPeople[0] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
@@ -90,7 +154,7 @@ function MP1() {
                                 color: `${(selectPeople[0] == true) ? 'var(--LM-mainouttext-color)' : 'var(--LM-subtext-color)'}`
                             }}>혼자</p>
                         </div>
-                        <div onClick = {() => changePeople(1)} className = {`${(selectPeople[1] == true) ? '' : 'hover'}`}
+                        <div onClick = {() => changePeople(1, people[1])} className = {`${(selectPeople[1] == true) ? '' : 'hover'}`}
                                 style = {{
                                 border: `1px solid ${(selectPeople[1] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
                                 backgroundColor: `${(selectPeople[1] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
@@ -111,7 +175,7 @@ function MP1() {
                                 </div>
                             </div>
                         </div>
-                        <div onClick = {() => changePeople(2)} className = {`${(selectPeople[2] == true) ? '' : 'hover'}`}
+                        <div onClick = {() => changePeople(2, people[2])} className = {`${(selectPeople[2] == true) ? '' : 'hover'}`}
                                 style = {{
                                 border: `1px solid ${(selectPeople[2] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
                                 backgroundColor: `${(selectPeople[2] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
@@ -132,7 +196,7 @@ function MP1() {
                                 </div >
                             </div>
                         </div>
-                        <div onClick = {() => changePeople(3)} className = {`${(selectPeople[3] == true) ? '' : 'hover'}`}
+                        <div onClick = {() => changePeople(3, people[3])} className = {`${(selectPeople[3] == true) ? '' : 'hover'}`}
                                 style = {{
                                 border: `1px solid ${(selectPeople[3] == true) ? 'var(--LM-main-color)' : 'color-mix(in srgb, var(--LM-line-color) 60%, transparent)'}`,
                                 backgroundColor: `${(selectPeople[3] == true) ? 'color-mix(in srgb, var(--LM-main-color) 20%, transparent)' : '#FFFFFF00'}`,
@@ -155,6 +219,15 @@ function MP1() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className = 'pageButton'>
+                {page != 1 && <div onClick = {() => moveLeftPage()}>
+                    <Button width = '150' height = '50' text = '이전단계' fsize = '16' fweight = '500' />
+                </div>}
+                <div></div>
+                {page != 5 &&<div onClick = {() => moveRightPage()}>
+                    <Button width = '150' height = '50' text = '다음단계' fsize = '16' fweight = '500' />
+                </div>}
             </div>
         </div>
     )

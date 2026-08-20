@@ -7,7 +7,7 @@
     transform: translate(-50%, 0);
 }
 
-.makePlan > div:nth-child(2) {
+.pageButton {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
@@ -19,13 +19,13 @@
     display: flex;
     flex-direction: row;
 }
-.makePlan > div:nth-child(2) > div:hover {
+.pageButton > div:hover {
     cursor: pointer;
 }
-.makePlan > div:nth-child(2) > div:nth-child(2) {
+.pageButton > div:nth-child(2) {
     margin-left: auto;
 }
-.makePlan > div:nth-child(2) > div > p {
+.pageButton > div > p {
     position: relative;
     top: 50%;
     transform: translate(0, -50%);
