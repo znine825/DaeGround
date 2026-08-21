@@ -11,6 +11,7 @@ import Dalseogu from './../../Components/Regions/7.Dalseogu/Dalseogu.jsx';
 import Dalseonggun from './../../Components/Regions/8.Dalseonggun/Dalseonggun.jsx';
 import './MP2.css'
 import './MakePlan.css'
+import './../page.css'
 
 function MP2({info, setInfo, page, pageSet}) {
 
@@ -33,11 +34,23 @@ function MP2({info, setInfo, page, pageSet}) {
     };
 
     const moveRightPage = () => {
+        
+        if (info['selectRegions'].includes('미등록')) {
+            alert('여행 장소를 선택해주세요');
+            return false;
+        }
+
         pageSet((prev) => {
             if (prev < 5) return prev + 1;
             return prev;
         });
     }; 
+
+    const clearRigon = (e) => {
+        const temp = {...info};
+        temp['selectRegions'][e] = '미등록';
+        setInfo(temp);
+    }
 
     return (
         <div className = 'MP2'>
@@ -137,13 +150,22 @@ function MP2({info, setInfo, page, pageSet}) {
                     </div>
                     <div>
                         {Array.from({ length: info['allDay'] }, (_, i) => (
-                            <div onClick = {() => changeDay(i)} key={i + 1} className = {day == i ? 'selectDay select' : 'selectDay'}>
+                            <div style = {{border: `1px solid ${info['selectRegions'][i] == '미등록' ? 'color-mix(in srgb, var(--LM-line-color) 70%, transparent' : 'var(--LM-main-color)'}`}} onClick = {() => changeDay(i)} key={i + 1} className = {day == i ? 'selectDay select' : 'selectDay'}>
+                                {info['selectRegions'][i] == '미등록' && 
                                 <div>
                                     <p>{i + 1}</p>
-                                </div>
+                                </div>}
+                                {info['selectRegions'][i] != '미등록' && 
+                                <div style = {{backgroundColor: 'var(--LM-main-color)'}}>
+                                    <Icon name = 'check' color = 'var(--LM-mainintext-color)'
+                                            style = {{position: 'relative', top: '5px', left: '5px'}}/>
+                                </div>}
                                 <div>
                                     <p>{i + 1}일차</p>
                                     <p>{info['selectRegions'][i]}</p>
+                                </div>
+                                <div onClick = {() => clearRigon(i)}>
+                                    <Icon name = 'undo' color = 'color-mix(in srgb, var(--LM-line-color) 70%, transparent)'/>
                                 </div>
                             </div>
                         ))}

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
+
+import { getFunctions, httpsCallable } from "firebase/functions";
+
 import MP1 from './MP1.jsx'
 import MP2 from './MP2.jsx'
 import MP3 from './MP3.jsx'
@@ -44,19 +47,34 @@ const loadMapText = [
     }
 ]
 
+
+export async function getTransitRoute(spot1x, spot1y, spot2x, spot2y) {
+    const functions = getFunctions();
+    const fn = httpsCallable(functions, 'getTransitRoute');
+
+    const result = await fn({
+        startX: spot1x,
+        startY: spot1y,
+        endX: spot2x,
+        endY: spot2y
+    });
+
+    console.log(result.data);
+    return result.data;
+}
+
 async function testCall() {
     const functions = getFunctions();
     const fn = httpsCallable(functions, 'callTourApi');
     
     try {
         const result = await fn({ 
-            endpoint: 'areaBasedList2', 
+            endpoint: 'lclsSystmCode2', 
             service : 'KorService2', 
             params: { 
-                areaCode: '1', 
-                numOfRows: 5, 
-                pageNo: 1,
-                contentTypeId: 39 } });
+                MobileOS: 'WEB', 
+                MobileApp: 'DaeGound', 
+                lclsSystmListYn: 'Y' } });
         console.log(result.data);
     } catch (error) {
         console.error(error.code, error.message);
@@ -75,25 +93,14 @@ function MakePlan() {
         peopleNumArray: [1, 0, 0, 0],
         peopleNum: 1,
 
+        theme: [],
+        themetitle: [],
+
         selectRegions: null,
 
         theme1: null,
         theme2: null
     });
-
-    const moveLeftPage = () => {
-        setPageNum((prev) => {
-            if (prev > 1) return prev - 1;
-            return prev;
-        });
-    };
-
-    const moveRightPage = () => {
-        setPageNum((prev) => {
-            if (prev < 5) return prev + 1;
-            return prev;
-        });
-    }; 
 
 
     return (

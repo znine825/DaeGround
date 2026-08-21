@@ -11,7 +11,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 40px;
-    column-gap: 50px;
+    column-gap: 100px;
 }
 .MP2 > div:nth-child(2) > div > div:nth-child(1) {
     display: flex;
@@ -73,13 +73,6 @@
 
     overflow-y: scroll;
 }
-.select {
-    border: 1px solid var(--LM-main-color) !important;
-
-    box-shadow: 0px 0px 20px color-mix(in srgb, var(--LM-main-color) 25%, var(--LM-background-color) 80%);
-
-    background-color: color-mix(in srgb, var(--LM-main-color) 20%, transparent);
-}
 .selectDay {
     position: relative;
     height: 60px;
@@ -136,4 +129,17 @@
     font-weight: 400px;
 
     color: var(--LM-subtext-color);
+}
+.selectDay > div:nth-child(3) {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    width: 24px;
+    height: 24px;
+
+    margin-right: 18px;
+    margin-left: auto;
+
+    cursor: pointer;
 }

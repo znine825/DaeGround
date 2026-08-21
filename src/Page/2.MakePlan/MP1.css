@@ -18,7 +18,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 40px;
-    column-gap: 50px;
+    column-gap: 100px;
 }
 .MP1 > div:nth-child(2) > div {
     position: relative;
@@ -36,8 +36,6 @@
     height: fit-content;
 
     margin-bottom: 10px;
-
-
 }
 .MP1 > div:nth-child(2) > div:nth-child(2) > div > div > p:nth-child(2),
 .MP1 > div:nth-child(2) > div > div:nth-child(1) > p:nth-child(2) {

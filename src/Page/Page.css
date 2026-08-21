@@ -149,3 +149,10 @@ html, body {
     margin-top: 120px;
     margin-bottom: 50px;
 }
+.select {
+    border: 1px solid var(--LM-main-color) !important;
+    box-shadow: 0px 0px 20px color-mix(in srgb, var(--LM-main-color) 25%, var(--LM-background-color) 80%);
+    background-color: color-mix(in srgb, var(--LM-main-color) 20%, transparent);
+
+    cursor: default !important;
+}

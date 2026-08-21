@@ -1,48 +1,17 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
 const {setGlobalOptions} = require("firebase-functions");
-const {onRequest} = require("firebase-functions/https");
-const logger = require("firebase-functions/logger");
-
-// For cost control, you can set the maximum number of containers that can be
-// running at the same time. This helps mitigate the impact of unexpected
-// traffic spikes by instead downgrading performance. This limit is a
-// per-function limit. You can override the limit for each function using the
-// `maxInstances` option in the function's options, e.g.
-// `onRequest({ maxInstances: 5 }, (req, res) => { ... })`.
-// NOTE: setGlobalOptions does not apply to functions using the v1 API. V1
-// functions should each use functions.runWith({ maxInstances: 10 }) instead.
-// In the v1 API, each function can only serve one request per container, so
-// this will be the maximum concurrent request count.
 setGlobalOptions({ maxInstances: 10 });
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
-
-// functions/index.js
 const { onCall, HttpsError } = require("firebase-functions/v2/https");
 const { defineSecret } = require("firebase-functions/params");
 const fetch = require("node-fetch");
 
-const tourApiKey = defineSecret("TOUR_API_KEY");   // 시크릿 정의
+const tourApiKey = defineSecret("TOUR_API_KEY"); 
 
 exports.callTourApi = onCall(
-    { secrets: [tourApiKey] },   // ← runWith 대신 이렇게 옵션으로 전달
+    { secrets: [tourApiKey] },
     async (request) => {
-        const serviceKey = tourApiKey.value();   // ← process.env 대신 이렇게 값 가져옴
-        const { endpoint, params, service } = request.data;   // v2는 request.data로 접근
+        const serviceKey = tourApiKey.value();   
+        const { endpoint, params, service } = request.data;   
 
         const baseUrl = `https://apis.data.go.kr/B551011/${service}/${endpoint}`;
 
@@ -70,5 +39,45 @@ exports.callTourApi = onCall(
         }
 
         return result.response.body.items.item;
+    }
+);
+
+
+const tmapApiKey = defineSecret("TMAP_API_KEY");
+
+exports.getTransitRoute = onCall(
+    { secrets: [tmapApiKey] },
+    async (request) => {
+        const appKey = tmapApiKey.value();
+        const { startX, startY, endX, endY } = request.data;
+
+        const url = 'https://apis.openapi.sk.com/transit/routes';
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'appKey': appKey
+            },
+            body: JSON.stringify({
+                startX: String(startX),
+                startY: String(startY),
+                endX: String(endX),
+                endY: String(endY),
+                count: 1,
+                lang: 0,
+                format: 'json'
+            })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            console.error('TMAP API 에러:', result);
+            throw new HttpsError('internal', 'TMAP 경로 조회 실패');
+        }
+
+        return result;
     }
 );
