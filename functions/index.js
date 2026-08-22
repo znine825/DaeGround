@@ -34,48 +34,79 @@ exports.callTourApi = onCall(
             throw new HttpsError('internal', 'TourAPI 요청 실패');
         }
 
-        if (result.response.header.resultCode !== '0000') {
-            throw new HttpsError('internal', result.response.header.resultMsg);
-        }
-
         return result.response.body.items.item;
     }
 );
 
 
-const tmapApiKey = defineSecret("TMAP_API_KEY");
+const kakaoApiKey = defineSecret("KAKAO_API_KEY");
 
-exports.getTransitRoute = onCall(
-    { secrets: [tmapApiKey] },
+exports.getPathToBud = onCall(
+    { secrets: [kakaoApiKey] },
     async (request) => {
-        const appKey = tmapApiKey.value();
+        const restApiKey = kakaoApiKey.value();
         const { startX, startY, endX, endY } = request.data;
+        const url = `https://dapi.kakao.com/v2/routing/publictraffic?${params.toString()}`;
 
-        const url = 'https://apis.openapi.sk.com/transit/routes';
-
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'appKey': appKey
-            },
-            body: JSON.stringify({
-                startX: String(startX),
-                startY: String(startY),
-                endX: String(endX),
-                endY: String(endY),
-                count: 1,
-                lang: 0,
-                format: 'json'
-            })
+        const params = new URLSearchParams({
+            start_x: String(startX),
+            start_y: String(startY),
+            end_x: String(endX),
+            end_y: String(endY),
         });
 
-        const result = await response.json();
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Authorization": `KakaoAK ${restApiKey}`,
+            },
+        });
 
-        if (!response.ok) {
-            console.error('TMAP API 에러:', result);
-            throw new HttpsError('internal', 'TMAP 경로 조회 실패');
+        const text = await response.text();
+
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (e) {
+            console.error("JSON 파싱 실패:", text);
+            throw new HttpsError("internal", "KakaoAPI 요청 실패");
+        }
+
+        return result;
+    }
+);
+
+
+exports.getToPath = onCall(
+    { secrets: [kakaoApiKey] },
+    async (request) => {
+        const restApiKey = kakaoApiKey.value();
+        const { startX, startY, endX, endY, way } = request.data;
+        
+
+        const params = new URLSearchParams({
+            start_x: String(startX),
+            start_y: String(startY),
+            end_x: String(endX),
+            end_y: String(endY),
+        });
+        
+        const url = `https://dapi.kakao.com/v2/routing/${way}?${params.toString()}`;
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Authorization": `KakaoAK ${restApiKey}`,
+            },
+        });
+
+        const text = await response.text();
+
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (e) {
+            console.error("JSON 파싱 실패:", text);
+            throw new HttpsError("internal", "KakaoAPI 요청 실패");
         }
 
         return result;

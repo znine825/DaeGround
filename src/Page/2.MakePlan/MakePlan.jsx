@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 
-import { getFunctions, httpsCallable } from "firebase/functions";
 
 import MP1 from './MP1.jsx'
 import MP2 from './MP2.jsx'
@@ -48,38 +47,9 @@ const loadMapText = [
 ]
 
 
-export async function getTransitRoute(spot1x, spot1y, spot2x, spot2y) {
-    const functions = getFunctions();
-    const fn = httpsCallable(functions, 'getTransitRoute');
 
-    const result = await fn({
-        startX: spot1x,
-        startY: spot1y,
-        endX: spot2x,
-        endY: spot2y
-    });
 
-    console.log(result.data);
-    return result.data;
-}
 
-async function testCall() {
-    const functions = getFunctions();
-    const fn = httpsCallable(functions, 'callTourApi');
-    
-    try {
-        const result = await fn({ 
-            endpoint: 'lclsSystmCode2', 
-            service : 'KorService2', 
-            params: { 
-                MobileOS: 'WEB', 
-                MobileApp: 'DaeGound', 
-                lclsSystmListYn: 'Y' } });
-        console.log(result.data);
-    } catch (error) {
-        console.error(error.code, error.message);
-    }
-}
 
 function MakePlan() {
     const [pageNum, setPageNum] = useState(1);

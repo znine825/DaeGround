@@ -99,7 +99,6 @@ function MP3({info, setInfo, page, pageSet}) {
                                     <SubTheme url = './Image/theme/맛집탐방/한식.png' name = '한식' theme = '맛집탐방'/>
                                     <SubTheme url = './Image/theme/맛집탐방/외국식.png' name = '외국식' theme = '맛집탐방'/>
                                     <SubTheme url = './Image/theme/맛집탐방/카페.png' name = '카페' theme = '맛집탐방'/>
-                                    <SubTheme url = './Image/theme/맛집탐방/주점.png' name = '주점' theme = '맛집탐방'/>
                                 </div>
                             </div>
                             <div>
@@ -130,7 +129,8 @@ function MP3({info, setInfo, page, pageSet}) {
                                     <p>자연 / 힐링</p>
                                 </div>
                                 <div>
-                                    <SubTheme url = './Image/theme/자연힐링/자연관광.png' name = '자연관광' theme = '자연힐링'/>
+                                    <SubTheme url = './Image/theme/자연힐링/산•숲.png' name = '산•숲' theme = '자연힐링'/>
+                                    <SubTheme url = './Image/theme/자연힐링/바다•강.png' name = '바다•강' theme = '자연힐링'/>
                                 </div>
                             </div>
                             <div>
