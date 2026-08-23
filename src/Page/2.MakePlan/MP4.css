@@ -1,0 +1,61 @@
+.kakaoMap {
+    width: 450px;
+    height: 500px;
+
+    border-radius: 10px;
+}
+.MP4 {
+    position: relative;
+    width: 1000px;
+    height: fit-content;
+
+    margin-top: 100px;
+}
+.MP4 > div:nth-child(2) {
+    margin-top: 50px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 40px;
+    column-gap: 100px;
+}
+.MP4 > div:nth-child(2) > div > div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+}
+.MP4 > div:nth-child(2) > div > div:nth-child(1) > p {
+    margin-left: 10px;
+    margin-top: 3px;
+}
+.MP4 > div:nth-child(2) > div > div:nth-child(2) {
+    margin-top: 20px;
+}
+.MP4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.path {
+    width: 450px;
+    height: 400px;
+
+    margin-top: 10px;
+
+    border: 1px solid var(--LM-line-color);
+    border-radius: 10px;
+    animation: display 1.0s ease-in;
+
+    animation: slideDown 0.3s ease forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

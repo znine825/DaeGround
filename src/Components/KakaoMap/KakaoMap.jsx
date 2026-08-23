@@ -1,8 +1,15 @@
 import { getTransitRoute } from '../../Javascript/TourAPI/httpsCall.js'
 import { useState, useEffect } from "react";
 
-export function getBusPath(route, info, setinfo) {
-    const busStep = route.steps[0];
+export function getBusPath(route) {
+    let lastNum = 0;
+    for(let i = 0; i < route.length; i++) {
+        if(route[i].properties.type == "SUBWAY") {
+            lastNum = i;
+            break;
+        }
+    }
+    const busStep = route.steps[lastNum];
 
     return {
         points: busStep.path.points,
@@ -26,7 +33,7 @@ export async function getBusToEnd(busEndX, busEndY, endX, endY) {
     return result;
 }
 
-export async function makeSet(route, startX, startY, endX, endY, info, setinfo) {
+export async function makeSet(route, startX, startY, endX, endY) {
     const busPath = getBusPath(route);
     const startToBus = await getStartToBus(startX, startY, busPath.start[0], busPath.start[1]);
     const busToEnd = await getBusToEnd(busPath.end[0], busPath.end[1], endX, endY);
@@ -35,9 +42,10 @@ export async function makeSet(route, startX, startY, endX, endY, info, setinfo) 
     return { startToBus, busPath, busToEnd, busName, busPathName };
 }
 
-export async function makeDaySet(Spots, info, setinfo) {
+export async function makeDaySet(Spots) {
     const pathArray = [];
     const busNameArray = [];
+    const walkPath = [];
 
     for (let i = 0; i < Spots.length; i++) {
         const startX = Spots[i][0].spot.mapx;
@@ -62,9 +70,10 @@ export async function makeDaySet(Spots, info, setinfo) {
         
         busNameArray.push([pathSet.busName, pathSet.busPathName]);
         pathArray.push([startToBus, bus, busToEnd]);
+        walkPath.push([pathSet.startToBus, pathSet.busToEnd]);
     }
 
-    return [pathArray, busNameArray];
+    return [pathArray, busNameArray, walkPath];
 }
 
 

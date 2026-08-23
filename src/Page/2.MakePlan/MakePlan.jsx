@@ -64,6 +64,7 @@ function MakePlan() {
         themetitle: [],
         pathset: [],
         pathNameset: [],
+        walkPath: [],
 
         selectRegions: null,
 
