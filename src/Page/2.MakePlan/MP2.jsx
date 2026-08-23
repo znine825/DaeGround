@@ -11,7 +11,7 @@ import Dalseogu from './../../Components/Regions/7.Dalseogu/Dalseogu.jsx';
 import Dalseonggun from './../../Components/Regions/8.Dalseonggun/Dalseonggun.jsx';
 import './MP2.css'
 import './MakePlan.css'
-import './../page.css'
+import './../Page.css'
 
 function MP2({info, setInfo, page, pageSet}) {
 

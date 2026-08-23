@@ -48,9 +48,6 @@ const loadMapText = [
 
 
 
-
-
-
 function MakePlan() {
     const [pageNum, setPageNum] = useState(1);
 
@@ -65,6 +62,8 @@ function MakePlan() {
 
         theme: [],
         themetitle: [],
+        pathset: [],
+        pathNameset: [],
 
         selectRegions: null,
 
