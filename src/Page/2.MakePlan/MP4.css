@@ -37,14 +37,11 @@
 }
 .path {
     width: 450px;
-    height: 400px;
+    height: 550px;
 
     margin-top: 10px;
 
-    border: 1px solid var(--LM-line-color);
-    border-radius: 10px;
     animation: display 1.0s ease-in;
-
     animation: slideDown 0.3s ease forwards;
 }
 
@@ -58,4 +55,106 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+.path {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.path > div > div:nth-child(1) {
+    position: relative;
+    width: 450px;
+    height: 40px;
+
+
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    border: 1px solid var(--LM-main-color);
+    border-radius: 20px;
+}
+.path > div > div:nth-child(1) > svg:nth-child(1) {
+    position: relative;
+    margin-left: 13px;
+}
+.path > div > div:nth-child(1) > * {
+    margin-top: 8px; 
+}
+.path > div > div:nth-child(1) > svg:nth-child(3) {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.path > div > div:nth-child(2) {
+    position: relative;
+    margin-top: 20px;
+}
+.path > div > div:nth-child(2) > div:nth-child(1) {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.path > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(odd) {
+    position: relative;
+    width: 45px;
+    height: 20px;
+
+    border-radius: 5px;
+
+    background-color: var(--LM-line-color);
+}
+.path > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(odd) > p {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: fit-content;
+    height: 14px;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    color: var(--LM-mainintext-color);
+}
+.path > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(even) {
+    position: relative;
+    top: 8px;
+    width: 50px;
+    height: 0px;
+
+    border-radius: 20px;
+    border: 2px dashed var(--LM-line-color);
+}
+.path > div > div:nth-child(2) > div:nth-child(2) {
+    position: relative;
+    margin-top: 10px;
+    height: 80px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+
+}
+.path > div > div:nth-child(2) > div:nth-child(2) > div {
+    height: 34px;
+    width: 80px;
+}
+.path > div > div:nth-child(2) > div:nth-child(2) > div > p:nth-child(1) {
+    position: relative;
+    
+    font-size: 14px;
+    font-weight: 400;
+}
+.path > div > div:nth-child(2) > div:nth-child(2) > div > p:nth-child(2) {
+    position: relative;
+    margin-top: 5px;
+    
+    font-size: 12px;
+    font-weight: 400;
+
+    color: var(--LM-subtext-color);
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { makeDaySet } from "../../Components/KakaoMap/KakaoMap.jsx"
+import { makeDaySet, makeMockDaySet } from "../../Components/KakaoMap/KakaoMap.jsx"
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import { generateTripSpots } from '../../Javascript/TourAPI/Functions.js'
@@ -34,7 +34,7 @@ function drawMarker(map, point) {
     });
 }
 
-async function loadRouteData(theme, region = 260) {
+async function loadRouteData(theme, region) {
     const result = [];
     const spots = await generateTripSpots(
         theme,
@@ -50,31 +50,67 @@ async function loadRouteData(theme, region = 260) {
 
 function MP4({info, setInfo, page, pageSet}) {
     const [day, setDay] = useState(0);
+    const [onloading, setOnloading] = useState(false);
 
     const changeDay = (e) => {
         setDay(e);
     }
+
+    useEffect(() => {
+        async function loadMock() {
+            const mock = await makeMockDaySet();
+
+            setInfo(prev => ({
+                ...prev,
+                pathset: [mock.pathset],
+                pathNameset: [mock.pathNameset],
+                spotName: [mock.spotName],
+                walkPath: [mock.walkPath]
+            }));
+
+            setOnloading(true);
+        }
+
+        loadMock();
+    }, []);
 
     // useEffect(() => {
     //     async function makeAllPath() {
     //         const allPathSet = [];
     //         const allPathName = [];
     //         const walkPath = [];
+    //         const spotName = [];
  
     //         for (let i = 0; i < info.allDay; i++) {
-    //             const spotsResult = await loadRouteData(info.theme);
+    //             const spotsResult = await loadRouteData(info.theme, info.selectRegions[i].split(" ")[0]);
+
+    //             const tempArray = [];
+    //             console.log('spot')
+    //             console.log(spotsResult)
+    //             for (let j = 0; j < 3; j++) {
+    //                 for (let k = 0; k < 2; k++) {
+    //                     if (!tempArray.includes(spotsResult[j][k].spot.title)) {
+    //                         tempArray.push(spotsResult[j][k].spot.title);
+    //                     }
+    //                 }
+    //             }
+    //             spotName.push(tempArray);
+
+
     //             const pathArray = await makeDaySet(spotsResult);
     //             allPathSet.push(pathArray[0]);
     //             allPathName.push(pathArray[1]);
     //             walkPath.push(pathArray[2]);
     //         }
 
-    //         setInfo(prev => ({
+    //         await setInfo(prev => ({
     //             ...prev,
+    //             spotName: spotName,
     //             pathset: allPathSet,
     //             pathNameset: allPathName,
     //             walkPath: walkPath
     //         }));
+    //         setOnloading(true);
     //     }
 
     //     if (info.allDay > 0 && info.theme.length > 0) {
@@ -129,12 +165,14 @@ function MP4({info, setInfo, page, pageSet}) {
     const polylineRef = useRef([]);
     const markerRef = useRef([]);
 
-    const bounds = new window.kakao.maps.LatLngBounds();
+    
 
     useEffect(() => {
+        
         const map = mapInstanceRef.current;
-
         if (!map || !info.pathset) return;
+
+        const bounds = new window.kakao.maps.LatLngBounds();
 
         // 기존 경로 제거
         polylineRef.current.forEach((polyline) => {
@@ -188,9 +226,9 @@ function MP4({info, setInfo, page, pageSet}) {
 
     }, [info.pathset, subday]);
 
-    console.log(info.pathNameset);
-    console.log(info.pathset);
-    console.log(info.walkPath);
+    console.log('======info======')
+    console.log(info);
+
     
     return (
         <div className = 'MP4' >
@@ -228,57 +266,58 @@ function MP4({info, setInfo, page, pageSet}) {
                                         <Icon name = 'down' color = 'color-mix(in srgb, var(--LM-line-color) 70%, transparent)'/>
                                     </div>
                                 </div>
-                                <div className = 'path' style = {{display: subday == i ? 'block' : 'none'}}>
-                                    {Array.from({ length: info.pathNameset.length }, (_, i) => (
-                                        <div key = {i}>
-                                            <div>
-                                                <Icon name = 'flag' color = 'var(--LM-main-color)' />
-                                                <p>{info.pathNameset[0][0][0].match(/\((.*?)\s*>\s*(.*?)\)/)[1]}</p>
-                                                <Icon name = 'arrowright' color = 'var(--LM-main-color)' />
-                                                <Icon name = 'flag' color = 'var(--LM-main-color)' />
-                                                <p>{info.pathNameset[0][0][0].match(/\((.*?)\s*>\s*(.*?)\)/)[2]}</p>
-                                            </div>
-                                            <div>
+                                {onloading && 
+                                    <div className = 'path' style = {{display: subday == i ? 'block' : 'none'}}>
+                                        {Array.from({ length: 3 }, (_, i) => (
+                                            <div key = {i}>
                                                 <div>
-                                                    <div>
-                                                        <p>출발</p>
-                                                    </div>
-                                                    <div></div>
-                                                    <div>
-                                                        <p>{info.pathNameset[0][0][0].split(" ")[1]}</p>
-                                                    </div>
-                                                    <div></div>
-                                                    <div>
-                                                        <p>도보</p>
-                                                    </div>
-                                                    <div></div>
-                                                    <div>
-                                                        <p>도착</p>
-                                                    </div>
+                                                    <Icon name = 'flag' color = 'var(--LM-main-color)' />
+                                                    <p>{info.spotName[day][i]}</p>
+                                                    <Icon name = 'arrowright' color = 'var(--LM-main-color)' />
+                                                    <Icon name = 'flag' color = 'var(--LM-main-color)' />
+                                                    <p>{info.spotName[day][i + 1]}</p>
                                                 </div>
                                                 <div>
                                                     <div>
-                                                        <p></p>
-                                                        <p></p>
+                                                        <div>
+                                                            <p>출발</p>
+                                                        </div>
+                                                        <div></div>
+                                                        <div>
+                                                            <p>{info.pathNameset[day][i][0].split(" ")[1].replace(/외$/, "")}</p>
+                                                        </div>
+                                                        <div></div>
+                                                        <div>
+                                                            <p>도보</p>
+                                                        </div>
+                                                        <div></div>
+                                                        <div>
+                                                            <p>도착</p>
+                                                        </div>
                                                     </div>
                                                     <div>
-                                                        <p>{info.pathNameset[0][0][0].match(/\((.*?)\s*>\s*(.*?)\)/)[1]}</p>
-                                                        <p></p>
-                                                    </div>
-                                                    <div>
-                                                        <p>{info.pathNameset[0][0][0].match(/\((.*?)\s*>\s*(.*?)\)/)[2]}</p>
-                                                        <p></p>
-                                                    </div>
-                                                    <div>
-                                                        <p></p>
-                                                        <p>도착</p>
+                                                        <div>
+                                                            <p>{info.spotName[day][i]}</p>
+                                                            <p>총 {info.walkPath[day][i][0].route.legs[0].properties.distance}m 이동</p>
+                                                        </div>
+                                                        <div>
+                                                            <p>{info.pathNameset[day][i][0].match(/\((.*?)\s*>\s*(.*?)\)/)[1]}</p>
+                                                            <p>{info.pathNameset[day][i][1].length}개 정류장 이동</p>
+                                                        </div>
+                                                        <div>
+                                                            <p>{info.pathNameset[day][i][0].match(/\((.*?)\s*>\s*(.*?)\)/)[2]}</p>
+                                                            <p>총 {info.walkPath[day][i][1].route.legs[0].properties.distance}m 이동</p>
+                                                        </div>
+                                                        <div>
+                                                            <p>{info.spotName[day][i + 1]}</p>
+                                                            <p>도착</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                    
-                                </div>
+                                        ))}
+                                    </div>
+                                }
                             </div>
                         ))}
                     </div>

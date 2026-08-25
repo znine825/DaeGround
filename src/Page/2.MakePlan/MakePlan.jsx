@@ -65,6 +65,7 @@ function MakePlan() {
         pathset: [],
         pathNameset: [],
         walkPath: [],
+        spotName: [],
 
         selectRegions: null,
 
