@@ -11,14 +11,16 @@ export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lc
             MobileApp: 'DaeGound',
             arrange: 'D',
             lDongRegnCd: 27,
-            lclsSystm1: lclsSystm1,
-            lclsSystm2: lclsSystm2,
-            lclsSystm3: lclsSystm3
+            lclsSystm1,
+            lclsSystm2,
+            lclsSystm3
         };
 
-        if (lDongSignguCd) {
+        if (lDongSignguCd !== undefined && lDongSignguCd !== null && lDongSignguCd !== '') {
             params.lDongSignguCd = lDongSignguCd;
         }
+
+        console.log('관광 API 검색 params:', params);
 
         const result = await fn({
             endpoint: 'areaBasedList2',

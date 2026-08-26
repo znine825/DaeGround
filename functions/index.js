@@ -6,35 +6,120 @@ const { defineSecret } = require("firebase-functions/params");
 const fetch = require("node-fetch");
 
 const tourApiKey = defineSecret("TOUR_API_KEY"); 
+const tourApiKey2 = defineSecret("TOUR_API_KEY2"); 
 
 exports.callTourApi = onCall(
-    { secrets: [tourApiKey] },
+    {
+        secrets: [tourApiKey2],
+        timeoutSeconds: 60,
+    },
     async (request) => {
-        const serviceKey = tourApiKey.value();   
-        const { endpoint, params, service } = request.data;   
-
-        const baseUrl = `https://apis.data.go.kr/B551011/${service}/${endpoint}`;
-
-        const query = new URLSearchParams({
-            serviceKey,
-            MobileOS: 'ETC',
-            MobileApp: 'DaeGround',
-            _type: 'json',
-            ...params
-        });
-
-        const response = await fetch(`${baseUrl}?${query.toString()}`);
-        const text = await response.text();
-
-        let result;
         try {
-            result = JSON.parse(text);
-        } catch (e) {
-            console.error('TourAPI 응답 파싱 실패:', text);
-            throw new HttpsError('internal', 'TourAPI 요청 실패');
-        }
+            const serviceKey = tourApiKey2.value();
+            const { endpoint, params, service } = request.data;
 
-        return result.response.body.items.item;
+            const baseUrl =
+                `https://apis.data.go.kr/B551011/${service}/${endpoint}`;
+
+            const query = new URLSearchParams({
+                serviceKey,
+                MobileOS: 'WEB',
+                MobileApp: 'DaeGround',
+                _type: 'json',
+                numOfRows: '50',
+                arrange: 'D',
+                ...params
+            });
+
+            const url = `${baseUrl}?${query.toString()}`;
+
+            console.log("TourAPI 요청:", url.replace(serviceKey, "***"));
+
+            let response;
+
+            for (let attempt = 1; attempt <= 3; attempt++) {
+                try {
+                    console.log(`TourAPI 요청 시도 ${attempt}/3`);
+
+                    response = await fetch(url, {
+                        signal: AbortSignal.timeout(10000)
+                    });
+
+                    break;
+                } catch (error) {
+                    console.error(
+                        `TourAPI 요청 실패 ${attempt}/3:`,
+                        error
+                    );
+
+                    if (attempt === 3) {
+                        throw error;
+                    }
+
+                    await new Promise(resolve =>
+                        setTimeout(resolve, 1000 * attempt)
+                    );
+                }
+            }
+
+            const text = await response.text();
+
+            console.log("TourAPI HTTP:", response.status);
+            console.log("TourAPI 응답:", text);
+
+            let result;
+
+            try {
+                result = JSON.parse(text);
+            } catch (e) {
+                console.error("TourAPI JSON 파싱 실패:", text);
+
+                throw new HttpsError(
+                    "internal",
+                    "TourAPI 응답이 JSON이 아닙니다."
+                );
+            }
+
+            if (!result?.response) {
+                console.error("response 없음:", result);
+
+                throw new HttpsError(
+                    "internal",
+                    "TourAPI response가 없습니다."
+                );
+            }
+
+            if (!result.response.body) {
+                console.error("body 없음:", result);
+
+                throw new HttpsError(
+                    "internal",
+                    "TourAPI body가 없습니다."
+                );
+            }
+
+            const items = result.response.body.items?.item;
+
+            if (!items || items === "") {
+                return [];
+            }
+
+            return Array.isArray(items)
+                ? items
+                : [items];
+
+        } catch (error) {
+            console.error("callTourApi 오류:", error);
+
+            if (error instanceof HttpsError) {
+                throw error;
+            }
+
+            throw new HttpsError(
+                "internal",
+                error.message || "TourAPI 요청 중 오류가 발생했습니다."
+            );
+        }
     }
 );
 

@@ -63,7 +63,7 @@
     flex-direction: column;
     gap: 30px;
 }
-.path > div > div:nth-child(1) {
+/* .path > div > div:nth-child(1) {
     position: relative;
     width: 450px;
     height: 40px;
@@ -157,4 +157,4 @@
     font-weight: 400;
 
     color: var(--LM-subtext-color);
-}
+} */

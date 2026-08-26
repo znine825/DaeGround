@@ -1,0 +1,85 @@
+.wayTitle {
+    position: relative;
+    width: 450px;
+    height: 40px;
+
+
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    border: 1px solid var(--LM-main-color);
+    border-radius: 20px;
+}
+.wayTitle > svg:nth-child(1) {
+    position: relative;
+    margin-left: 13px;
+}
+.wayTitle > * {
+    margin-top: 8px; 
+}
+.wayTitle > svg:nth-child(3) {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.WayPointGrid {
+    position: relative;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 20px;
+}
+.wayPoint {
+    position: relative;
+    width: 100px;
+}
+.wayPoint > div > div:nth-child(1) {
+    position: relative;
+    width: 45px;
+    height: 20px;
+
+    border-radius: 5px;
+
+    background-color: var(--LM-line-color);
+}
+.wayPoint > div > div:nth-child(1) > p {
+    position: relative;
+    top: 50%;
+    left: 50%;
+
+    width: fit-content;
+    height: fit-content;
+    transform: translate(-50%, -50%);
+
+    font-size: 12px;
+    font-weight: 400;
+
+    color: var(--LM-mainintext-color);
+}
+.wayPoint > p:nth-child(3) {
+    position: relative;
+    margin-top: 5px;
+    font-size: 14px;
+
+    color: var(--LM-mainouttext-color);
+}
+.wayPoint > p:nth-child(4) {
+    position: relative;
+    margin-top: 5px;
+    font-size: 12px;
+
+    color: var(--LM-subtext-color);
+}
+.wayPoint > div:nth-child(2) {
+    position: absolute;
+    top: 8px;
+    left: 55px;
+    width: 50px;
+    height: 0px;
+
+    border-radius: 20px;
+    border: 2px dashed var(--LM-line-color);
+}

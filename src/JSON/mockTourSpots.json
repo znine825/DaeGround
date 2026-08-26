@@ -1,0 +1,222 @@
+[
+    {
+        "slot": 1,
+        "type": "밥",
+        "subTheme": "한식",
+        "mainTheme": "맛집탐방",
+        "pool": "밥",
+        "codes": [
+            [
+                "FD01",
+                "FD010100"
+            ],
+            [
+                "FD01",
+                "FD010200"
+            ]
+        ],
+        "candidateCount": 37,
+        "spot": {
+            "addr1": "대구광역시 수성구 수성못2길 5 (두산동)",
+            "addr2": "",
+            "areacode": "",
+            "cat1": "",
+            "cat2": "",
+            "cat3": "",
+            "contentid": "2737987",
+            "contenttypeid": "39",
+            "createdtime": "20210831195400",
+            "firstimage": "https://tong.visitkorea.or.kr/cms/resource/10/4088810_image2_1.jpg",
+            "firstimage2": "https://tong.visitkorea.or.kr/cms/resource/10/4088810_image3_1.jpg",
+            "cpyrhtDivCd": "Type1",
+            "mapx": "128.6223786072",
+            "mapy": "35.8255950595",
+            "mlevel": "6",
+            "modifiedtime": "20260716173334",
+            "sigungucode": "",
+            "tel": "",
+            "title": "마루막창 수성점",
+            "zipcode": "42203",
+            "lDongRegnCd": "27",
+            "lDongSignguCd": "260",
+            "lclsSystm1": "FD",
+            "lclsSystm2": "FD01",
+            "lclsSystm3": "FD010100"
+        }
+    },
+    {
+        "slot": 2,
+        "type": "활동",
+        "subTheme": "카페",
+        "mainTheme": "맛집탐방",
+        "pool": "활동",
+        "codes": [
+            [
+                "FD05",
+                "FD050100"
+            ],
+            [
+                "FD05",
+                "FD050200"
+            ],
+            [
+                "FD05",
+                "FD050300"
+            ]
+        ],
+        "candidateCount": 9,
+        "spot": {
+            "addr1": "대구광역시 수성구 수성못길 20 (두산동)",
+            "addr2": "",
+            "areacode": "",
+            "cat1": "",
+            "cat2": "",
+            "cat3": "",
+            "contentid": "2840732",
+            "contenttypeid": "39",
+            "createdtime": "20220822153914",
+            "firstimage": "https://tong.visitkorea.or.kr/cms/resource/25/4091625_image2_1.jpg",
+            "firstimage2": "https://tong.visitkorea.or.kr/cms/resource/25/4091625_image3_1.jpg",
+            "cpyrhtDivCd": "Type1",
+            "mapx": "128.6222402929",
+            "mapy": "35.8266357006",
+            "mlevel": "6",
+            "modifiedtime": "20260723161716",
+            "sigungucode": "",
+            "tel": "",
+            "title": "포켓",
+            "zipcode": "42203",
+            "lDongRegnCd": "27",
+            "lDongSignguCd": "260",
+            "lclsSystm1": "FD",
+            "lclsSystm2": "FD05",
+            "lclsSystm3": "FD050100"
+        }
+    },
+    {
+        "slot": 3,
+        "type": "밥",
+        "subTheme": "외국식",
+        "mainTheme": "맛집탐방",
+        "pool": "밥",
+        "codes": [
+            [
+                "FD02",
+                "FD020100"
+            ],
+            [
+                "FD02",
+                "FD020200"
+            ],
+            [
+                "FD02",
+                "FD020300"
+            ],
+            [
+                "FD02",
+                "FD020400"
+            ],
+            [
+                "FD02",
+                "FD020500"
+            ]
+        ],
+        "candidateCount": 20,
+        "spot": {
+            "addr1": "대구광역시 수성구 동원로1길 26",
+            "addr2": "(범어동)",
+            "areacode": "",
+            "cat1": "",
+            "cat2": "",
+            "cat3": "",
+            "contentid": "2767415",
+            "contenttypeid": "39",
+            "createdtime": "20211103175300",
+            "firstimage": "",
+            "firstimage2": "",
+            "cpyrhtDivCd": "",
+            "mapx": "128.638643944139",
+            "mapy": "35.859821906026",
+            "mlevel": "6",
+            "modifiedtime": "20260127150823",
+            "sigungucode": "",
+            "tel": "",
+            "title": "오스테리아밀즈",
+            "zipcode": "42031",
+            "lDongRegnCd": "27",
+            "lDongSignguCd": "260",
+            "lclsSystm1": "FD",
+            "lclsSystm2": "FD02",
+            "lclsSystm3": "FD020300"
+        }
+    },
+    {
+        "slot": 4,
+        "type": "활동",
+        "subTheme": "랜드마크",
+        "mainTheme": "역사문화",
+        "pool": "활동",
+        "codes": [
+            [
+                "VE01",
+                "VE010100"
+            ],
+            [
+                "VE01",
+                "VE010200"
+            ],
+            [
+                "VE01",
+                "VE010300"
+            ],
+            [
+                "VE01",
+                "VE010400"
+            ],
+            [
+                "VE01",
+                "VE010500"
+            ],
+            [
+                "VE01",
+                "VE010700"
+            ],
+            [
+                "VE01",
+                "VE010800"
+            ],
+            [
+                "VE01",
+                "VE010900"
+            ]
+        ],
+        "candidateCount": 7,
+        "spot": {
+            "addr1": "대구광역시 남구 앞산순환로 574-114 (봉덕동)",
+            "addr2": "",
+            "areacode": "",
+            "cat1": "",
+            "cat2": "",
+            "cat3": "",
+            "contentid": "2366916",
+            "contenttypeid": "12",
+            "createdtime": "20160206014632",
+            "firstimage": "https://tong.visitkorea.or.kr/cms/resource/05/4056405_image2_1.jpg",
+            "firstimage2": "https://tong.visitkorea.or.kr/cms/resource/05/4056405_image3_1.jpg",
+            "cpyrhtDivCd": "Type1",
+            "mapx": "128.5871411930",
+            "mapy": "35.8243596512",
+            "mlevel": "6",
+            "modifiedtime": "20260611093833",
+            "sigungucode": "",
+            "tel": "",
+            "title": "앞산 케이블카(앞산 전망대)",
+            "zipcode": "42502",
+            "lDongRegnCd": "27",
+            "lDongSignguCd": "200",
+            "lclsSystm1": "VE",
+            "lclsSystm2": "VE01",
+            "lclsSystm3": "VE010200"
+        }
+    }
+]

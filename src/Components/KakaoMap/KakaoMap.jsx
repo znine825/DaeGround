@@ -1,186 +1,188 @@
-import { getTransitRoute } from '../../Javascript/TourAPI/httpsCall.js'
-import { useState, useEffect } from "react";
+import { getTransitRoute } from '../../Javascript/TourAPI/httpsCall.js';
 
-// export function getBusPath(route) {
-//     let lastNum = 0;
-//     for(let i = 0; i < route.length; i++) {
-//         if(route[i].properties.type == "SUBWAY") {
-//             lastNum = i;
-//             break;
-//         }
-//     }
-//     const busStep = route.steps[lastNum];
+export async function makeMove(startSpot, endSpot) {
+    const startX = Number(startSpot.spot.mapx);
+    const startY = Number(startSpot.spot.mapy);
+    const endX = Number(endSpot.spot.mapx);
+    const endY = Number(endSpot.spot.mapy);
 
-//     return {
-//         points: busStep.path.points,
-//         start: busStep.path.points[0],
-//         end: busStep.path.points[busStep.path.points.length - 1],
-//         guidance: busStep.properties.guidance,
-//         vehicles: busStep.properties.vehicles,
-//         distance: busStep.properties.distance,
-//         stops: busStep.properties.stops,
-//         time: busStep.properties.time
-//     };
-// }
+    const transitResult = await getTransitRoute(startX, startY, endX, endY, "publictraffic");
 
-export async function getStartToBus(startX, startY, busStartX, busStartY) {
-    const result = await getTransitRoute(startX, startY, busStartX, busStartY, "walk");
-    return result;
-}
-
-export async function getBusToEnd(busEndX, busEndY, endX, endY) {
-    const result = await getTransitRoute( busEndX, busEndY, endX, endY, "walk");
-    return result;
-}
-
-export async function makeSet(route, startX, startY, endX, endY) {
-    const busPath = getBusPath(route);
-    const startToBus = await getStartToBus(startX, startY, busPath.start[0], busPath.start[1]);
-    const busToEnd = await getBusToEnd(busPath.end[0], busPath.end[1], endX, endY);
-    const busPathName = busPath.stops;
-    const busName = busPath.guidance;
-    return { startToBus, busPath, busToEnd, busName, busPathName };
-}
-
-export async function makeDaySet(Spots) {
-    const pathArray = [];
-    const busNameArray = [];
-    const walkPath = [];
-
-    for (let i = 0; i < Spots.length; i++) {
-        const startX = Spots[i][0].spot.mapx;
-        const startY = Spots[i][0].spot.mapy;
-        const endX = Spots[i][1].spot.mapx;
-        const endY = Spots[i][1].spot.mapy;
-
-        const transitResult = await getTransitRoute(startX, startY, endX, endY, "publictraffic");
-
-        const route = transitResult.routes[0];
-        const pathSet = await makeSet(route, startX, startY, endX, endY);
-
-        const startToBus = pathSet.startToBus.route.legs
-            .flatMap(leg => leg.steps)
-            .flatMap(step => step.path.points);
-
-        const bus = pathSet.busPath.points;
-
-        const busToEnd = pathSet.busToEnd.route.legs
-            .flatMap(leg => leg.steps)
-            .flatMap(step => step.path.points);
-        
-        busNameArray.push([pathSet.busName, pathSet.busPathName]);
-        pathArray.push([startToBus, bus, busToEnd]);
-        walkPath.push([pathSet.startToBus, pathSet.busToEnd]);
+    if (transitResult?.status === "OK" && transitResult.routes?.length > 0) {
+        const route = selectBestTransitRoute(transitResult.routes);
+        return makeTransitMove(route, startX, startY, endX, endY);
     }
 
-    return [pathArray, busNameArray, walkPath];
+    return makeWalkMove(startX, startY, endX, endY);
 }
 
-import {
-    mockWalkStart,
-    mockWalkEnd,
-    mockTransitResult
-} from "../../Javascript/mockRoute.js";
+function selectBestTransitRoute(routes) {
+    const priority = {
+        SUBWAY: 0,
+        BUSANDSUBWAY: 1,
+        BUS: 2
+    };
 
-export function getBusPath(route) {
-    const busStep = route.steps[0];
+    return [...routes].sort((a, b) => {
+        return (priority[a.properties.type] ?? 99) - (priority[b.properties.type] ?? 99);
+    })[0];
+}
+
+async function makeTransitMove(route, startX, startY, endX, endY) {
+    const type = route.properties.type;
+
+    const transitSteps = route.steps.filter(step => {
+        return step.properties?.type === "BUS" || step.properties?.type === "SUBWAY";
+    });
+
+    if (transitSteps.length === 0) {
+        return makeWalkMove(startX, startY, endX, endY);
+    }
+
+    const firstStep = transitSteps[0];
+    const lastStep = transitSteps[transitSteps.length - 1];
+
+    const startPoint = firstStep.path.points[0];
+    const endPoint = lastStep.path.points[lastStep.path.points.length - 1];
+
+    const startWalk = await getTransitRoute(startX, startY, startPoint[0], startPoint[1], "walk");
+    const endWalk = await getTransitRoute(endPoint[0], endPoint[1], endX, endY, "walk");
 
     return {
-        points: busStep.path.points,
-        start: busStep.path.points[0],
-        end: busStep.path.points[busStep.path.points.length - 1],
-        guidance: busStep.properties.guidance,
-        vehicles: busStep.properties.vehicles,
-        distance: busStep.properties.distance,
-        time: busStep.properties.time,
-        busName: busStep.properties.guidance.split(" ")[1],
-        busPathName: busStep.properties.guidance
+        type,
+        detail: getTransportDetail(route),
+        path: route,
+        startWalk,
+        endWalk
     };
 }
 
+function getTransportDetail(route) {
+    const type = route.properties.type;
 
+    if (type === "WALK") {
+        return "도보";
+    }
 
+    const details = [];
 
+    for (const step of route.steps) {
+        const stepType = step.properties?.type;
 
+        if (stepType === "BUS") {
+            const guidance = step.properties?.guidance || "";
+            const busDetail = parseBusGuidance(guidance);
 
+            if (busDetail) {
+                details.push(busDetail);
+            }
+        }
 
+        if (stepType === "SUBWAY") {
+            const subwayDetail = parseSubwayStep(step);
 
+            if (subwayDetail) {
+                details.push(subwayDetail);
+            }
+        }
+    }
 
+    return [...new Set(details)].join(" + ") || "대중교통";
+}
 
+function parseBusGuidance(guidance) {
+    if (!guidance) {
+        return null;
+    }
 
-export async function makeMockSet() {
-    const route = mockTransitResult.routes[0];
-    const busPath = getBusPath(route);
+    let text = guidance.split("(")[0].trim();
+    text = text.replace(/^(간선|지선|급행|마을|순환)\s*/u, "");
+    text = text.replace(/외\s*(\d+)\s*대/u, " 외 $1대");
+
+    return text.trim() || null;
+}
+
+function parseSubwayStep(step) {
+    const vehicles = step.properties?.vehicles || [];
+    const subwayLines = [];
+
+    for (const vehicle of vehicles) {
+        const name = vehicle?.name || vehicle;
+
+        if (!name) {
+            continue;
+        }
+
+        if (name.includes("1호선")) {
+            if (!subwayLines.includes("1호선")) {
+                subwayLines.push("1호선");
+            }
+        } else if (name.includes("2호선")) {
+            if (!subwayLines.includes("2호선")) {
+                subwayLines.push("2호선");
+            }
+        } else if (name.includes("3호선")) {
+            if (!subwayLines.includes("3호선")) {
+                subwayLines.push("3호선");
+            }
+        }
+    }
+
+    if (subwayLines.length === 0) {
+        const guidance = step.properties?.guidance || "";
+
+        if (guidance.includes("1호선")) {
+            subwayLines.push("1호선");
+        }
+
+        if (guidance.includes("2호선")) {
+            subwayLines.push("2호선");
+        }
+
+        if (guidance.includes("3호선")) {
+            subwayLines.push("3호선");
+        }
+    }
+
+    return [...new Set(subwayLines)].join(" + ") || null;
+}
+
+async function makeWalkMove(startX, startY, endX, endY) {
+    const result = await getTransitRoute(startX, startY, endX, endY, "walk");
 
     return {
-        startToBus: mockWalkStart,
-        busPath: busPath,
-        busToEnd: mockWalkEnd,
-
-        busName: "지선 수성3-1 (범물청구타운건너 > 고모동입구)",
-        busPathName: [
-            "범물청구타운건너",
-            "범물청구타운건너",
-            "고모동입구"
-        ]
+        type: "WALK",
+        detail: "도보",
+        path: result,
+        startWalk: null,
+        endWalk: null
     };
 }
 
+export async function makeDaySet(spots) {
+    const moveTypes = [];
+    const moveDetails = [];
+    const pathSet = [];
+    const pathNameSet = [];
 
-export async function makeMockDaySet() {
-    const pathSet = await makeMockSet();
+    for (let i = 0; i < spots.length; i++) {
+        const move = await makeMove(spots[i][0], spots[i][1]);
 
-    const startToBus = pathSet.startToBus.route.legs
-        .flatMap(leg => leg.steps)
-        .flatMap(step => step.path.points);
+        moveTypes.push(move.type);
+        moveDetails.push(move.detail);
+        pathSet.push(move);
 
-    const bus = pathSet.busPath.points;
-
-    const busToEnd = pathSet.busToEnd.route.legs
-        .flatMap(leg => leg.steps)
-        .flatMap(step => step.path.points);
-
-    const pathset = [
-        [startToBus, bus, busToEnd],
-        [startToBus, bus, busToEnd],
-        [startToBus, bus, busToEnd]
-    ];
-
-    const pathNameset = [
-        [
-            "지선 수성3-1 (범물청구타운건너 > 고모동입구)",
-            "범물청구타운건너",
-            "고모동입구"
-        ],
-        [
-            "간선 403 (동대구역 > 반월당역)",
-            "동대구역",
-            "반월당역"
-        ],
-        [
-            "지선 수성4 (범물동 > 수성못)",
-            "범물동",
-            "수성못"
-        ]
-    ];
-
-    const walkPath = [
-        [pathSet.startToBus, pathSet.busToEnd],
-        [pathSet.startToBus, pathSet.busToEnd],
-        [pathSet.startToBus, pathSet.busToEnd]
-    ];
-
-    const spotName = [
-        "목업 출발지",
-        "목업 장소 1",
-        "목업 장소 2",
-        "목업 장소 3"
-    ];
+        pathNameSet.push({
+            start: spots[i][0].spot.title,
+            end: spots[i][1].spot.title
+        });
+    }
 
     return {
-        pathset,
-        pathNameset,
-        spotName,
-        walkPath
+        moveTypes,
+        moveDetails,
+        pathSet,
+        pathNameSet
     };
 }
+
