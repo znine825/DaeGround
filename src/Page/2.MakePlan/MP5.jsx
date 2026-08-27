@@ -53,7 +53,7 @@ function CarbonChart({ dates, carData, transitData }) {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: { display: false }   // 기본 범례 끄고 직접 커스텀 범례 만들 예정
+            legend: { display: true, position: 'top' }   // 기본 범례 끄고 직접 커스텀 범례 만들 예정
         },
         scales: {
             y: { beginAtZero: true },
@@ -115,7 +115,10 @@ function MP5({info, setInfo, page, pageSet}) {
                     <div className = 'CO2graph'>
                         
                         <CarbonChart
-                            dates={[info.spotName[day][0], info.spotName[day][1], info.spotName[day][2], info.spotName[day][3]]}
+                            dates={[info.pathNameSet[day][0].start, 
+                                    info.pathNameSet[day][1].start, 
+                                    info.pathNameSet[day][2].start, 
+                                    info.pathNameSet[day][2].end]}
                             carData={[50, 80, 130, 150]}
                             transitData={[30, 55, 80, 100]}
                         />
@@ -127,6 +130,23 @@ function MP5({info, setInfo, page, pageSet}) {
                         <p>이동 경로</p>
                     </div>
                     <div>
+                        {Array.from({ length: info.allDay },(_, i) => (
+                        <div key={i + 1}>
+                            <div style={{ border: `1px solid ${ info.selectRegions[i] === '미등록' ? 'color-mix(in srgb, var(--LM-line-color) 70%, transparent)' : 'var(--LM-main-color)' }`}}
+                                onClick={() => { changeDay(i); changeSubday(i); }}
+                                className={ day === i ? 'selectDay select' : 'selectDay'}>
+                                <div>
+                                    <p>{i + 1}</p>
+                                </div>
+                                <div>
+                                    <p>{i + 1}일차</p>
+                                    <p>{info.selectRegions[i]}</p>
+                                </div>
+                                <div>
+                                    <Icon name='down' color='color-mix(in srgb, var(--LM-line-color) 70%, transparent)'/>
+                                </div>
+                            </div>
+                        </div>))}
                     </div>
                 </div>
             </div>

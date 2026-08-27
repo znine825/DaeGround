@@ -5,7 +5,7 @@ const { onCall, HttpsError } = require("firebase-functions/v2/https");
 const { defineSecret } = require("firebase-functions/params");
 const fetch = require("node-fetch");
 
-const tourApiKey = defineSecret("TOUR_API_KEY"); 
+
 const tourApiKey2 = defineSecret("TOUR_API_KEY2"); 
 
 exports.callTourApi = onCall(

@@ -6,6 +6,7 @@ import { Icon } from './../../Components/Icons/Icons.jsx';
 import { generateTripSpots } from '../../Javascript/TourAPI/Functions.js';
 import { LocalBasedLoojup } from '../../Javascript/TourAPI/httpsCall.js';
 import districtCode from '../../JSON/법정동분류코드.json';
+import mockinfo from '../../JSON/test.json';
 import './MP4.css';
 import './MP2.css';
 import './MakePlan.css';
@@ -67,42 +68,44 @@ function MP4({ info, setInfo, page, pageSet }) {
         setSubday(e);
     };
 
-    useEffect(() => {
-        async function makeAllPath() {
-            const allMoveTypes = [];
-            const allMoveDetails = [];
-            const allPathSet = [];
-            const allPathNameSet = [];
+    // useEffect(() => {
+    //     async function makeAllPath() {
+    //         const allMoveTypes = [];
+    //         const allMoveDetails = [];
+    //         const allPathSet = [];
+    //         const allPathNameSet = [];
 
-            for (let i = 0; i < info.allDay; i++) {
-                const spotsResult = await loadRouteData(
-                    info.theme,
-                    districtCode[info.selectRegions[i].split(" ")[0]].code
-                );
+    //         for (let i = 0; i < info.allDay; i++) {
+    //             const spotsResult = await loadRouteData(
+    //                 info.theme,
+    //                 districtCode[info.selectRegions[i].split(" ")[0]].code
+    //             );
 
-                const dayResult = await makeDaySet(spotsResult);
+    //             const dayResult = await makeDaySet(spotsResult);
 
-                allMoveTypes.push(dayResult.moveTypes);
-                allMoveDetails.push(dayResult.moveDetails);
-                allPathSet.push(dayResult.pathSet);
-                allPathNameSet.push(dayResult.pathNameSet);
-            }
+    //             allMoveTypes.push(dayResult.moveTypes);
+    //             allMoveDetails.push(dayResult.moveDetails);
+    //             allPathSet.push(dayResult.pathSet);
+    //             allPathNameSet.push(dayResult.pathNameSet);
+    //         }
 
-            setInfo(prev => ({
-                ...prev,
-                moveType: allMoveTypes,
-                moveDetail: allMoveDetails,
-                pathset: allPathSet,
-                pathNameSet: allPathNameSet
-            }));
+    //         setInfo(prev => ({
+    //             ...prev,
+    //             moveType: allMoveTypes,
+    //             moveDetail: allMoveDetails,
+    //             pathset: allPathSet,
+    //             pathNameSet: allPathNameSet
+    //         }));
 
-            setOnloading(true);
-        }
+    //         setOnloading(true);
+    //     }
 
-        if (info.allDay > 0 && info.theme.length > 0) {
-            makeAllPath();
-        }
-    }, [info.allDay, info.theme, info.selectRegions]);
+    //     if (info.allDay > 0 && info.theme.length > 0) {
+    //         makeAllPath();
+    //     }
+    // }, [info.allDay, info.theme, info.selectRegions]);
+
+
 
     useEffect(() => {
         let timer = null;
@@ -382,6 +385,16 @@ function MP4({ info, setInfo, page, pageSet }) {
         }
     }, [info.pathset, subday, mapReady]);
 
+
+
+    useEffect(()  => {
+        async function test() {
+            await setInfo(mockinfo);
+            setOnloading(true);
+        }
+        test();
+    },[]);
+
     const moveLeftPage = () => {
         pageSet(prev => {
             if (prev > 1) return prev - 1;
@@ -396,6 +409,7 @@ function MP4({ info, setInfo, page, pageSet }) {
         });
     };
 
+    console.log(info);
     return (
         <div className='MP4'>
             <Title
@@ -405,7 +419,7 @@ function MP4({ info, setInfo, page, pageSet }) {
                 subtitle='맘에드는지 확인해보세요'
                 locate='left'
             />
-
+            {onloading && (
             <div>
                 <div>
                     <div>
@@ -448,17 +462,17 @@ function MP4({ info, setInfo, page, pageSet }) {
                                     <Icon name='down' color='color-mix(in srgb, var(--LM-line-color) 70%, transparent)'/>
                                 </div>
                             </div>
-                            {onloading && (
+                            
                             <div className='path' style={{ display: subday === i ? 'block' : 'none' }}>
                                 {Array.from({ length: 3 }, (_, i) => (
                                 <div key={i}>
                                     <Bus info = {info} day = {day} num = {i}/>
                                 </div>))}
-                            </div>)}
+                            </div>
                         </div>))}
                     </div>
                 </div>
-            </div>
+            </div>)}
 
             <div className='pageButton'>
                 {page !== 1 && (
