@@ -31,10 +31,16 @@
     margin-top: 20px;
 }
 .MP4 > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
+    position: relative;
+    height: 500px;
+
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    overflow-y: scroll;
 }
+
 .path {
     width: 450px;
     height: fit-content;

@@ -32,7 +32,7 @@ function MyPage() {
                     <p>나의 여행</p>
                     <Link className = {`menu ${menu[1]}`}
                         to = "MyPlan"
-                        onClick = {() => changeMenu(1)}><Icon name = 'plan' color = {(menu[1] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>예정된 여행</p></Link>
+                        onClick = {() => changeMenu(1)}><Icon name = 'plan' color = {(menu[1] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>저장된 여행</p></Link>
                     <Link className = {`menu ${menu[2]}`}
                         to = "MySaving"
                         onClick = {() =>changeMenu(2)}><Icon name = 'echo' color = {(menu[2] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>나의 탄소절감</p></Link>

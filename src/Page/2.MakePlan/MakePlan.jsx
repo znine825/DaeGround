@@ -55,18 +55,20 @@ function MakePlan() {
         startDay: null,
         endDay: null,
         allDay: 0,
+
         peopleType: [true, false, false, false],
         peopleNumArray: [1, 0, 0, 0],
         peopleNum: 1,
+
         theme: [],
         themetitle: [],
         selectRegions: null,
-        theme1: null,
-        theme2: null,
+
         moveType: [],
         moveDetail: [],
         pathSet: [],
-        pathNameSet: []
+        pathNameSet: [],
+
     });
 
 

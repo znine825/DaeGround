@@ -55,12 +55,13 @@ export async function logIn(email, password) {
 }
 
 // 게시글 작성
-export async function createPost(title, content, name) {
+export async function createPost(title, content, text, name) {
     const user = auth.currentUser;
 
     const docRef = await addDoc(collection(db, "posts"), {
         title,
-        content,
+        text,
+        content : JSON.stringify(content),
         authorUid: user.uid,
         authorName: name || '익명',
         createdAt: serverTimestamp(),

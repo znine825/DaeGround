@@ -10,36 +10,41 @@ import './MyInfo.css'
 
 function MyInfo() {
 
-    
-
     const [userData, setUserData] = useState(null);
     const [postCount, setPostCount] = useState([]);
     const [commentCount, setCommentCount] = useState([]);
 
-    
-
     useEffect(() => {
-        const uid = auth.currentUser.uid;   // 안전하게 바로 사용 가능
+        const uid = auth.currentUser?.uid;
+
+        if (!uid) return;
 
         async function fetchData() {
+
+
             const db = getFirestore();
-            const docSnap = await getDoc(doc(db, "users", uid));
+            try {
+                const docSnap = await getDoc(
+                    doc(db, "users", uid)
+                );
+            
+                if (docSnap.exists()) {
+                    setUserData(docSnap.data());
+                }
 
-            if (docSnap.exists()) {
-                setUserData(docSnap.data());
+                const posts = await getPostsByUid(uid);
+                setPostCount(posts.length);
+
+
+                const comments = await getCommentsByUid(uid);
+                setCommentCount(comments.length);
+            } catch (error) {
+                console.error("유저 정보 가져오기 실패:", error);
             }
-
-            const [posts, comments] = await Promise.all([
-                getPostsByUid(uid),
-                getCommentsByUid(uid)
-            ]);
-
-            setPostCount(posts.length);
-            setCommentCount(comments.length);
         }
+
         fetchData();
     }, []);
-
     
     if (!userData) {
         return <div>로딩중...</div>;

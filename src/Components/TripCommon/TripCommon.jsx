@@ -29,22 +29,17 @@ function WayPoint({title, way, subtitle, color, line = true}) {
 }
 
 export function Bus({info, day, num}) {
-    const busCount = info.pathset[day][num].path.steps;
-
+    const busCount = info.pathSet[day][num].path.steps;
+    
     function getBusNumber(text) {
-        const busText = text.split(" ")[1];
-
-        if (!busText) return null;
-
         // 농어촌 300 → 농300
-        const rural = busText.match(/^농어촌\s*(\d+)/);
+        const rural = text.match(/농어촌\s*(\d+(?:-\d+)?)/);
         if (rural) {
             return `농${rural[1]}`;
         }
 
-        // 101, 102, 730
-        // 급행1, 급행2
-        const match = busText.match(/^(?:\d+(?:-\d+)?|급행\d+)/);
+        // 숫자 / 숫자-숫자 / 급행숫자 / 한글+숫자
+        const match = text.match(/(?:급행\d+|[가-힣]+\d+|\d+(?:-\d+)?)/);
 
         return match ? match[0] : null;
     }
@@ -129,7 +124,11 @@ export function Bus({info, day, num}) {
                         </div>}
                         {busWayArray[i] == "SUBWAY" &&
                         <div>
-                            지하철
+                            <WayPoint 
+                                title = {wayColorAndText(busCount[i].properties.guidance)[1]} 
+                                way = {`${getBusStops(busCount[i].properties.guidance)[0]} 탑승`}
+                                subtitle = {`${getBusStops(busCount[i].properties.guidance)[1]} 하차`}
+                                color = {wayColorAndText(busCount[i].properties.guidance)[0]}/> 
                         </div>}
                         {busWayArray[i] == "WALKING" &&
                         <div>
@@ -138,30 +137,20 @@ export function Bus({info, day, num}) {
                     </div>
                 ))}
 
-                <WayPoint title = '도착' way = {info.pathNameSet[day][num].end} subtitle = '1111m 이동' line = {false}/>
+                <WayPoint title = '도착' way = {info.pathNameSet[day][num].end} subtitle = '도착' line = {false}/>
             </div>
         </div>
     )
 }
+
 export function Walk({info, day, num}) {
     return (
-        <div className = 'walk'>
+        <div>
             <WayTitle start = {info.pathNameSet[day][num].start} end = {info.pathNameSet[day][num].end}/>
-        </div>
-    )
-}
-export function Subway({info, day, num}) {
-    return (
-        <div className = 'subway'>
-            <WayTitle start = {info.pathNameSet[day][num].start} end = {info.pathNameSet[day][num].end}/>
-        </div>
-    )
-}
-
-export function SubwayAndBus({info, day, num}) {
-    return (
-        <div className = 'SubwayAndBus'>
-            <WayTitle start = {info.pathNameSet[day][num].start} end = {info.pathNameSet[day][num].end}/>
+            <div className = 'WayPointGrid'>
+                <WayPoint title = '출발' way = {info.pathNameSet[day][num].start} subtitle = '1111m 이동'/>
+                <WayPoint title = '도착' way = {info.pathNameSet[day][num].end} subtitle = '도착' line = {false}/>
+            </div>
         </div>
     )
 }

@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { makeDaySet } from "../../Components/KakaoMap/KakaoMap.jsx";
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx';
-import { Bus, Walk, Subway } from '../../Components/TripCommon/TripCommon.jsx'
+import { Bus, Walk } from '../../Components/TripCommon/TripCommon.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx';
 import { generateTripSpots } from '../../Javascript/TourAPI/Functions.js';
 import { LocalBasedLoojup } from '../../Javascript/TourAPI/httpsCall.js';
 import districtCode from '../../JSON/법정동분류코드.json';
-import mockinfo from '../../JSON/test.json';
+import mockinfo from '../../JSON/walk.json';
 import './MP4.css';
 import './MP2.css';
 import './MakePlan.css';
@@ -67,45 +67,64 @@ function MP4({ info, setInfo, page, pageSet }) {
     const changeSubday = (e) => {
         setSubday(e);
     };
+    
 
-    // useEffect(() => {
-    //     async function makeAllPath() {
-    //         const allMoveTypes = [];
-    //         const allMoveDetails = [];
-    //         const allPathSet = [];
-    //         const allPathNameSet = [];
+    useEffect(() => {
 
-    //         for (let i = 0; i < info.allDay; i++) {
-    //             const spotsResult = await loadRouteData(
-    //                 info.theme,
-    //                 districtCode[info.selectRegions[i].split(" ")[0]].code
-    //             );
+        if (info.pathSet.length) {
+            setOnloading(true);
+            return;
+        }
 
-    //             const dayResult = await makeDaySet(spotsResult);
+        async function makeAllPath() {
+            const allMoveTypes = [];
+            const allMoveDetails = [];
+            const allPathSet = [];
+            const allPathNameSet = [];
+            const allContentsID = [];
 
-    //             allMoveTypes.push(dayResult.moveTypes);
-    //             allMoveDetails.push(dayResult.moveDetails);
-    //             allPathSet.push(dayResult.pathSet);
-    //             allPathNameSet.push(dayResult.pathNameSet);
-    //         }
+            for (let i = 0; i < info.allDay; i++) {
+                const spotsResult = await loadRouteData(
+                    info.theme,
+                    districtCode[info.selectRegions[i].split(" ")[0]].code
+                );
+                console.log(spotsResult);
 
-    //         setInfo(prev => ({
-    //             ...prev,
-    //             moveType: allMoveTypes,
-    //             moveDetail: allMoveDetails,
-    //             pathset: allPathSet,
-    //             pathNameSet: allPathNameSet
-    //         }));
+                const dayResult = await makeDaySet(spotsResult);
 
-    //         setOnloading(true);
-    //     }
+                allMoveTypes.push(dayResult.moveTypes);
+                allMoveDetails.push(dayResult.moveDetails);
+                allPathSet.push(dayResult.pathSet);
+                allPathNameSet.push(dayResult.pathNameSet);
 
-    //     if (info.allDay > 0 && info.theme.length > 0) {
-    //         makeAllPath();
-    //     }
-    // }, [info.allDay, info.theme, info.selectRegions]);
+                const tempArray = [
+                    spotsResult[0][0].spot.contentid,
+                    spotsResult[1][0].spot.contentid,
+                    spotsResult[2][0].spot.contentid,
+                    spotsResult[2][1].spot.contentid,
+                ];
+                allContentsID.push(tempArray);
 
+            }
 
+            setInfo(prev => ({
+                ...prev,
+                moveType: allMoveTypes,
+                moveDetail: allMoveDetails,
+                pathSet: allPathSet,
+                pathNameSet: allPathNameSet,
+                allContentsID: allContentsID
+            }));
+
+            setOnloading(true);
+        }
+
+        if (info.allDay > 0 && info.theme.length > 0) {
+            makeAllPath();
+        }
+    }, [info.allDay, info.theme, info.selectRegions]);
+
+        console.log(info);
 
     useEffect(() => {
         let timer = null;
@@ -149,7 +168,7 @@ function MP4({ info, setInfo, page, pageSet }) {
         const map = mapInstanceRef.current;
 
         if (!mapReady || !map) return;
-        if (!info.pathset?.length) return;
+        if (!info.pathSet?.length) return;
 
         const bounds = new window.kakao.maps.LatLngBounds();
 
@@ -228,7 +247,7 @@ function MP4({ info, setInfo, page, pageSet }) {
             return "#C7BB34";
         };
 
-        info.pathset.forEach((daySet, dayIndex) => {
+        info.pathSet.forEach((daySet, dayIndex) => {
             const opacity = dayIndex === subday ? 0.8 : 0.2;
 
             daySet.forEach(move => {
@@ -383,23 +402,21 @@ function MP4({ info, setInfo, page, pageSet }) {
         if (!bounds.isEmpty()) {
             map.setBounds(bounds);
         }
-    }, [info.pathset, subday, mapReady]);
+    }, [info.pathSet, subday, mapReady]);
 
 
 
-    useEffect(()  => {
-        async function test() {
-            await setInfo(mockinfo);
-            setOnloading(true);
-        }
-        test();
-    },[]);
+    // useEffect(()  => {
+    //     async function test() {
+    //         await setInfo(mockinfo);
+    //         setOnloading(true);
+    //     }
+    //     test();
+    // },[]);
 
     const moveLeftPage = () => {
-        pageSet(prev => {
-            if (prev > 1) return prev - 1;
-            return prev;
-        });
+        alert('여행이 완성되어서 이전단계로 갈 수 없어요.');
+        return false;
     };
 
     const moveRightPage = () => {
@@ -409,7 +426,6 @@ function MP4({ info, setInfo, page, pageSet }) {
         });
     };
 
-    console.log(info);
     return (
         <div className='MP4'>
             <Title
@@ -466,14 +482,19 @@ function MP4({ info, setInfo, page, pageSet }) {
                             <div className='path' style={{ display: subday === i ? 'block' : 'none' }}>
                                 {Array.from({ length: 3 }, (_, i) => (
                                 <div key={i}>
-                                    <Bus info = {info} day = {day} num = {i}/>
+                                    {info.pathSet[day][i].type != "WALK" &&
+                                    <Bus info = {info} day = {day} num = {i}/>}
+                                    {info.pathSet[day][i].type == "WALK" &&
+                                    <Walk info = {info} day = {day} num = {i}/>}
                                 </div>))}
                             </div>
                         </div>))}
                     </div>
                 </div>
             </div>)}
-
+            {!onloading && (
+                <div>로딩중</div>
+            )}
             <div className='pageButton'>
                 {page !== 1 && (
                     <div onClick={moveLeftPage}>
