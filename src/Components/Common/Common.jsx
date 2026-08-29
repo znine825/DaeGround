@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Icon } from './../Icons/Icons.jsx'
+import { Bus, Walk } from '../TripCommon/TripCommon.jsx'
+import { getPostsByUid, getComments } from "./../../Javascript/firebase_logic.js"
 import './Common.css'
 
 
@@ -124,6 +127,83 @@ export function InfoHeader({contents}) {
                 </div>
             </div>
             <Icon name = 'profile' color = 'color-mix(in srgb, var(--LM-background-color) 30%, #FFFFFF00 70%)' width = '250' height = '250' strc = '1'/>
+        </div>
+    )
+}
+
+export function Post(post) {
+    const navigate = useNavigate();
+
+    function formatDate(timestamp) {
+        const date = timestamp.toDate();
+
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+
+        return `${year}. ${month}. ${day}`;
+    }
+    const [showPost, setShowPost] = useState(false);
+    const cuPost = post.post;
+    const data = JSON.parse(cuPost.content);
+    const [com, setCom] = useState(null);
+
+    useEffect(() => {
+        async function postStart() {
+            const comment = await getComments(cuPost.id);
+            setCom(comment);
+        }
+        postStart();
+    }, [])
+
+    if (!com) {
+        return <div>로딩중</div>
+    }
+
+    
+
+    const showPostInfo = () => {
+        setShowPost(true);
+    }
+
+    return (
+        <div className="post"  onClick={() => navigate(`/NoticeBoard/${cuPost.id}`)}>
+            <img src = {data.contentImage} />
+            <div>
+                <div>
+                    <Icon
+                        name="comment"
+                        color="var(--LM-background-color)"
+                    />
+                    <p>{com.length}</p>
+                    <Icon
+                        name="heart"
+                        color="var(--LM-background-color)"
+                    />
+                    <p>{cuPost.likeCount}</p>
+                </div>
+            </div>
+            <div>
+                <p>{cuPost.title}</p>
+                <p>{data.allDay == 1 ? '당일 여행' : `${data.allDay - 1}박 ${data.allDay}일`}</p>
+            </div>
+            <p>제작 날짜 | {formatDate(cuPost.createdAt)}</p>
+        </div>
+    );
+}
+
+export function PageHeader({contents}) {
+    return (
+        <div className = 'pageheader' style={{ height: `${contents.heigth}px` }}>
+            <div>
+                <div>
+                    <Icon name = {contents.icon} color = 'var(--LM-main-color)'/>
+                    <p>{contents.iconText}</p>
+                </div>
+            </div>
+            <p>{contents.title}</p>
+            <p>{contents.subtitle}</p>
+            <img src = {contents.image} style={{ height: `${contents.heigth}px` }}/>
         </div>
     )
 }

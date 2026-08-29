@@ -1,7 +1,7 @@
 import { signOut, deleteUser } from "firebase/auth";
 import { auth, db } from "./firebase";
 import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, collection, setDoc, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
+import { doc, collection, setDoc, getDocs, getDoc, addDoc, deleteDoc } from 'firebase/firestore';
 import { collectionGroup, serverTimestamp, runTransaction, increment, query, orderBy, where, writeBatch, getFirestore } from 'firebase/firestore';
 
 // 회원가입
@@ -167,4 +167,45 @@ export async function getCommentsByUid(uid) {
         postId: doc.ref.parent.parent.id,
         ...doc.data()
     }));
+}
+
+// 게시글 불러오기
+export async function getPost(postId) {
+    try {
+        const postRef = doc(db, "posts", postId);
+        const postSnap = await getDoc(postRef);
+
+        if (!postSnap.exists()) {
+            console.log("게시글이 존재하지 않음");
+            return null;
+        }
+
+        return {
+            id: postSnap.id,
+            ...postSnap.data()
+        };
+
+    } catch (error) {
+        console.error("게시글 불러오기 실패:", error);
+        return null;
+    }
+}
+
+// 유저 정보 불러오기
+export async function getUserInfo(uid) {
+    try {
+        const docSnap = await getDoc(
+            doc(db, "users", uid)
+        );
+        if (!docSnap.exists()) {
+            console.log("유저가 존재하지 않음");
+            return null;
+        }
+
+        return docSnap.data();
+
+    } catch (error) {
+        console.error("유저정보 불러오기 실패:", error);
+        return null;
+    }
 }

@@ -1,3 +1,11 @@
+.MP5 {
+    position: relative;
+    width: 1000px;
+    height: fit-content;
+
+    margin-top: 100px;
+}
+
 .CO2graph {
     position: relative;
     width: 450px;
@@ -107,7 +115,6 @@
 
     background: color-mix(in srgb, (--LM-background-color) 20%, transparent);
     backdrop-filter: blur(3px);
-
 }
 .addtrip > div {
     width: 1120px;

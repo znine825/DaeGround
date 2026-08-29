@@ -1,11 +1,12 @@
 .myplan {
     position: relative;
-    width: 975px;
-    height: 700px;
-}
-.myplan > div > div:nth-child(1) img {
-    width: 305px;
-    height: 170px;
+    width: fit-content;
+    height: fit-content;
 
-    border-radius: 20px;
+    margin-top: 30px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 20px;
 }

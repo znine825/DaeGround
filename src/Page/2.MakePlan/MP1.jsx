@@ -4,7 +4,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { ko } from "date-fns/locale/ko";
 registerLocale("ko", ko);
 
-import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
+import { Title, Input, Button, LoadMap, PageHeader } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import "react-datepicker/dist/react-datepicker.css";
 import './MP1.css'
@@ -84,12 +84,7 @@ function MP1({info, setInfo, page, pageSet}) {
 
     return (
         <div className = 'MP1'>
-            <Title 
-                icon = 'calendarCheck'
-                text = '1단계' 
-                title = '누구와, 언제 떠나요?'
-                subtitle = '여행 날짜와 누구랑 가는지 알려주세요'
-                locate = 'left'/>
+            <div></div>
             <div>
                 <div>
                     <div>

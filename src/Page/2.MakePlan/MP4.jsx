@@ -427,13 +427,7 @@ function MP4({ info, setInfo, page, pageSet }) {
 
     return (
         <div className='MP4'>
-            <Title
-                icon='calendarCheck'
-                text='4단계'
-                title='여행 경로가 완성되었어요'
-                subtitle='맘에드는지 확인해보세요'
-                locate='left'
-            />
+            <div></div>
             {onloading && (
             <div>
                 <div>

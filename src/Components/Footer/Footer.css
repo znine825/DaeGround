@@ -6,6 +6,7 @@
     padding-top: 30px;
 
     background-color: #34C75910;
+    z-index: -1;
 }
 .footer > div {
     position: relative;

@@ -75,12 +75,7 @@ function MP3({info, setInfo, page, pageSet}) {
 
     return (
         <div className = 'MP3'>
-            <Title 
-                icon = 'calendarCheck'
-                text = '3단계' 
-                title = '어떤 여행을 하고싶나요?'
-                subtitle = '선호하는 여행 테마를 선택해주세요'
-                locate = 'left'/>
+            <div></div>
             <div>
                 <div>
                     <div>

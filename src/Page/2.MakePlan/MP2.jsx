@@ -54,13 +54,7 @@ function MP2({info, setInfo, page, pageSet}) {
 
     return (
         <div className = 'MP2'>
-            <Title 
-                icon = 'calendarCheck'
-                text = '2단계' 
-                title = '대구 어디로 떠나요?'
-                subtitle = '정하신 장소 또는 가고 싶은 장소를 골라주세요'
-                locate = 'left'/>
-
+            <div></div>
             <div>
                 <div>
                     <div>
