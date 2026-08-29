@@ -1,0 +1,11 @@
+.myplan {
+    position: relative;
+    width: 975px;
+    height: 700px;
+}
+.myplan > div > div:nth-child(1) img {
+    width: 305px;
+    height: 170px;
+
+    border-radius: 20px;
+}

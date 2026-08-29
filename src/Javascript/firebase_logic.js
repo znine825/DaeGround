@@ -19,7 +19,8 @@ export async function signUp(email, password, name) {
                 realname: '미등록',
                 phonenumber: '미등록',
                 residentialarea: '미등록',
-                gender: '미등록'
+                gender: '미등록',
+                co2: 0
             }
         });
 

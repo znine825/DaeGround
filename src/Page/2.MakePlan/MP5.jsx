@@ -3,6 +3,10 @@ import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.js
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import { Bus, Walk } from '../../Components/TripCommon/TripCommon.jsx'
 import { createPost } from '../../Javascript/firebase_logic.js'
+import { app, auth } from "../../Javascript/firebase.js";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { Link, useNavigate } from 'react-router-dom';
+import { getContentImage } from '../../Javascript/TourAPI/httpsCall.js'
 import './MP5.css'
 import './MakePlan.css'
 
@@ -106,7 +110,7 @@ function MP5({info, setInfo, page, pageSet}) {
 
     const [day, setDay] = useState(0);
     const [allco2, setAllco2] = useState([0, 0, 0]);
-    const [distance, setDistance] = useState([0, 0, 0]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const tempco2 = [0, 0, 0];
@@ -153,6 +157,7 @@ function MP5({info, setInfo, page, pageSet}) {
     const [addTrip, setAddTrip] = useState(false);
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
+
     const seveTrip = () => {
         setAddTrip(true);
 
@@ -161,31 +166,59 @@ function MP5({info, setInfo, page, pageSet}) {
             left: 0,
             behavior: 'smooth'
         });
-
-
-        
     }
 
     const savePost = () => {
-        
-        const tempInfo = structuredClone(info);
-        for(let i = 0; i < info.allDay; i++) {
-            for(let j = 0; j < 3; j++) {
-                 tempInfo.pathSet[i][j].endWalk = 0;
-                 tempInfo.pathSet[i][j].startWalk = 0;
-
-                if (tempInfo.moveType[i][j] == "WALK") {
-                    tempInfo.pathSet[i][j].path.route.legs = 0;
-                } else {
-                    for(let k = 0; k < tempInfo.pathSet[i][j].path.steps.length; k++) {
-                        tempInfo.pathSet[i][j].path.steps[k].path = 0;
-                        tempInfo.pathSet[i][j].path.steps[k].properties.stops = 0;
+        async function save() {
+            const tempInfo = structuredClone(info);
+            for(let i = 0; i < info.allDay; i++) {
+                for(let j = 0; j < 3; j++) {
+                     tempInfo.pathSet[i][j].endWalk = 0;
+                     tempInfo.pathSet[i][j].startWalk = 0;
+    
+                    if (tempInfo.moveType[i][j] == "WALK") {
+                        tempInfo.pathSet[i][j].path.route.legs = 0;
+                    } else {
+                        for(let k = 0; k < tempInfo.pathSet[i][j].path.steps.length; k++) {
+                            tempInfo.pathSet[i][j].path.steps[k].path = 0;
+                            tempInfo.pathSet[i][j].path.steps[k].properties.stops = 0;
+                        }
                     }
                 }
             }
-        }
-        createPost(title, tempInfo, text);
-    }; 
+            console.log(tempInfo);
+            var image = null;
+            for (let i = 0; i < tempInfo.allDay; i++) {
+                for (let j = 0; j < 4; j++) {
+                    image = await getContentImage(tempInfo.allContentsID[i][j]);
+                    if (image != []) {
+                        const random3 = Math.floor(Math.random() * image.length);
+                        tempInfo.contentImage = image[random3].originimgurl;
+                        break;
+                    }
+                }
+            }
+
+
+            const uid = auth.currentUser?.uid;
+            const db = getFirestore();
+
+            const docSnap = await getDoc(
+                    doc(db, "users", uid)
+                );
+
+            const userRef = await doc(db, "users", uid);
+            await updateDoc(userRef, {
+                'info.co2' : docSnap.data().info.co2 + Math.round(allco2[1] - allco2[0])
+            });
+
+            createPost(title, tempInfo, text);
+            setAddTrip(false);
+            alert('여행 경로가 저장되었습니다.')
+            navigate('/');
+        }; 
+        save();
+    }
 
     return (
         <div className = 'MP5'>
@@ -293,10 +326,10 @@ function MP5({info, setInfo, page, pageSet}) {
                         subtitle = '다른 사람들도 볼 수 있어요'
                         locate = 'left'/>
                     <p>제목</p>
-                    <input placeholder = '여행 제목을 입력해주세요' value={title} maxLength = {9} onChange={(e) => setTitle(e.target.value)}/>
+                    <input placeholder = '여행 제목을 입력해주세요' value={title} maxLength = {10} onChange={(e) => setTitle(e.target.value)}/>
                     <p>{title.length}/10자</p>
                     <p>여행 설명</p>
-                    <textarea placeholder = '여행 설명을 작성해주세요' value={text} maxLength = {99} onChange={(e) => setText(e.target.value)}/>
+                    <textarea placeholder = '여행 설명을 작성해주세요' value={text} maxLength = {100} onChange={(e) => setText(e.target.value)}/>
                     <p>{text.length}/100자</p>
                     <div className = 'pageButton'>
                         <div onClick = {() => {setAddTrip(false)}}>

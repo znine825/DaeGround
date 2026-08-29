@@ -26,8 +26,6 @@ exports.callTourApi = onCall(
                 MobileOS: 'WEB',
                 MobileApp: 'DaeGround',
                 _type: 'json',
-                numOfRows: '50',
-                arrange: 'D',
                 ...params
             });
 

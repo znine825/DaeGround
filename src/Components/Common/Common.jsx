@@ -97,7 +97,7 @@ export function InfoHeader({contents}) {
                 </div>
                 <div>
                     <p>{contents.name}</p>
-                    <p>가입일 {contents.date.toDate().toLocaleDateString()}</p>
+                    <p>가입일 {contents.date}</p>
                 </div>
             </div>
             <div>
@@ -119,7 +119,7 @@ export function InfoHeader({contents}) {
                     <div>
                         <Icon name = 'file' color = 'var(--LM-background-color)'/>
                     </div>
-                    <p>1234kg</p>
+                    <p>{contents.co2}g</p>
                     <p>절감 CO2</p>
                 </div>
             </div>

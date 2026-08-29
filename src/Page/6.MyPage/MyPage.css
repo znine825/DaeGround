@@ -8,7 +8,6 @@
 
     display: flex;
     flex-direction: row;
-
 }
 .MyPageheader > div:nth-child(1) {
     position: relative;
@@ -73,4 +72,9 @@
 }
 .outlet {
     position: relative;
+}
+.MyPage > div:nth-child(2) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }

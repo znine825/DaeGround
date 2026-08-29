@@ -88,7 +88,6 @@ function MP4({ info, setInfo, page, pageSet }) {
                     info.theme,
                     districtCode[info.selectRegions[i].split(" ")[0]].code
                 );
-                console.log(spotsResult);
 
                 const dayResult = await makeDaySet(spotsResult);
 
@@ -124,7 +123,7 @@ function MP4({ info, setInfo, page, pageSet }) {
         }
     }, [info.allDay, info.theme, info.selectRegions]);
 
-        console.log(info);
+
 
     useEffect(() => {
         let timer = null;

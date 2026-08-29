@@ -1,10 +1,9 @@
 .myinfo {
     position: relative;
-    width: 964px;
+    width: 975px;
     height: 700px;
-
 }
-.myinfo > div:nth-child(2) {
+.myinfo > div:nth-child(1) {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);

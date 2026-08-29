@@ -20,8 +20,6 @@ export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lc
             params.lDongSignguCd = lDongSignguCd;
         }
 
-        console.log('관광 API 검색 params:', params);
-
         const result = await fn({
             endpoint: 'areaBasedList2',
             service: 'KorService2',
@@ -35,6 +33,32 @@ export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lc
     }
 }
 
+export async function getContentImage(contentId) {
+    const functions = getFunctions();
+    const fn = httpsCallable(functions, 'callTourApi');
+
+    try {
+        const params = {
+            MobileOS: 'WEB',
+            MobileApp: 'DaeGound',
+            contentId: contentId,
+            numOfRows: 20,
+            pageNo: 1
+        };
+
+
+        const result = await fn({
+            endpoint: 'detailImage2',
+            service: 'KorService2',
+            params
+        });
+
+        return result.data;
+    } catch (error) {
+        console.error('getContentImage 오류:', error.code, error.message);
+        return null;
+    }
+}
 
 export async function getTransitRoute(startX, startY, endX, endY, way) {
     const functions = getFunctions();

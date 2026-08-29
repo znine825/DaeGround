@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { app, auth } from "./../../Javascript/firebase.js";
+import { getPostsByUid, getCommentsByUid, addComment } from "./../../Javascript/firebase_logic.js";
 import { Outlet, Link } from 'react-router-dom';
-import { Title } from '../../Components/Common/Common.jsx'
+import { Title, InfoHeader } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import './MyPage.css'
 
 function MyPage() {
-
+    const [userInfo, setUserInfo] = useState(null);
     const [menu, setMenu] = useState(['Myon', 'Myoff', 'Myoff', 'Myoff', 'Myoff', 'Myoff', 'Myoff'])
 
     function changeMenu(num) {
@@ -13,7 +16,55 @@ function MyPage() {
         tempMenu[num] = 'Myon';
         setMenu(tempMenu);
     }
+
+    const [userData, setUserData] = useState(null);
+    const [postCount, setPostCount] = useState([]);
+    const [commentCount, setCommentCount] = useState([]);
+
+    useEffect(() => {
+        const uid = auth.currentUser?.uid;
+
+        if (!uid) return;
+
+        async function fetchData() {
+            const db = getFirestore();
+            try {
+                const docSnap = await getDoc(
+                    doc(db, "users", uid)
+                );
+            
+                if (docSnap.exists()) {
+                    setUserData(docSnap.data());
+                }
+
+                const posts = await getPostsByUid(uid);
+                setPostCount(posts.length);
+
+
+                const comments = await getCommentsByUid(uid);
+                setCommentCount(comments.length);
+            } catch (error) {
+                console.error("유저 정보 가져오기 실패:", error);
+            }
+            setUserInfo([userData, postCount, commentCount]);
+        }
+
+        fetchData();
+    }, []);
     
+    if (!userData) {
+        return <div>로딩중...</div>;
+    }
+    
+    const headerInfo = {
+        icon: userData.info.icon,
+        name: userData.info.name,
+        date: userData.info.createdAt.toDate().toLocaleDateString(),
+        postCount: postCount,
+        commentCount: commentCount,
+        co2: userData.info.co2
+    }
+
 
     return (
         <div className = 'MyPage'>
@@ -51,9 +102,11 @@ function MyPage() {
                         onClick = {() => changeMenu(6)}><Icon name = 'star' color = {(menu[6] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>즐겨찾기</p></Link>
                 </div>
             </div>
-            <div></div>
-            <div className = 'outlet'>
-                <Outlet />
+            <div>
+                <InfoHeader contents = {headerInfo}/>
+                <div className = 'outlet'>
+                    <Outlet />
+                </div>
             </div>
         </div>
     )

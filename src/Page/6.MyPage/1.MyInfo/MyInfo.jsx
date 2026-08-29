@@ -20,8 +20,6 @@ function MyInfo() {
         if (!uid) return;
 
         async function fetchData() {
-
-
             const db = getFirestore();
             try {
                 const docSnap = await getDoc(
@@ -51,18 +49,12 @@ function MyInfo() {
     }
 
 
-    const headerInfo = {
-        icon: userData.info.icon,
-        name: userData.info.name,
-        date: userData.info.createdAt,
-        postCount: postCount,
-        commentCount: commentCount
-    }
+
 
 
     return (
         <div className = 'myinfo'>
-            <InfoHeader contents = {headerInfo}/>
+            
             <div>
                 <Info title = '아이디' subtitle = {userData.info.name} icon = 'profile'/>
                 <Info title = '이름' subtitle = {userData.info.realname} icon = 'profile'/>
