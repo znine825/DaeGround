@@ -18,79 +18,45 @@ exports.callTourApi = onCall(
         try {
             const serviceKey = tourApiKey2.value();
             const { endpoint, params, service } = request.data;
-
-            const baseUrl =
-                `https://apis.data.go.kr/B551011/${service}/${endpoint}`;
-
+            const baseUrl = `https://apis.data.go.kr/B551011/${service}/${endpoint}`;
             const query = new URLSearchParams({
                 serviceKey,
-                MobileOS: 'WEB',
-                MobileApp: 'DaeGround',
-                _type: 'json',
+                MobileOS: "WEB",
+                MobileApp: "DaeGround",
+                _type: "json",
                 ...params
             });
-
             const url = `${baseUrl}?${query.toString()}`;
-
             console.log("TourAPI 요청:", url.replace(serviceKey, "***"));
-
-            const response = await fetch(url, {
-                signal: AbortSignal.timeout(30000)
-            });
-
+            const response = await fetch(url);
             const text = await response.text();
-
             console.log("TourAPI HTTP:", response.status);
             console.log("TourAPI 응답:", text);
-
             let result;
-
             try {
                 result = JSON.parse(text);
             } catch (e) {
                 console.error("TourAPI JSON 파싱 실패:", text);
-
-                throw new HttpsError(
-                    "internal",
-                    "TourAPI 응답이 JSON이 아닙니다."
-                );
+                throw new HttpsError("internal", "TourAPI 응답이 JSON이 아닙니다.");
             }
-
             if (!result?.response) {
                 console.error("response 없음:", result);
-
-                throw new HttpsError(
-                    "internal",
-                    "TourAPI response가 없습니다."
-                );
+                throw new HttpsError("internal", "TourAPI response가 없습니다.");
             }
-
             if (!result.response.body) {
                 console.error("body 없음:", result);
-
-                throw new HttpsError(
-                    "internal",
-                    "TourAPI body가 없습니다."
-                );
+                throw new HttpsError("internal", "TourAPI body가 없습니다.");
             }
-
             const items = result.response.body.items?.item;
-
             if (!items || items === "") {
                 return [];
             }
-
-            return Array.isArray(items)
-                ? items
-                : [items];
-
+            return Array.isArray(items) ? items : [items];
         } catch (error) {
             console.error("callTourApi 오류:", error);
-
             if (error instanceof HttpsError) {
                 throw error;
             }
-
             throw new HttpsError(
                 "internal",
                 error.message || "TourAPI 요청 중 오류가 발생했습니다."

@@ -167,8 +167,8 @@ export async function withdrawAccount() {
 }
 
 // 전체 게시글 불러오기
-export async function getAllPosts() {
-    const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+export async function getAllPosts(showType = 'createdAt', sortStandard = 0) {
+    const q = query(collection(db, "posts"), orderBy(showType, (sortStandard ? 'desc' : 'asc')));
     const snapshot = await getDocs(q);
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }

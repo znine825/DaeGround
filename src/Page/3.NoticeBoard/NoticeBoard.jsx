@@ -15,17 +15,70 @@ function NoticeBoard() {
 
     const [showType, setShowType] = useState(false);
     const [TypeNumber, serTypeNumber] = useState(0);
-    const TypeName = ['날짜', '좋아요', '조회수', '댓글수'];
+    const TypeName = ['날짜', '좋아요', '조회수'];
 
     const [sortStandard, setSortStandard] = useState(0); // 0 오름차순, 1 내림차순
+
+    const [showPostNumber, setShowPostNumber] = useState([]);
+    const [search, setSearch] = useState("");
+    const [toggleSearch, setToggleSearch] = useState(true);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 16;
+
+    function typetrans(text) {
+        if (text == '날짜')  return "createdAt";
+        if (text == '좋아요')  return "likeCount";
+        if (text == '조회수')  return "view";
+    }
+    
+
     useEffect (() => {
         async function loading() {
-            const allPost = await getAllPosts();
+            const allPost = await getAllPosts(typetrans(TypeName[TypeNumber]), sortStandard);
             setAllPost(allPost);
             setOnLodding(true);
         }
         loading();
-    },[])
+    },[TypeNumber, sortStandard])
+
+    useEffect(() => {
+        if (allPost == null) return;
+
+        const list = [];
+
+        for (let i = 0; i < allPost.length; i++) {
+            const post = allPost[i];
+
+            if (search !== "" && !post.title.includes(search)) {
+                continue;
+            }
+
+            if (RegionName[RegionNumber] !== "전체") {
+                const json = JSON.parse(post.content);
+
+                if (!json.selectRegions.some(region =>
+                    region.includes(RegionName[RegionNumber])
+                )) {
+                    continue;
+                }
+            }
+
+            list.push(i);
+        }
+
+        
+        setShowPostNumber(list);
+        setCurrentPage(1);
+
+        if (RegionName[RegionNumber] === "전체") {
+            setShowPostNumber(allPost.map((_, i) => i));
+            setCurrentPage(1);
+            return;
+        }
+    }, [allPost, RegionNumber, search, toggleSearch]);
+
+
     const ph = {
         image: './Image/bagic/PageHeader.png',
         icon: 'file',
@@ -70,7 +123,10 @@ function NoticeBoard() {
             <div className = 'searchbar'>
                 <div>
                     <Icon name = 'mapPin' color = 'var(--LM-mainouttext-color)'/>
-                    <input placeholder = '여행 제목으로 검색...'/>
+                    <input value = {search} onChange={(e) => setSearch(e.target.value)} placeholder = '여행 제목으로 검색...'/>
+                    <div onClick = {() => {setToggleSearch(!toggleSearch)}}>
+                        <Icon name = 'search' color = 'var(--LM-mainouttext-color)'/>
+                    </div>
                 </div>
                 <div>
                     <Icon name = 'map' color = 'var(--LM-mainouttext-color)'/>
@@ -114,10 +170,29 @@ function NoticeBoard() {
                 </div>
             </div>
             <div>
-                {allPost.map((_, i) => (
-                <div>
-                    <Post post = {allPost[i]}/>
-                </div>
+                {showPostNumber
+                    .slice(
+                        (currentPage - 1) * postsPerPage,
+                        currentPage * postsPerPage
+                    )
+                    .map((postIndex) => (
+                        <div key={postIndex}>
+                            <Post post={allPost[postIndex]} />
+                        </div>
+                    ))}
+            </div>
+            <div className="pagination">
+                {Array.from(
+                    { length: Math.ceil(showPostNumber.length / postsPerPage) },
+                    (_, i) => i + 1
+                ).map(page => (
+                    <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={currentPage === page ? "active" : ""}
+                    >
+                        {page}
+                    </button>
                 ))}
             </div>
         </div>

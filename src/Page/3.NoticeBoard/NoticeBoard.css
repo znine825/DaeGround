@@ -44,16 +44,20 @@
     margin-top: 18px;
 }
 .searchbar > div:nth-child(1) {
+    position: relative;
+    top: 4px;
+    display: flex;
+    flex-direction: row;
     border-right: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent); 
 }
 .searchbar > div:nth-child(1) > svg {
     position: relative;
-    margin-left: 23px;
+    margin-left: 18px;
     margin-top: 5px;
 }
 .searchbar > div:nth-child(1) > input {
     position: relative;
-    top: -6px;
+    top: -3px;
 
     margin-left: 10px;
     padding-left: 10px;
@@ -64,6 +68,22 @@
 .searchbar > div:nth-child(1) > input:focus {
     border-bottom: 2px solid #000;
     outline: none;
+}
+.searchbar > div:nth-child(1) > div {
+    position: relative;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid var(--LM-mainouttext-color);
+    border-radius: 10px;
+
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.searchbar > div:nth-child(1) > div > svg {
+    position: relative;
+    top: 2px;
+    left: 2px;
 }
 .searchbar > div:nth-child(2) {
     display: flex;
@@ -100,7 +120,7 @@
     flex-direction: row;
     gap: 5px;
 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     background-color: var(--LM-background-color);
 }
 .searchbar > div:nth-child(3) > div:nth-child(2) > p,
@@ -156,7 +176,7 @@
     border: 1px solid var(--BM-background-color);
     border-radius: 10px;
 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     
     background-color: var(--LM-background-color);
 }
@@ -187,4 +207,24 @@
 }
 .MsortType {
     margin-left: 66px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 30px 0;
+}
+
+.pagination button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    font-weight: bold;
+    text-decoration: underline;
 }

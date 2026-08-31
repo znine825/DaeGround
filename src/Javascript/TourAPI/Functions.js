@@ -95,31 +95,26 @@ export function selectThemeSlots(selectedSubThemeNames) {
 }
 
 async function fetchAllSpotsForSlot(lDongSignguCd, slot, callApiFn) {
-    const results = await Promise.all(
-        slot.codes.map(async ([lclsSystm2, lclsSystm3]) => {
-            const lclsSystm1 = lclsSystm2.slice(0, 2);
-
-            try {
-                const data = await callApiFn(
-                    lDongSignguCd,
-                    lclsSystm1,
-                    lclsSystm2,
-                    lclsSystm3
-                );
-
-                return Array.isArray(data) ? data : [];
-            } catch (error) {
-                console.error(
-                    `TourAPI 호출 실패: ${lclsSystm2}, ${lclsSystm3}`,
-                    error
-                );
-
-                return [];
-            }
-        })
-    );
-
-    return results.flat();
+    const results = [];
+    for (const [lclsSystm2, lclsSystm3] of slot.codes) {
+        const lclsSystm1 = lclsSystm2.slice(0, 2);
+        try {
+            const data = await callApiFn(
+                lDongSignguCd,
+                lclsSystm1,
+                lclsSystm2,
+                lclsSystm3
+            );
+            if (Array.isArray(data)) results.push(...data);
+        } catch (error) {
+            console.error(
+                `TourAPI 호출 실패: ${lclsSystm2}, ${lclsSystm3}`,
+                error
+            );
+        }
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    return results;
 }
 
 function makeSlotWithTheme(slot, subTheme) {
@@ -253,13 +248,13 @@ export async function fetchCandidatesForAllSlots(
 
 export function pickFinalSpots(candidateLists) {
     return candidateLists.map(list => {
-        if (!list || list.length === 0) {
-            return null;
+        if (!list || list.length === 0) return null;
+        const shuffled = [...list];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-
-        return list[
-            Math.floor(Math.random() * list.length)
-        ];
+        return shuffled[0];
     });
 }
 
