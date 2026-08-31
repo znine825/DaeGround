@@ -78,16 +78,24 @@
 
     color: var(--LM-mainouttext-color);
 }
+.postinfobox > div > div:nth-child(2) > div:nth-child(4),
 .postinfobox > div > div:nth-child(2) > svg {
     position: relative;
     margin-top: 7px;
     margin-left: 10px;
 }
-
+.postinfobox > div > div:nth-child(2) > p:nth-child(5),
 .postinfobox > div > div:nth-child(2) > p:nth-child(3) {
     position: relative;
     margin-top: 9px;
 }
+.postinfobox > div > div:nth-child(2) > div:nth-child(4) {
+    width: 24px;
+    height: 24px;
+}
+.postinfobox > div > div:nth-child(2) > div:nth-child(4):hover {
+    cursor: pointer;
+} 
 .postinfobox > div > p {
     position: relative;
 
@@ -97,6 +105,7 @@
 }
 .postinfobox > p {
     position: relative;
+    width: 430px;
     margin-top: 30px;
     margin-left: 30px;
 
@@ -104,12 +113,14 @@
     font-weight: 400;
 
     color: var(--LM-subtext-color);
+
+    white-space: pre-wrap;
 }
 
 .co2info {
     position: relative;
     left: 50%;
-    width: fit-content;
+    width: 1000px;
     transform: translate(-50%, 0);
 
     margin-top: 130px;
@@ -201,4 +212,63 @@
     width: 1px;
 
     background-color: var(--LM-line-color);
+}
+.commentPost {
+    position: relative;
+    width: 1000px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    margin-top: 200px;
+}
+.commentPost > div:nth-child(1) {
+    height: fit-content;
+
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+
+    border-bottom: 1px solid var(--BM-background-color);
+}
+.commentPost > div:nth-child(1) > p:nth-child(1) {
+    height: fit-content;
+    font-size: 32px;
+    font-weight: 700;
+
+    color: var(--LM-mainouttext-color);
+}
+.commentPost > div:nth-child(1) > div {
+    position: relative;
+    margin-left: auto;
+
+    display: flex;
+    flex-direction: row;
+}
+.commentPost > div:nth-child(1) > p:nth-child(3) {
+    position: absolute;
+    top: 40px;
+    left: 810px;
+
+    font-size: 12px;
+    font-weight: 300;
+
+    color: var(--LM-subtext-color);
+}
+.commentPost > div:nth-child(1) > div > input {
+    position: relative;
+    top: 2px;
+
+    width: 776px;
+    height: 35px;
+
+    border: 2px solid var(--BM-background-color);
+    border-radius: 18px;
+
+    padding-left: 18px;
+    margin-right: 20px;
+}
+.commentPost > div:not(:nth-child(1)) {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-bottom: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent)
 }

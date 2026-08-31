@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
+import { Title, Input, Button, LimitedTextarea } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import { Bus, Walk } from '../../Components/TripCommon/TripCommon.jsx'
 import { createPost } from '../../Javascript/firebase_logic.js'
@@ -175,7 +175,6 @@ function MP5({info, setInfo, page, pageSet}) {
                     }
                 }
             }
-            console.log(tempInfo);
             var image = null;
             for (let i = 0; i < tempInfo.allDay; i++) {
                 for (let j = 0; j < 4; j++) {
@@ -314,7 +313,12 @@ function MP5({info, setInfo, page, pageSet}) {
                     <input placeholder = '여행 제목을 입력해주세요' value={title} maxLength = {10} onChange={(e) => setTitle(e.target.value)}/>
                     <p>{title.length}/10자</p>
                     <p>여행 설명</p>
-                    <textarea placeholder = '여행 설명을 작성해주세요' value={text} maxLength = {100} onChange={(e) => setText(e.target.value)}/>
+                    <LimitedTextarea
+                        value={text}
+                        onChange={setText}   // state 함수를 그대로 넘김
+                        maxLines={5}
+                        placeholder="최대 5줄까지 입력 가능"
+                        />
                     <p>{text.length}/100자</p>
                     <div className = 'pageButton'>
                         <div onClick = {() => {setAddTrip(false)}}>

@@ -143,7 +143,6 @@ export function Post(post) {
 
         return `${year}. ${month}. ${day}`;
     }
-    const [showPost, setShowPost] = useState(false);
     const cuPost = post.post;
     const data = JSON.parse(cuPost.content);
     const [com, setCom] = useState(null);
@@ -162,9 +161,7 @@ export function Post(post) {
 
     
 
-    const showPostInfo = () => {
-        setShowPost(true);
-    }
+    
 
     return (
         <div className="post"  onClick={() => navigate(`/NoticeBoard/${cuPost.id}`)}>
@@ -181,6 +178,11 @@ export function Post(post) {
                         color="var(--LM-background-color)"
                     />
                     <p>{cuPost.likeCount}</p>
+                    <Icon
+                        name="chartbar"
+                        color="var(--LM-background-color)"
+                    />
+                    <p>{cuPost.view}</p>
                 </div>
             </div>
             <div>
@@ -206,4 +208,56 @@ export function PageHeader({contents}) {
             <img src = {contents.image} style={{ height: `${contents.heigth}px` }}/>
         </div>
     )
+}
+
+export function Comment({contents}) {
+    return (
+        <div className = 'comment'>
+            <div>
+                <div>
+                    <Icon name = {contents.authorIcon} color = 'var(--LM-mainouttext-color)'/>
+                </div>
+                <p>{contents.authorName}</p>
+            </div>
+            <p>{contents.content}</p>
+            <p>{contents.createdAt.toDate().toLocaleDateString()}</p>
+        </div>
+    )
+}
+
+export function LimitedTextarea({ value, onChange, maxLength = 100, maxLines = 5, ...rest }) {
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+        const currentLines = value.split("\n").length;
+        if (currentLines >= maxLines) {
+            e.preventDefault();
+        }
+        }
+    };
+
+    const handleChange = (e) => {
+        let newValue = e.target.value;
+
+        const lines = newValue.split("\n");
+        if (lines.length > maxLines) {
+        newValue = lines.slice(0, maxLines).join("\n");
+        }
+
+        if (newValue.length > maxLength) {
+        newValue = newValue.slice(0, maxLength);
+        }
+
+        onChange(newValue);
+    };
+
+    return (
+        <textarea
+            value={value}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            rows={maxLines}
+            {...rest}
+        />
+    );
 }

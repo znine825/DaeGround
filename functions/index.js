@@ -10,6 +10,7 @@ const tourApiKey2 = defineSecret("TOUR_API_KEY2");
 
 exports.callTourApi = onCall(
     {
+        region: "asia-northeast3",
         secrets: [tourApiKey2],
         timeoutSeconds: 60,
     },
@@ -33,32 +34,9 @@ exports.callTourApi = onCall(
 
             console.log("TourAPI 요청:", url.replace(serviceKey, "***"));
 
-            let response;
-
-            for (let attempt = 1; attempt <= 3; attempt++) {
-                try {
-                    console.log(`TourAPI 요청 시도 ${attempt}/3`);
-
-                    response = await fetch(url, {
-                        signal: AbortSignal.timeout(10000)
-                    });
-
-                    break;
-                } catch (error) {
-                    console.error(
-                        `TourAPI 요청 실패 ${attempt}/3:`,
-                        error
-                    );
-
-                    if (attempt === 3) {
-                        throw error;
-                    }
-
-                    await new Promise(resolve =>
-                        setTimeout(resolve, 1000 * attempt)
-                    );
-                }
-            }
+            const response = await fetch(url, {
+                signal: AbortSignal.timeout(30000)
+            });
 
             const text = await response.text();
 

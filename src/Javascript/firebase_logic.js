@@ -1,7 +1,7 @@
 import { signOut, deleteUser } from "firebase/auth";
 import { auth, db } from "./firebase";
 import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, collection, setDoc, getDocs, getDoc, addDoc, deleteDoc } from 'firebase/firestore';
+import { doc, collection, setDoc, getDocs, getDoc, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { collectionGroup, serverTimestamp, runTransaction, increment, query, orderBy, where, writeBatch, getFirestore } from 'firebase/firestore';
 
 // 회원가입
@@ -66,24 +66,35 @@ export async function createPost(title, content, text, name) {
         authorUid: user.uid,
         authorName: name || '익명',
         createdAt: serverTimestamp(),
-        likeCount: 0
+        likeCount: 0,
+        view: 0
     });
 
     return docRef.id;
 }
 
 // 댓글 작성
-export async function addComment(postId, content, name) {
+export async function addComment(postId, content) {
     const db = getFirestore();
     const user = auth.currentUser;
+    
+    const userinfo = await getUserInfo(user.uid);
 
     await addDoc(collection(db, "posts", postId, "comments"), {
         content,
         authorUid: user.uid,
-        authorName: name || '익명',
+        authorName: userinfo.info.name,
+        authorIcon: userinfo.info.icon,
         createdAt: serverTimestamp()
     });
+}
 
+// 조회수 추가
+export async function addview(postId) {
+    const db = getFirestore();
+    const postRef = doc(db, "posts", postId);
+    await updateDoc(postRef, { view: increment(1) });
+    
 }
 
 // 좋아요 추가
@@ -99,11 +110,29 @@ export async function toggleLike(postId) {
     if (likeSnap.exists()) {
         await deleteDoc(likeRef);
         await updateDoc(postRef, { likeCount: increment(-1) });
+        return true;
     } else {
         await setDoc(likeRef, { postId, uid: user.uid, createdAt: serverTimestamp() });
         await updateDoc(postRef, { likeCount: increment(1) });
+        return false;
     }
 }
+// 좋아요 확인
+export async function checkLike(postId) {
+    const db = getFirestore();
+    const user = auth.currentUser;
+    const likeId = `${postId}_${user.uid}`;
+    const likeRef = doc(db, "likes", likeId);
+
+    const likeSnap = await getDoc(likeRef);
+
+    if (likeSnap.exists()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 // 회원 탈퇴
 export async function withdrawAccount() {
@@ -144,9 +173,9 @@ export async function getAllPosts() {
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
-// 게시글 댓글 불러오가
+// 게시글 댓글 불러오기
 export async function getComments(postId) {
-    const q = query(collection(db, "posts", postId, "comments"), orderBy("createdAt", "asc"));
+    const q = query(collection(db, "posts", postId, "comments"), orderBy("createdAt", "desc"));
     const snapshot = await getDocs(q);
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }

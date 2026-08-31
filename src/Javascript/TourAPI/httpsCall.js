@@ -1,7 +1,7 @@
 import { getFunctions, httpsCallable } from "firebase/functions";
 
 export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lclsSystm3) {
-    const functions = getFunctions();
+    const functions = getFunctions(undefined, "asia-northeast3");
     const fn = httpsCallable(functions, 'callTourApi');
 
     try {
@@ -34,7 +34,7 @@ export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lc
 }
 
 export async function getContentImage(contentId) {
-    const functions = getFunctions();
+    const functions = getFunctions(undefined, "asia-northeast3");
     const fn = httpsCallable(functions, 'callTourApi');
 
     try {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPost, getUserInfo } from "./../../Javascript/firebase_logic"
-import { PageHeader } from './../../Components/Common/Common.jsx'
+import { getPost, getUserInfo, addview, toggleLike, checkLike, getComments, addComment } from "./../../Javascript/firebase_logic"
+import { PageHeader, Comment, Button } from './../../Components/Common/Common.jsx'
 import { Bus, Walk } from './../../Components/TripCommon/TripCommon.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import './PostPage.css'
@@ -92,25 +92,54 @@ function CO2(way, distance) {
 }
 
 
+
 function PostPage() {
     const { postId } = useParams();
     const [post, setPost] = useState(null);
     const [user, setUser] = useState(null);
     const [info, setInfo] = useState(null);
+    const [comment, setComment] = useState(null);
     const [day, setDay] = useState(0);
     const [allco2, setAllco2] = useState([0, 0, 0]);
+    const [postlike, setPostlike] = useState(false);
+    const [firstlike, setFirstlike] = useState();
 
- 
+    const [onLodding, setOnLodding] = useState(false);
+
+    const [title, setTitle] = useState("");
+
+    function likerPtks() {
+        if (firstlike) {
+            if (postlike) {
+                return post.likeCount;
+            }
+            return post.likeCount - 1;
+        } else {
+            if (postlike) {
+                return post.likeCount + 1;
+            }
+            return post.likeCount;
+        }
+    }
+
+    function likeFuc() {
+        toggleLike(post.id);
+        setPostlike(!postlike);
+    }
+
+
     useEffect(() => {
         async function loadPost() {
             const data = await getPost(postId);
-            const userdata = await getUserInfo(data.authorUid);
             setPost(data);
+
+            const userdata = await getUserInfo(data.authorUid);
             setUser(userdata);
+
             const temp = JSON.parse(data.content);
             setInfo(temp);
+
             const tempco2 = [0, 0, 0];
-    
             for (let i = 0; i < temp.allDay; i++) {
                 for (let j = 0; j < 3; j++) {
                     const way = temp.moveType[i][j];
@@ -125,32 +154,46 @@ function PostPage() {
                     } else {
                         distance = path.properties.totalDistance;
                     }
-    
                     tempco2[0] += used;
                     tempco2[1] += car;
                     tempco2[2] += distance;
                 }
-    
             }
-    
             setAllco2(tempco2);
+
+            await addview(postId);
+            const temp2 = await checkLike(postId);
+            setPostlike(temp2);
+            setFirstlike(temp2);
+
+            
+            
+            setOnLodding(true);
         }
 
         loadPost();
     }, [postId]);
 
+    const [reload, setReload] = useState(true);
+
     useEffect(() => {
-        
-    }, [info]);
+        async function loadComment() {
+            const temp3 = await getComments(postId);
+            setComment(temp3);
+        }
+        loadComment();
+    }, [postId, reload]);
 
-    
-
-    if (!user) {
-        return <div>로딩중...</div>;
+    async function uploadComment(text) {
+        await addComment(postId, text);
+        setReload(!reload);
     }
 
-
-
+    
+    if (!onLodding) {
+        return <div>로딩중...</div>;
+    }
+    
     
     const ph = {
         image: info.contentImage,
@@ -166,6 +209,7 @@ function PostPage() {
         setDay(e);
     }
 
+    
 
     return (
         <div className = 'postpage'>
@@ -180,8 +224,12 @@ function PostPage() {
                     </div>
                     <div>
                         <p>{post.title}</p>
-                        <Icon name = 'heart' color = 'var(--LM-mainouttext-color)'/>
-                        <p>{post.likeCount}</p>
+                        <Icon name = 'chartbar' color = 'var(--LM-mainouttext-color)'/>
+                        <p>{post.view}</p>
+                        <div onClick = {() => likeFuc()}>
+                            <Icon name = 'heart' color = {postlike ? 'red' : 'black'}/>
+                        </div>
+                        <p>{likerPtks()}</p>
                     </div>
                     <p>{info.allDay == 1 ? '당일 여행' : `${info.allDay - 1}박 ${info.allDay}일`}</p>
                 </div>
@@ -265,6 +313,23 @@ function PostPage() {
                         </div>))}
                     </div>
                 </div>
+            </div>
+            <div className = "commentPost">
+                <div>
+                    <p>댓글</p>
+                    <div>
+                        <input placeholder = '댓글 추가...' value={title} maxLength = {10} onChange={(e) => setTitle(e.target.value)}></input>
+                        <div onClick  = {() => uploadComment(title)}>
+                            <Button width = '120' height = '38' text = '댓글 달기' fsize = '16' fweight = '500'/>
+                        </div>
+                    </div>
+                    <p>0/100자</p>
+                </div>
+                {Array.from({ length: comment.length },(_, i) => (
+                    <div>
+                        <Comment contents = { comment[i] }/>
+                    </div>
+                ))}
             </div>
         </div>
     );
