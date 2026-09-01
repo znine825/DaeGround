@@ -1,0 +1,208 @@
+.home1 {
+    position: relative;
+    width: 1920px;
+    height: 1000px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.home1 > div:nth-child(1) {
+    position: absolute;
+    top: 190px;
+    left: 170px;
+    width: fit-content;
+    height: fit-content;
+}
+.home1 > div:nth-child(1) > p:nth-child(1) {
+    font-size: 64px;
+    font-weight: 700;
+
+    color: var(--LM-mainouttext-color);
+}
+.home1 > div:nth-child(1) > p:nth-child(2) {
+    position: relative;
+
+    font-size: 64px;
+    font-weight: 800;
+
+    color: var(--LM-main-color);
+}
+.home1 > div:nth-child(1) > p:nth-child(3) {
+    position: relative;
+
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 300;
+
+    color: var(--LM-subtext-color);
+}
+.home1 > div:nth-child(1) > p:nth-child(4) {
+    position: relative;
+
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: 300;
+
+    color: var(--LM-subtext-color);
+}
+.home1 > div:nth-child(1) > div:nth-child(5) {
+    position: relative;
+
+    margin-top: 50px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.home1 > div:nth-child(1) > div:nth-child(5) > div:nth-child(1) {
+    position: relative;
+    height: 50px;
+    width: 200px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px color-mix(in srgb, var(--LM-main-color) 50%, transparent);
+
+    background-color: var(--LM-main-color);
+
+}
+.home1 > div:nth-child(1) > div:nth-child(5) > div:nth-child(1):hover {
+    cursor: pointer;
+}
+.home1 > div:nth-child(1) > div:nth-child(5) > div:nth-child(1) > p {
+    position: relative;
+    margin-left: 33px;
+    margin-top: 13px;
+
+    font-size: 20px;
+    font-weight: 500;
+
+    color: var(--LM-mainintext-color);
+}
+
+.home1 > div:nth-child(1) > div:nth-child(5) > div:nth-child(1) > div {
+    position: relative;
+
+    margin-top: 10px;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 15px;
+    background-color: color-mix(in srgb, var(--LM-background-color) 20%, transparent);
+}
+.home1 > div:nth-child(1) > div:nth-child(5) > div:nth-child(1) > div > svg {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.home1 > div:nth-child(1) > div:nth-child(5) > div:nth-child(2) {
+    position: relative;
+    width: 130px;
+    height: 50px;
+
+    border-radius: 20px;
+
+    box-shadow: 0px 0px 20px color-mix(in srgb, var(--LM-mainouttext-color) 25%, transparent);
+
+    background-color:  var(--LM-background-color);
+}
+.home1 > div:nth-child(1) > div:nth-child(5) > div:nth-child(2) > p {
+    position: relative;
+    width: fit-content;
+
+    font-size: 20px;
+    font-weight: 500;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.home1 > div:nth-child(2) {
+    position: relative;
+    width: 1054px;
+    height: 721px;
+
+    top: 30px;
+    left: 696px;
+}
+.home1 > div:nth-child(2) > img {
+    position: absolute;
+    width: 1054px;
+    height: 721px;
+
+    filter: drop-shadow(0px 0px 20px rgba(52, 199, 89, 0.33));
+    border-radius: 30px;
+    transition: opacity 0.5s ease;
+}
+
+.fadeIn {
+    opacity: 1;
+}
+
+.fadeOut {
+    opacity: 0;
+}
+.home1 > div:nth-child(2) > div:not(:last-child) {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 40px;
+    height: 40px;
+
+    border-radius: 20px;
+
+    background-color: color-mix(in srgb, var(--BM-background-color) 20%, transparent);
+}
+.home1 > div:nth-child(2) > div:not(:last-child) > svg {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.home1 > div:nth-child(2) > div:nth-child(2) {
+    position: relative;
+    left: 100%;
+    transform: translate(-150%, 0);
+
+}
+.home1 > div:nth-child(2) > div:nth-child(3) {
+    margin-left: 20px;
+}
+.home1 > div:nth-child(2) > div:nth-child(4) {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -150%);
+
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    z-index: 999;
+}
+.home1 > div:nth-child(2) > div:nth-child(4) > div {
+    position: relative;
+    width: 8px;
+    height: 8px;
+
+    border-radius: 4px;
+
+    background-color: color-mix(in srgb, var(--BM-background-color) 60%, transparent);
+    transition: width 0.3s ease;
+}
+.home1 > div:nth-child(2) > div:nth-child(2),
+.home1 > div:nth-child(2) > div:nth-child(3),
+.home1 > div:nth-child(2) > div:nth-child(4) > div:hover {
+    cursor: pointer;
+}
+
+

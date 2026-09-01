@@ -1,0 +1,19 @@
+.home3 {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.home3 > div:nth-child(1) {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-bottom: 50px;
+}
+.home3 > div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

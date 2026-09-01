@@ -1,0 +1,47 @@
+.home {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    width: 100vw;
+    height: fit-content;
+
+}
+.home > img {
+    position: absolute;
+    top: -50px;
+    width: 100%;
+    height: auto;
+}
+.home > div:nth-child(3) {
+    position: relative;
+    top: -450px;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+
+    pointer-events: none;
+}
+.home > div:nth-child(4) {
+    position: relative;
+    top: -450px;
+    width: 100%;
+    height: 450px;
+
+    background-color: var(--LM-background-color);
+}
+.home > div:nth-child(5) {
+    position: relative;
+    top: -450px;
+    width: 100%;
+    height: 450px;
+
+    background-color: color-mix(in srgb, var(--LM-main-color) 10%, transparent);
+}
+.home > div:nth-child(6) {
+    position: relative;
+    top: -400px;
+    width: 100%;
+    height: 450px;
+
+}

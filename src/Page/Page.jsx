@@ -25,9 +25,9 @@ createRoot(document.getElementById('root')).render(
             <main className = 'main'>
                 <Routes >
                     <Route path="/" element={<Home />}></Route>
-                    <Route path="/MakePlan" element={<MakePlan />}></Route>
+                    <Route path="/MakePlan" element={<Lodding><MakePlan /></Lodding>}></Route>
                     <Route path="/NoticeBoard" element={<NoticeBoard />}></Route>
-                    <Route path="/NoticeBoard/:postId" element={<PostPage />} />
+                    <Route path="/NoticeBoard/:postId" element={<Lodding><PostPage /></Lodding>} />
                     <Route path="/Contact" element={<Contact />}></Route>
                     <Route path="/Login" element={<Login />}></Route>
                     <Route path="/Signup" element={<Signup />}></Route>

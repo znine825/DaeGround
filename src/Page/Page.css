@@ -124,6 +124,7 @@ p {
 html, body {
     margin: 0;
     height: 100%;
+    scrollbar-width: none;
 }
 .hover:hover {
     cursor: pointer;
