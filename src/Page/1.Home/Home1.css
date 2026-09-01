@@ -1,19 +1,22 @@
 .home1 {
     position: relative;
-    width: 1920px;
+    width: 1300px;
     height: 1000px;
-    left: 50%;
-    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: row;
 }
 
 .home1 > div:nth-child(1) {
-    position: absolute;
-    top: 190px;
-    left: 170px;
+    position: relative;
+    top: 110px;
     width: fit-content;
     height: fit-content;
+
+    margin-right: auto;
 }
 .home1 > div:nth-child(1) > p:nth-child(1) {
+    width: 460px; 
     font-size: 64px;
     font-weight: 700;
 
@@ -124,16 +127,17 @@
 }
 .home1 > div:nth-child(2) {
     position: relative;
-    width: 1054px;
-    height: 721px;
+    width: 780px;
+    height: 540px;
 
-    top: 30px;
-    left: 696px;
+    top: 10px;
+    margin-left: auto;
+
 }
 .home1 > div:nth-child(2) > img {
     position: absolute;
-    width: 1054px;
-    height: 721px;
+    width: 780px;
+    height: 540px;
 
     filter: drop-shadow(0px 0px 20px rgba(52, 199, 89, 0.33));
     border-radius: 30px;
