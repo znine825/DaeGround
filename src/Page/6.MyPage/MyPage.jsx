@@ -80,16 +80,9 @@ function MyPage() {
                     <Link className = {`menu ${menu[0]}`}
                         to = "MyInfo"
                         onClick = {() => changeMenu(0)}><Icon name = 'profile' color = {(menu[0] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>회원 정보</p></Link>
-                    <p>나의 여행</p>
-                    <Link className = {`menu ${menu[1]}`}
-                        to = "MyPlan"
-                        onClick = {() => changeMenu(1)}><Icon name = 'plan' color = {(menu[1] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>저장된 여행</p></Link>
-                    <Link className = {`menu ${menu[2]}`}
-                        to = "MySaving"
-                        onClick = {() =>changeMenu(2)}><Icon name = 'echo' color = {(menu[2] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>나의 탄소절감</p></Link>
                     <p>나의 활동</p>
                     <Link className = {`menu ${menu[3]}`}
-                        to = "MyInfo"
+                        to = "MyPlan"
                         onClick = {() => changeMenu(3)}><Icon name = 'file' color = {(menu[3] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>게시글</p></Link>
                     <Link className = {`menu ${menu[4]}`}
                         to = "MyInfo"

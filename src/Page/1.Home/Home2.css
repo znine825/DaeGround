@@ -1,10 +1,12 @@
 .home2 {
     position: relative;
     width: fit-content;
-    height: fit-content;
-    top: 50%;
+    height: 285px;
     left: 50%;
-    transform: translate(-50%, -50%);
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+    transform: translate(-50%, 0);
 }
 .home2 > div:nth-child(1) {
     position: relative;

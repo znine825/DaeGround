@@ -4,7 +4,7 @@ import { Icon } from './../../Components/Icons/Icons.jsx'
 import { Bus, Walk } from '../../Components/TripCommon/TripCommon.jsx'
 import { createPost } from '../../Javascript/firebase_logic.js'
 import { app, auth } from "../../Javascript/firebase.js";
-import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc, increment  } from "firebase/firestore";
 import { Link, useNavigate } from 'react-router-dom';
 import { getContentImage } from '../../Javascript/TourAPI/httpsCall.js'
 import './MP5.css'
@@ -192,15 +192,30 @@ function MP5({info, setInfo, page, pageSet}) {
             const uid = auth.currentUser?.uid;
             const db = getFirestore();
 
-            const docSnap = await getDoc(
-                    doc(db, "users", uid)
-                );
-
-            const userRef = await doc(db, "users", uid);
-            await updateDoc(userRef, {
-                'info.co2' : docSnap.data().info.co2 + Math.round(allco2[1] - allco2[0])
+            const today = new Date().toLocaleDateString('sv-SE', {
+                timeZone: 'Asia/Seoul'
             });
 
+
+            const ecoRef = doc(db, "statistics", "eco");
+            const postRef = doc(db, "statistics", "post");
+            const userRef = doc(db, "users", uid);
+
+            const co2Value = Math.round(allco2[1] - allco2[0]);
+
+            await updateDoc(ecoRef, {
+                [today]: increment(co2Value)
+            });
+
+            await updateDoc(postRef, {
+                [today]: increment(1)
+            });
+
+            await updateDoc(userRef, {
+                'info.co2': increment(co2Value)
+            });
+
+            
             createPost(title, tempInfo, text);
             setAddTrip(false);
             alert('여행 경로가 저장되었습니다.')

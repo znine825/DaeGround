@@ -14,20 +14,24 @@ function Home() {
     return (
         <div className = 'home'>
             <img src = './Image/bagic/MainBackground.png'/>
-            <Home1 />
-            <div></div>
+            <div>
+                <Home1 />
+            </div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
             <div>
                 <Home2 />
             </div>
             <div>
+                <Home5 />
+            </div>
+            <div>
                 <Home3 />
             </div>
-            {/* <div></div> */}
             <div>
                 <Home4 />
-            </div>
-            <div>
-                <Home5 />
             </div>
         </div>
     )

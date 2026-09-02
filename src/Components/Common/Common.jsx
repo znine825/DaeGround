@@ -135,7 +135,15 @@ export function Post(post) {
     const navigate = useNavigate();
 
     function formatDate(timestamp) {
+        if (!timestamp || typeof timestamp.toDate !== "function") {
+            return "";
+        }
+
         const date = timestamp.toDate();
+
+        if (isNaN(date.getTime())) {
+            return "";
+        }
 
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -158,10 +166,6 @@ export function Post(post) {
     if (!com) {
         return <div>로딩중</div>
     }
-
-    
-
-    
 
     return (
         <div className="post"  onClick={() => navigate(`/NoticeBoard/${cuPost.id}`)}>

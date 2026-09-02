@@ -20,8 +20,18 @@ export async function signUp(email, password, name) {
                 phonenumber: '미등록',
                 residentialarea: '미등록',
                 gender: '미등록',
+                icon: 'profile',
                 co2: 0
             }
+        });
+
+        const today = new Date().toLocaleDateString('sv-SE', {
+            timeZone: 'Asia/Seoul'
+        });
+
+        const userRef = doc(db, "statistics", "user");
+        await updateDoc(userRef, {
+            [today]: increment(1)
         });
 
         // 활동 정보
