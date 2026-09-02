@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter , Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client'
 import Home from './1.Home/Home.jsx'
 import MakePlan from './2.MakePlan/MakePlan.jsx'
@@ -20,7 +20,7 @@ import Lodding from './../Components/Lodding/Lodding.jsx';
 import './Page.css'
 createRoot(document.getElementById('root')).render(
     <div className = 'pages'>
-        <BrowserRouter >
+        <HashRouter  >
             <Header />
             <main className = 'main'>
                 <Routes >
@@ -39,6 +39,6 @@ createRoot(document.getElementById('root')).render(
                 </Routes>
             </main>
             <Footer />
-        </BrowserRouter>
+        </HashRouter >
   </div>
 )
