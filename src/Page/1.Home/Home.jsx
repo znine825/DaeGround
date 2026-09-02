@@ -7,6 +7,7 @@ import Home1 from './Home1.jsx'
 import Home2 from './Home2.jsx'
 import Home3 from './Home3.jsx'
 import Home4 from './Home4.jsx'
+import Home5 from './Home5.jsx'
 function Home() {
 
     
@@ -21,8 +22,12 @@ function Home() {
             <div>
                 <Home3 />
             </div>
+            {/* <div></div> */}
             <div>
                 <Home4 />
+            </div>
+            <div>
+                <Home5 />
             </div>
         </div>
     )

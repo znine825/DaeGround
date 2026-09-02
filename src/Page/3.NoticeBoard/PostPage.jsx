@@ -208,7 +208,7 @@ function PostPage() {
     const changeDay = (e) => {
         setDay(e);
     }
-
+    const shortText = (text) => text.length > 6 ? text.slice(0, 6) + '...' : text;
     
 
     return (
@@ -244,18 +244,33 @@ function PostPage() {
                     </div>
                     <div className = 'CO2graph'> 
                         <CarbonChart
-                            dates={[[info.pathNameSet[day][0].start, '~', info.pathNameSet[day][0].end], 
-                                    [info.pathNameSet[day][1].start, '~', info.pathNameSet[day][1].end], 
-                                    [info.pathNameSet[day][2].start, '~', info.pathNameSet[day][2].end]] }
+                            dates={[
+                                [
+                                    shortText(info.pathNameSet[day][0].start),
+                                    '~',
+                                    shortText(info.pathNameSet[day][0].end)
+                                ],
+                                [
+                                    shortText(info.pathNameSet[day][1].start),
+                                    '~',
+                                    shortText(info.pathNameSet[day][1].end)
+                                ],
+                                [
+                                    shortText(info.pathNameSet[day][2].start),
+                                    '~',
+                                    shortText(info.pathNameSet[day][2].end)
+                                ]
+                            ]}
                             carData={[
-                                    CO2(info.moveType[day][0], info.pathSet[day][0].path)[1], 
-                                    CO2(info.moveType[day][1], info.pathSet[day][1].path)[1],
-                                    CO2(info.moveType[day][2], info.pathSet[day][2].path)[1]]}
-                            transitData={
-                                    [
-                                    CO2(info.moveType[day][0], info.pathSet[day][0].path)[0], 
-                                    CO2(info.moveType[day][1], info.pathSet[day][1].path)[0],
-                                    CO2(info.moveType[day][2], info.pathSet[day][2].path)[0]]}
+                                CO2(info.moveType[day][0], info.pathSet[day][0].path)[1],
+                                CO2(info.moveType[day][1], info.pathSet[day][1].path)[1],
+                                CO2(info.moveType[day][2], info.pathSet[day][2].path)[1]
+                            ]}
+                            transitData={[
+                                CO2(info.moveType[day][0], info.pathSet[day][0].path)[0],
+                                CO2(info.moveType[day][1], info.pathSet[day][1].path)[0],
+                                CO2(info.moveType[day][2], info.pathSet[day][2].path)[0]
+                            ]}
                         />
                     </div>
                     <div>
