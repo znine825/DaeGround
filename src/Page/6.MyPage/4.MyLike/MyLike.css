@@ -1,0 +1,13 @@
+.MyLike {
+    margin-top: 30px;
+}
+.MyLike > div:nth-child(1) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 20px;
+}
+
+.pagination {
+    margin-top: 10px;
+}

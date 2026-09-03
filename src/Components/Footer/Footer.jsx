@@ -1,7 +1,12 @@
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import PrivacyPage from '../../Components/Files/PrivacyPolicy/PrivacyPolicy.jsx'
+import TermsOfUse from '../../Components/Files/TermsOfUse/TermsOfUse.jsx'
 import './Footer.css'
 
 function Footer() {
+    const [showprivate, setShowprivate] = useState(false);
+    const [showTermsOfUse, setShowTermsOfUse] = useState(false);
 
     return (
         <footer className = 'footer'>
@@ -26,13 +31,15 @@ function Footer() {
                     {/* 우 */}
                     <div>
                         <p>소개</p>
-                        <p>이용약관</p>
-                        <p>개인정보 처리방침</p>
+                        <p onClick = {() => setShowTermsOfUse(true)}>이용약관</p>
+                        <p onClick = {() => setShowprivate(true)}>개인정보 처리방침</p>
                     </div>
                 </div>
                 <div></div>
                 <p>© 2026 DETAILED. ALL Rights Reserved.</p>
             </div>
+            {showprivate && <PrivacyPage setShowprivate = { setShowprivate }/>}
+            {showTermsOfUse && <TermsOfUse setShowTermsOfUse = { setShowTermsOfUse }/>}
         </footer>
     );
 }

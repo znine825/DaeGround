@@ -11,7 +11,8 @@ import MyPage from './6.MyPage/MyPage.jsx'
 
 import MyInfo from './6.MyPage/1.MyInfo/MyInfo.jsx'
 import MyPlan from './6.MyPage/2.MyPlan/MyPlan.jsx'
-import MySaving from './6.MyPage/3.MySaving/MySaving.jsx'
+import MyComment from './6.MyPage/3.MyComment/MyComment.jsx'
+import MyLike from './6.MyPage/4.MyLike/MyLike.jsx'
 
 import Header from './../Components/Header/Header.jsx'
 import Footer from './../Components/Footer/Footer.jsx'
@@ -34,7 +35,8 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/MyPage" element={<Lodding><MyPage /></Lodding>}>
                         <Route path="MyInfo" element={<MyInfo />} />
                         <Route path="MyPlan" element={<MyPlan />} />
-                        <Route path="MySaving" element={<MySaving />} />
+                        <Route path="MyComment" element={<MyComment />} />
+                        <Route path="MyLike" element={<MyLike />} />
                     </Route>
                 </Routes>
             </main>

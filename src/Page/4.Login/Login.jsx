@@ -11,9 +11,13 @@ function Login() {
     const navigate = useNavigate();
 
     const LoginButton = () => {
-        if (logIn(id, password)) {
-            navigate('/');
-        } 
+        async function lodding() {
+            const isLog = await logIn(id, password);
+            if (isLog) {
+                navigate('/');
+            } 
+        }
+        lodding();
     };
 
     return (
@@ -24,7 +28,12 @@ function Login() {
                 title = '로그인 하기' 
                 subtitle = '대그라운드에 다시오신걸 환영합니다' 
                 locate = 'middle'/>
-            <div className = 'loginputGrid'>
+            <div className = 'loginputGrid'
+                onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            LoginButton();
+                        }
+                }}>
                 <Input  className = 'id'
                         value = { id } setValue = { setId } showPassword = { true } errch = {1}
                         title = '이메일' warning = '이메일을 입력해 주세요.'
@@ -33,7 +42,7 @@ function Login() {
                         value = { password } setValue = { setPassword } showPassword = { false } errch = {1}
                         title = '비밀번호' warning = '비밀번호를 입력해 주세요.'
                         condition = ''/>
-                <div onClick = {() => LoginButton()}>
+                <div onClick = {() => LoginButton()} >
                     <Button width = '360' height = '50' text = '로그인' fsize = '16' fweight = '500'/>
                 </div>
             </div>

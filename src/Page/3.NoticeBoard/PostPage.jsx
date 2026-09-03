@@ -167,7 +167,7 @@ function PostPage() {
             setFirstlike(temp2);
 
             
-            
+            console.log(info);
             setOnLodding(true);
         }
 

@@ -31,7 +31,7 @@ function Myplan() {
     return (
         <div className="myplan">
              {post.map((_, i) => (
-                <div>
+                <div key = {i}>
                     <Post post = {post[i]}/>
                 </div>
              ))}

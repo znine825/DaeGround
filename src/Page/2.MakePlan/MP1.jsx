@@ -65,13 +65,17 @@ function MP1({info, setInfo, page, pageSet}) {
 
         if (info['peopleNum'] == 0) {
             alert('옮바른 인원을 선택해주세요');
-            return false
+            return false;
         }
 
         const tempInfo = {...info};
 
        
         tempInfo['allDay'] = info['startDay'] && info['endDay'] ? Math.round((info['endDay'] - info['startDay']) / (1000 * 60 * 60 * 24)) + 1 : 0;
+        if (tempInfo['allDay'] >= 4) {
+            alert('여행은 최대 3일까지 설정할 수 있어요');
+            return false;
+        }
         tempInfo['selectRegions'] = Array(tempInfo['allDay']).fill('미등록');
         setInfo(tempInfo);
 

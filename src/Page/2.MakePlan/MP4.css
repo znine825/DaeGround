@@ -69,3 +69,27 @@
     flex-direction: column;
     gap: 30px;
 }
+
+
+.loading {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.loadingBar {
+    width: 360px;
+    height: 10px;
+    background: var(--LM-line-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loadingBarProgress {
+    height: 100%;
+    background: var(--LM-main-color);
+    border-radius: 10px;
+    transition: width 5s ease;
+}

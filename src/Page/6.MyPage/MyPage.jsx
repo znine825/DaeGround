@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { app, auth } from "./../../Javascript/firebase.js";
-import { getPostsByUid, getCommentsByUid, addComment } from "./../../Javascript/firebase_logic.js";
+import { app, auth } from "../../Javascript/firebase.js";
+import { getPostsByUid, getCommentsByUid, addComment } from "../../Javascript/firebase_logic.js";
 import { Outlet, Link } from 'react-router-dom';
 import { Title, InfoHeader } from '../../Components/Common/Common.jsx'
-import { Icon } from './../../Components/Icons/Icons.jsx'
+import { Icon } from '../../Components/Icons/Icons.jsx'
 import './MyPage.css'
 
 function MyPage() {
@@ -47,6 +47,7 @@ function MyPage() {
                 console.error("유저 정보 가져오기 실패:", error);
             }
             setUserInfo([userData, postCount, commentCount]);
+            changeMenu(0);
         }
 
         fetchData();
@@ -85,14 +86,11 @@ function MyPage() {
                         to = "MyPlan"
                         onClick = {() => changeMenu(3)}><Icon name = 'file' color = {(menu[3] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>게시글</p></Link>
                     <Link className = {`menu ${menu[4]}`}
-                        to = "MyInfo"
+                        to = "MyComment"
                         onClick = {() => changeMenu(4)}><Icon name = 'comment' color = {(menu[4] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>댓글</p></Link>
                     <Link className = {`menu ${menu[5]}`}
-                        to = "MyInfo"
+                        to = "MyLike"
                         onClick = {() => changeMenu(5)}><Icon name = 'heart' color = {(menu[5] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>좋아요</p></Link>
-                    <Link className = {`menu ${menu[6]}`}
-                        to = "MyInfo"
-                        onClick = {() => changeMenu(6)}><Icon name = 'star' color = {(menu[6] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>즐겨찾기</p></Link>
                 </div>
             </div>
             <div>

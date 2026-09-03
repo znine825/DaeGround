@@ -17,7 +17,7 @@ function NoticeBoard() {
     const [TypeNumber, serTypeNumber] = useState(0);
     const TypeName = ['날짜', '좋아요', '조회수'];
 
-    const [sortStandard, setSortStandard] = useState(0); // 0 오름차순, 1 내림차순
+    const [sortStandard, setSortStandard] = useState(1); // 0 오름차순, 1 내림차순
 
     const [showPostNumber, setShowPostNumber] = useState([]);
     const [search, setSearch] = useState("");
@@ -179,7 +179,7 @@ function NoticeBoard() {
                         <div key={postIndex}>
                             <Post post={allPost[postIndex]} />
                         </div>
-                    ))}
+                ))}
             </div>
             <div className="pagination">
                 {Array.from(

@@ -107,11 +107,13 @@ export function Bus({info, day, num}) {
     for(let i = 0; i < busCount.length; i++) {
         busWayArray.push(busCount[i].properties.type);
     }
+
+    
     return (
         <div className = 'bus'>
             <WayTitle start = {info.pathNameSet[day][num].start} end = {info.pathNameSet[day][num].end}/>
             <div className = 'WayPointGrid'>
-                <WayPoint title = '출발' way = {info.pathNameSet[day][num].start} subtitle = '1111m 이동'/>
+                <WayPoint title = '출발' way = {info.pathNameSet[day][num].start} subtitle = {info.pathSet[day][num].startWalk === 0 ? '0m 이동' : `${info.pathSet[day][num].startWalk.route.legs[0].properties.distance}m 이동`}/>
                 {Array.from({ length: busWayArray.length }, (_, i) => (
                     <div key = {i}>
                         {busWayArray[i] == "BUS" &&
@@ -132,7 +134,7 @@ export function Bus({info, day, num}) {
                         </div>}
                         {busWayArray[i] == "WALKING" &&
                         <div>
-                            <WayPoint title = '환승' way = {`${getBusStops(busCount[i+1].properties.guidance)[0]}까지 이동`} subtitle = '1111m 이동'/>
+                            <WayPoint title = '환승' way = {`${getBusStops(busCount[i+1].properties.guidance)[0]}까지 이동`} subtitle = {info.pathSet[day][num].startWalk === 0 ? '0m 이동' : `${info.pathSet[day][num].startWalk.route.legs[0].properties.distance}m 이동`}/>
                         </div>}
                     </div>
                 ))}
@@ -148,7 +150,7 @@ export function Walk({info, day, num}) {
         <div>
             <WayTitle start = {info.pathNameSet[day][num].start} end = {info.pathNameSet[day][num].end}/>
             <div className = 'WayPointGrid'>
-                <WayPoint title = '출발' way = {info.pathNameSet[day][num].start} subtitle = '1111m 이동'/>
+                <WayPoint title = '출발' way = {info.pathNameSet[day][num].start} subtitle = {`${info.pathSet[day][num].path.route.properties.totalDistance}m 이동`}/>
                 <WayPoint title = '도착' way = {info.pathNameSet[day][num].end} subtitle = '도착' line = {false}/>
             </div>
         </div>

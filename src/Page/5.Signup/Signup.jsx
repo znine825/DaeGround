@@ -4,6 +4,7 @@ import Header from '../../Components/Header/Header.jsx'
 import { Title, Input, Button, LoadMap } from '../../Components/Common/Common.jsx'
 import { signUp } from '../../Javascript/firebase_logic.js'
 import PrivacyPage from '../../Components/Files/PrivacyPolicy/PrivacyPolicy.jsx'
+import TermsOfUse from '../../Components/Files/TermsOfUse/TermsOfUse.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
 
 import './Signup.css'
@@ -130,6 +131,7 @@ function Signup() {
     }
 
     const [showprivate, setShowprivate] = useState(false);
+    const [showTermsOfUse, setShowTermsOfUse] = useState(false);
 
     return (
         <div className = 'signup'>
@@ -156,7 +158,7 @@ function Signup() {
             </div>
             <div>
                 <div><input type="checkbox" checked = {privacyCheck} onChange = {(e) => setPrivacyCheck(e.target.checked)}/>[ 필수 ] 개인정보 처리방침<p onClick = {() => setShowprivate(true)}>자세히</p></div>
-                <div><input type="checkbox" checked = {termsofservice} onChange = {(e) => setTermsofservice(e.target.checked)}/>[ 필수 ] 이용약관<p>자세히</p></div>
+                <div><input type="checkbox" checked = {termsofservice} onChange = {(e) => setTermsofservice(e.target.checked)}/>[ 필수 ] 이용약관<p onClick = {() => setShowTermsOfUse(true)}>자세히</p></div>
                 <p style = {{display: (privacyCheck && termsofservice) ? 'none' : 'block'}}>필수항목에 동의해주세요.</p>
             </div>
             <div className = 'signButton' onClick = {() => signButton()}>
@@ -167,6 +169,7 @@ function Signup() {
 
             {/* 문서 */}
             {showprivate && <PrivacyPage setShowprivate = { setShowprivate }/>}
+            {showTermsOfUse && <TermsOfUse setShowTermsOfUse = { setShowTermsOfUse }/>}
         </div>
     ) 
 }

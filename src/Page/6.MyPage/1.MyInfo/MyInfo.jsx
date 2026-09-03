@@ -57,11 +57,11 @@ function MyInfo() {
             
             <div>
                 <Info title = '아이디' subtitle = {userData.info.name} icon = 'profile'/>
-                <Info title = '이름' subtitle = {userData.info.realname} icon = 'profile'/>
+                {/* <Info title = '이름' subtitle = {userData.info.realname} icon = 'profile'/> */}
                 <Info title = '이메일' subtitle = {userData.info.email} icon = 'profile'/>
-                <Info title = '전화번호' subtitle = {userData.info.phonenumber} icon = 'profile'/>
+                {/* <Info title = '전화번호' subtitle = {userData.info.phonenumber} icon = 'profile'/>
                 <Info title = '거주지역' subtitle = {userData.info.residentialarea} icon = 'profile'/>
-                <Info title = '성별' subtitle = {userData.info.gender} icon = 'profile'/>
+                <Info title = '성별' subtitle = {userData.info.gender} icon = 'profile'/> */}
             </div>
         </div>
     )

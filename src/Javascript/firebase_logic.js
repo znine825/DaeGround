@@ -127,6 +127,7 @@ export async function toggleLike(postId) {
         return false;
     }
 }
+
 // 좋아요 확인
 export async function checkLike(postId) {
     const db = getFirestore();

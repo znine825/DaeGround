@@ -96,6 +96,7 @@ function CO2(way, distance) {
 }
 
 function MP5({info, setInfo, page, pageSet}) {
+    const shortText = (text) => text.length > 6 ? text.slice(0, 6) + '...' : text;
 
     const [day, setDay] = useState(0);
     const [allco2, setAllco2] = useState([0, 0, 0]);
@@ -236,9 +237,21 @@ function MP5({info, setInfo, page, pageSet}) {
                     </div>
                     <div className = 'CO2graph'> 
                         <CarbonChart
-                            dates={[[info.pathNameSet[day][0].start, '~', info.pathNameSet[day][0].end], 
-                                    [info.pathNameSet[day][1].start, '~', info.pathNameSet[day][1].end], 
-                                    [info.pathNameSet[day][2].start, '~', info.pathNameSet[day][2].end]] }
+                            dates={[[
+                                        shortText(info.pathNameSet[day][0].start),
+                                        '~',
+                                        shortText(info.pathNameSet[day][0].end)
+                                    ],
+                                    [
+                                        shortText(info.pathNameSet[day][1].start),
+                                        '~',
+                                        shortText(info.pathNameSet[day][1].end)
+                                    ],
+                                    [
+                                        shortText(info.pathNameSet[day][2].start),
+                                        '~',
+                                        shortText(info.pathNameSet[day][2].end)
+                                    ]] }
                             carData={[
                                     CO2(info.moveType[day][0], info.pathSet[day][0].path)[1], 
                                     CO2(info.moveType[day][1], info.pathSet[day][1].path)[1],

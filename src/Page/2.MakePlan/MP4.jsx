@@ -60,6 +60,9 @@ function MP4({ info, setInfo, page, pageSet }) {
     const polylineRef = useRef([]);
     const markerRef = useRef([]);
 
+    const [bar, setBar] = useState(1);
+    let maxbar = 0;
+
     const changeDay = (e) => {
         setDay(e);
     };
@@ -82,6 +85,7 @@ function MP4({ info, setInfo, page, pageSet }) {
             const allPathSet = [];
             const allPathNameSet = [];
             const allContentsID = [];
+            maxbar = info.allDay + 1;
 
             for (let i = 0; i < info.allDay; i++) {
                 const spotsResult = await loadRouteData(
@@ -103,7 +107,7 @@ function MP4({ info, setInfo, page, pageSet }) {
                     spotsResult[2][1].spot.contentid,
                 ];
                 allContentsID.push(tempArray);
-
+                setBar(prev => prev + 1);
             }
 
             setInfo(prev => ({
@@ -486,7 +490,20 @@ function MP4({ info, setInfo, page, pageSet }) {
                 </div>
             </div>)}
             {!onloading && (
-                <div>로딩중</div>
+                <div className="loading">
+                    <p>여행 경로를 생성하고 있어요.</p>
+
+                    <div className="loadingBar">
+                        <div
+                            className="loadingBarProgress"
+                            style={{
+                                width: `${info.allDay > 0 ? (bar / info.allDay) * 100 : 0}%`
+                            }}
+                        />
+                    </div>
+
+                    <p>{bar} / {info.allDay}</p>
+                </div>
             )}
             <div className='pageButton'>
                 {page !== 1 && (
