@@ -112,9 +112,7 @@ function Header() {
                                 </div>
                             )}
                             <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
-                                <Link to = '/Mypage/MyInfo'>
-                                    <Icon name = 'close' color = 'black' />
-                                </Link>
+                                <Icon name = 'close' color = 'black' />
                             </div>
                         </div>
                         <div></div>
