@@ -46,15 +46,7 @@
     width: fit-content;
 
 }
-.MP2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) {
-    position: relative;
-    width: 450px;
-    height: 450px;
 
-    margin-top: 50px;
-    overflow-y: visible;
-    
-}
 
 .MP2 > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
     margin-top: 20px;
@@ -129,6 +121,15 @@
     }
     .MP2 > div:nth-child(2) {
         grid-template-columns: 1fr 1fr;
+    }
+    .MP2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) {
+        position: relative;
+        width: 450px;
+        height: 450px;
+
+        margin-top: 50px;
+        overflow-y: visible;
+
     }
     .selectDay {
         position: relative;
@@ -206,21 +207,32 @@
         row-gap: 40px;
     }
 }
-@media (max-width: 480px) {
-    .MP2 > div:nth-child(2) > div > div:nth-child(3) {
-        position: relative;
-        left: 50%;
-        transform: translate(-65%, 0);
-        scale: 0.75;
-    }
-}
+
 @media (max-width: 450px) {
     .MP2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
+        width: fit-content;
+        left: 50%;
+        transform: translate(-50%);
         grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 15px;
+        
+    }
+    .MP2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) {
+        transform: translate(-15%, 0) !important;
+        scale: 0.8;
     }
 }
 @media (max-width: 330px) {
     .MP2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
+        width: fit-content;
+        left: 50%;
+        transform: translate(-50%);
         grid-template-columns: 1fr 1fr;
+        column-gap: 15px;
+        
+    }
+    .MP2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) {
+        scale: 0.6;
+        transform: translate(-30%, 0) !important;
     }
 }

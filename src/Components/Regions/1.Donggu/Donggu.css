@@ -1,33 +1,11 @@
 .Donggu {
     position: relative;
     top: -60px;
-    
+    left: 68px;
     width: 450px;
     height: 450px;
 
 }
-@media (min-width: 1300px) {
-    .Donggu {
-        left: 68px;
-    }
-}
-@media (max-width: 1300px) {
-    .Donggu {
-        left: 68px;
-    }
-}
-@media (max-width: 460px) {
-    .Donggu {
-        left: 250px !important;
-    }
-}
-@media (max-width: 360px) {
-    .Donggu {
-        left: 200px !important;
-    }
-}
-
-
 .Donggu >  p {
     position: absolute;
     z-index: 100;
