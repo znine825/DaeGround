@@ -1,21 +1,42 @@
-.Home4 {
-    position: relative;
-    width: fit-content;
+@media(min-width: 1600px) {
+    .Home4 {
+        position: relative;
+        width: fit-content;
 
-    margin-top: 50px;
-    margin-bottom: 50px;
+        margin-top: 50px;
+        margin-bottom: 50px;
 
-    left: 50%;
-    transform: translate(-50%, 0);
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    .Home4 > div:nth-child(1) {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        margin-bottom: 50px;
+    }
+    .Home4 > div:nth-child(2) {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
 }
-.Home4 > div:nth-child(1) {
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
-    margin-bottom: 50px;
-}
-.Home4 > div:nth-child(2) {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+@media (max-width: 1600px) {
+    .Home4 {
+        position: relative;
+        width: fit-content;
+
+        margin-top: 50px;
+        margin-bottom: 50px;
+
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    .Home4 > div:nth-child(1) {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        margin-bottom: 50px;
+    }
+
 }

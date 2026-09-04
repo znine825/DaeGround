@@ -240,7 +240,7 @@ function Home5() {
                                 <p>{leftMenu[0]}</p>
                                 <p>g</p>
                             </div>
-                            <p>이번 주 절감한 CO₂</p>
+                            <p>절감한 CO₂</p>
                         </div>
                     </div >
                     <div className = {dataNum == 1 ? 'Home5Select' : ''} onClick = {() => changeNum(1)}>
@@ -252,7 +252,7 @@ function Home5() {
                                 <p>{leftMenu[1]}</p>
                                 <p>개</p>
                             </div>
-                            <p>이번 주 게시된 여행 경로</p>
+                            <p>게시된 여행 경로</p>
                         </div>
                     </div>
                     <div className = {dataNum == 2 ? 'Home5Select' : ''} onClick = {() => changeNum(2)}>
@@ -264,11 +264,11 @@ function Home5() {
                                 <p>{leftMenu[2]}</p>
                                 <p>명</p>
                             </div>
-                            <p>이번 주 가입한 에코 여행자</p>
+                            <p>에코 여행자</p>
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className = 'HomeMiddle'>
                     <CarbonChart
                         title = {dataNum == 0 ? '절감한 Co2' : dataNum == 1 ? '일별 게시글' : dataNum == 2 ? '일별 가입자' : ''}
                         dates={chartData[dataNum][0]}
@@ -278,7 +278,7 @@ function Home5() {
                 <div className = 'HomeRight'>
                     <div>
                         <Icon name = 'profile' color = 'var(--LM-main-color)' />
-                        <p>대구 구별 절감 기여도</p>
+                        <p>구별 절감 기여도</p>
                     </div>
                     <div>
                         <div style = {{width: `${Object.values(outage)[0]}%`}}></div>

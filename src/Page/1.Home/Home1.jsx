@@ -50,7 +50,7 @@ function Home1() {
 
     return (
         <div className = 'home1'>
-            <div>
+            <div className = 'leftText'>
                 <p>지구를 위한 여행</p>
                 <p>DaeGround</p>
                 <p>대구의 친환경 여행 경로를 AI로 추천받고</p>
@@ -67,7 +67,7 @@ function Home1() {
                     </div>
                 </div>
             </div>
-            <div>
+            <div className = 'rightImg'>
                 <img
                     src={`./Image/bagic/Home/Home${displayPage}.png`}
                     className={fade ? 'homeImage fadeIn' : 'homeImage fadeOut'}

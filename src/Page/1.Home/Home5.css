@@ -19,33 +19,8 @@
     flex-direction: row;
     gap: 15px;
 }
-.Home5 > div:nth-child(2) > div:nth-child(1) {
-    position: relative;
-    width: 335px;
-    height: 325px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.Home5 > div:nth-child(2) > div:nth-child(1) > div {
-    position: relative;
-    width: 335px;
-    height: 70px;
 
-    border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
-}
-.Home5 > div:nth-child(2) > div:nth-child(2) {
-    position: relative;
-    width: 600px;
-    height: 325px;
-
-    padding: 20px;
-
-    border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
-}
 .Home5 > div:nth-child(2) > div:nth-child(3){
     position: relative;
     width: 335px;
@@ -167,28 +142,12 @@
 .HomeRight > div:nth-child(n+3) {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 
     margin-top: 17px;
     margin-bottom: 18px;
     margin-left: 20px;
     margin-bottom: 23px;
-}
-
-/* 각 행의 점(dot) */
-.HomeRight > div:nth-child(n+3) > div:nth-child(1) {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-/* 각 행의 라벨(p) */
-.HomeRight > div:nth-child(n+3) > p:nth-child(2) {
-    width: 48px;
-    margin: 0;
-    font-size: 14px;
-    color: #333;
 }
 
 /* 각 행의 트랙(회색 배경, 170px 고정) */
@@ -240,3 +199,194 @@
 
 .HomeRight > div:nth-child(8) > div:nth-child(1),
 .HomeRight > div:nth-child(8) > div:nth-child(3) > div:nth-child(2) { background: #111111; }
+
+@media (min-width: 1300px) {
+    .Home5 > div:nth-child(2) > div:nth-child(1) > div {
+        position: relative;
+        width: 335px;
+        height: 70px;
+
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
+    }
+    .Home5 > div:nth-child(2) > div:nth-child(2) {
+        position: relative;
+        width: 600px;
+        height: 325px;
+
+        padding: 20px;
+
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
+    }
+    .Home5 > div:nth-child(2) > div:nth-child(1) {
+        position: relative;
+        width: 335px;
+        height: 325px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .Home5 > div:nth-child(2) > div:nth-child(3){
+        position: relative;
+        width: 335px;
+        height: 325px;
+
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
+    }
+    .HomeRight > div:nth-child(2) {
+        display: flex;
+        gap: 2px;
+
+        width: 295px;
+        height: 15px;
+
+        margin-top: 13px;
+        margin-left: 20px;
+        margin-bottom: 16px;
+
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .HomeRight > div:nth-child(n+3) > p:nth-child(2) {
+        width: 48px;
+        margin: 0;
+        font-size: 14px;
+        color: #333;
+    }
+    /* 각 행의 점(dot) */
+    .HomeRight > div:nth-child(n+3) > div:nth-child(1) {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    /* 각 행의 트랙(회색 배경, 170px 고정) */
+    .HomeRight > div:nth-child(n+3) > div:nth-child(3) {
+        position: relative;
+    }
+    .HomeRight > div:nth-child(n+3) > div:nth-child(3) > div:nth-child(1) {
+        position: relative;
+        width: 170px;
+        height: 8px;
+        background: #eee;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 1300px) {
+    .Home5 > div:nth-child(2) {
+        position: relative;
+
+        width: calc(100vw - 30px);
+        left: 50%;
+        transform: translate(-50%, 0);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .Home5 > div:nth-child(2) > div:nth-child(1) > div {
+        position: relative;
+        width: calc(50vw - 22px);
+        height: 70px;
+
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
+
+    }
+    .Home5 > div:nth-child(2) > div:nth-child(2) {
+        position: relative;
+        width: calc(100vw - 30px);
+        height: 325px;
+        
+        padding: 20px;
+
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
+    }
+    .Home5 > div:nth-child(2) > div:nth-child(1) {
+        position: relative;
+        width: 335px;
+        height: fit-content;
+
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .HomeMiddle {
+        order: 2;
+    }
+    .HomeRight {
+        order: 1;
+    }
+    .Home5 > div:nth-child(2) > div:nth-child(3){
+        position: absolute;
+        width: calc(50vw - 22px);
+        height: 240px;
+
+        left: calc(50vw - 7px);
+
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
+    }
+    .HomeRight > div:nth-child(2) {
+        display: flex;
+        gap: 2px;
+
+        width: calc(100% - 35px);
+        height: 15px;
+
+        margin-top: 13px;
+        margin-left: 20px;
+        margin-bottom: 16px;
+
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .HomeRight > div:nth-child(3) {
+        margin-top: 25px !important;
+    }
+    .HomeRight > div:nth-child(n+3) {
+        position: relative;
+    }
+    .HomeRight > div:nth-child(n+3) > p:nth-child(2) {
+        position: absolute;
+        top: -16px;
+        left: 15px;
+        width: 48px;
+
+        margin: 0;
+
+        font-size: 12px;
+        color: #333;
+    }
+    /* 각 행의 점(dot) */
+    .HomeRight > div:nth-child(n+3) > div:nth-child(1) {
+        position: absolute;
+        top: -12px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    .HomeRight > div:nth-child(7),
+    .HomeRight > div:nth-child(8) {
+        
+        display: none;
+    }
+    /* 각 행의 트랙(회색 배경, 170px 고정) */
+    .HomeRight > div:nth-child(n+3) > div:nth-child(3) {
+        position: relative;
+    }
+    .HomeRight > div:nth-child(n+3) > div:nth-child(3) > div:nth-child(1) {
+        position: relative;
+        width: calc(50vw - 30px - 22px - 60px);
+        height: 8px;
+        background: #eee;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+}

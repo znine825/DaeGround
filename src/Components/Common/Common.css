@@ -48,8 +48,8 @@
     font-size: 14px;
     font-weight: 300;
     color: #6D6D6D;
+    text-align: center;
 
-    white-space: nowrap;
 }
 .middle {
     align-items: center;
@@ -124,17 +124,20 @@
     color: var(--LM-mainintext-color);
 }
 
-.loadMap {
-    position: relative;
-    width: fit-content;
-    display: flex;
-    flex-direction: row;
-    gap: 0px;
 
-}
-.loadMap > div {
-    display: flex;
-    flex-direction: row;
+@media (min-width: 1300px) {
+    .loadMap {
+        position: relative;
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+        gap: 0px;
+
+    }
+    .loadMap > div {
+        display: flex;
+        flex-direction: row;
+    }
 }
 .loadMap > div > div {
     position: relative;
@@ -550,4 +553,42 @@
     font-size: 14px;
     font-weight: 400;
     color: var(--LM-subtext-color);
+}
+
+
+@media (max-width: 1300px) {
+    .loadMap {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        width: 100vw;
+        height: fit-content;
+
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+
+    }
+    .loadMap > div {
+        display: flex;
+        height: fit-content;
+
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    .loadMap > div > p {
+        display: none;
+    }
+    .loadMap > div > div > p:nth-child(3) {
+        margin-top: 10px;
+
+        width: 125px;
+        
+        font-size: 12px;
+        font-weight: 300;
+        
+        text-align: center;
+        color: var(--LM-subtext-color);
+}
 }

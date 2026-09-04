@@ -21,18 +21,19 @@ function Home() {
                 <div></div>
                 <div></div>
             </div>
+
             <div>
                 <Home2 />
             </div>
             <div>
                 <Home5 />
-            </div>
-            <div>
+            </div> 
+            {/* <div>
                 <Home3 />
             </div>
             <div>
                 <Home4 />
-            </div>
+            </div>  */}
         </div>
     )
 }
