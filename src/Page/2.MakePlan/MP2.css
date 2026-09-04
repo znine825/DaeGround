@@ -1,8 +1,4 @@
-.MP2 {
-    position: relative;
-    width: 1000px;
-    height: fit-content;
-}
+
 .MP2 > div:nth-child(2) {
     margin-top: 50px;
 
@@ -56,6 +52,8 @@
     height: 450px;
 
     margin-top: 50px;
+    overflow-y: visible;
+    
 }
 
 .MP2 > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
@@ -155,8 +153,9 @@
 @media (max-width: 1300px) {
     .MP2 {
         position: relative;
-        width: 100vw;
+        width: calc(100vw - 30px);
         height: fit-content;
+        overflow-x: hidden;
     }
     .MP2 > div:nth-child(2) {
         position: relative;
@@ -191,7 +190,7 @@
         flex-shrink: 0; 
     }
     .MP2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
-        width: 450px;
+        width: min(450px, calc(100vw - 30px));
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
@@ -211,13 +210,12 @@
     .MP2 > div:nth-child(2) > div > div:nth-child(3) {
         position: relative;
         left: 50%;
-        transform: translate(-60%, 0);
-        scale: 0.8;
+        transform: translate(-65%, 0);
+        scale: 0.75;
     }
 }
 @media (max-width: 450px) {
     .MP2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
-        width: min(450px, calc(100vw));
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
