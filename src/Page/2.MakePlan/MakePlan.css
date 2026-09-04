@@ -1,11 +1,4 @@
-.makePlan {
-    position: relative;
-    height: fit-content;
-    width: 1300px;
-    
-    left: 50%;
-    transform: translate(-50%, 0);
-}
+
 
 
 .pageButton > div:hover {
@@ -25,15 +18,7 @@
     margin-right: 10px;
     color: var(--LM-line-color);
 }
-.makePlan > div:nth-child(1) {
-    position: relative;
-    width: 1300px;
-    display: flex;
-    flex-direction: column;
 
-    align-items: center;
-    gap: 0px;
-}
 .makePlan > div > div:nth-child(2) {
     position: absolute;
     top: 200px;
@@ -46,6 +31,23 @@
 }
 
 @media (min-width: 1300px) {
+    .makePlan > div:nth-child(1) {
+        position: relative;
+        width: 1300px;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        gap: 0px;
+    }
+    .makePlan {
+        position: relative;
+        height: fit-content;
+        width: 1300px;
+        
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
     .pageButton {
         position: relative;
         left: 50%;
@@ -61,6 +63,16 @@
 }
 
 @media (max-width: 1300px) {
+    .makePlan > div:nth-child(1) {
+        position: relative;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        gap: 0px;
+    }
+
     .makePlan > div > div:nth-child(2) {
         display: none;
     }

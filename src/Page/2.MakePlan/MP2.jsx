@@ -61,7 +61,7 @@ function MP2({info, setInfo, page, pageSet}) {
                         <Icon name = 'calendarCheck' color = 'var(--LM-main-color)' />
                         <p>대구광역시</p>
                     </div>
-                    <div>
+                    <div >
                         <div className = {regions == 1 ? 'select' : ''} onClick = {() => changeRegionMap(1)}><p>동구</p></div>
                         <div className = {regions == 2 ? 'select' : ''} onClick = {() => changeRegionMap(2)}><p>중구</p></div>
                         <div className = {regions == 3 ? 'select' : ''} onClick = {() => changeRegionMap(3)}><p>서구</p></div>

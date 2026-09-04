@@ -7,6 +7,19 @@
     height: 450px;
 
 }
+@media (max-width: 480px) {
+    .Donggu {
+        position: relative;
+        left: 68px;
+        top: -60px;
+        margin-left: 45px;
+        
+        width: 450px;
+        height: 450px;
+
+    }
+}
+
 .Donggu >  p {
     position: absolute;
     z-index: 100;
