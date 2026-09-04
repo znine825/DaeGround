@@ -128,7 +128,6 @@
 @media (min-width: 1300px) {
     .loadMap {
         position: relative;
-        width: fit-content;
         display: flex;
         flex-direction: row;
         gap: 0px;
@@ -558,17 +557,11 @@
 
 @media (max-width: 1300px) {
     .loadMap {
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0);
-
-        width: 100vw;
         height: fit-content;
-
+        width: calc(100vw - 30px) !important;
         display: flex;
         flex-direction: row;
         gap: 50px;
-
     }
     .loadMap > div {
         display: flex;
@@ -590,5 +583,8 @@
         
         text-align: center;
         color: var(--LM-subtext-color);
-}
+    }
+    .pageheader {
+        width: calc(100vw - 30px) !important;
+    }
 }

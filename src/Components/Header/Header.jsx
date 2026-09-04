@@ -103,11 +103,11 @@ function Header() {
                                 // 로그아웃 상태
                                 <div className = 'state_logout'>
                                     <Link to = '/Login'>
-                                        <p>로그인</p>
+                                        <p onClick = {() => {setMobileMenu(!mobileMenu)}}>로그인</p>
                                     </Link>
                                     <div></div>
                                     <Link to = '/Signup'>
-                                        <p>회원가입</p>
+                                        <p onClick = {() => {setMobileMenu(!mobileMenu)}}>회원가입</p>
                                     </Link>
                                 </div>
                             )}
@@ -116,19 +116,19 @@ function Header() {
                             </div>
                         </div>
                         <div></div>
-                        <div>
+                        <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'house' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link to = '/'><p>홈</p></Link>
                         </div>
-                        <div>
+                        <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'map' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link to = '/MakePlan'><p>나만의 여행 만들기</p></Link>
                         </div>
-                        <div>
+                        <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'calendarCheck' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link to = '/NoticeBoard'><p>여행 게시판</p></Link>
                         </div>
-                        <div>
+                        <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'comment' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link to = '/Contact'><p>문의하기</p></Link>
                         </div>

@@ -28,12 +28,12 @@ function Home() {
             <div>
                 <Home5 />
             </div> 
-            {/* <div>
+            <div>
                 <Home3 />
             </div>
             <div>
                 <Home4 />
-            </div>  */}
+            </div> 
         </div>
     )
 }

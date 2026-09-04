@@ -71,12 +71,16 @@
     .home > img {
         position: absolute;
         width: 100%;
-        height: auto;
+        height: 295px;
     }
     .home > div:nth-child(2) {
         position: relative;
         width: 100%;
         height: fit-content;
+    }
+    .home > div:nth-child(2) > div {
+        position: relative;
+
     }
     .home > div:nth-child(3) > div {
         height: 0px !important;

@@ -1,25 +1,5 @@
-.MP1 {
-    position: relative;
-    width: 1000px;
-    height: fit-content;
 
-    margin-top: 100px;
-}
 
-.MP1 > div:nth-child(2) {
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
-
-    width: fit-content;
-
-    margin-top: 50px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 40px;
-    column-gap: 100px;
-}
 .MP1 > div:nth-child(2) > div {
     position: relative;
     width: fit-content;
@@ -58,16 +38,7 @@
     display: flex;
     flex-direction: column;
 }
-.MP1 > div:nth-child(2) > div:nth-child(2) > div > div:not(:nth-child(1)) {
-    position: relative;
-    height: 60px;
-    width: 450px;
 
-    margin-bottom: 10px;
-
-    border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--LM-line-color) 60%, transparent);
-}
 .MP1 > div:nth-child(2) > div:nth-child(2) > div > div:not(:nth-child(1)) > svg {
     position: relative;
     margin-left: 20px;
@@ -102,13 +73,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-.react-datepicker {
-    width: 450px;
-    height: 450px;
-
-    font-family: 'A2z';
-    border-radius: 10px;
 }
 .react-datepicker__day,
 .react-datepicker__day-name {
@@ -202,4 +166,119 @@
     background-color: #FFFFFF00;
     border-bottom: none;
     padding-top: 30px;
+}
+@media (min-width: 1300px) {
+    .MP1 {
+        position: relative;
+        width: 1000px;
+        height: fit-content;
+
+        margin-top: 100px;
+    }
+    .MP1 > div:nth-child(2) {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        width: fit-content;
+
+        margin-top: 50px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 40px;
+        column-gap: 100px;
+    }
+    .react-datepicker {
+        width: 450px;
+        height: 450px;
+
+        font-family: 'A2z';
+        border-radius: 10px;
+    }
+    .MP1 > div:nth-child(2) > div:nth-child(2) > div > div:not(:nth-child(1)) {
+        position: relative;
+        height: 60px;
+        width: 450px;
+
+        margin-bottom: 10px;
+
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 60%, transparent);
+    }
+}
+@media (max-width: 1300px) {
+    .MP1 {
+        position: relative;
+        width: 100vw;
+        height: fit-content;
+
+    }
+    .MP1 > div:nth-child(2) {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        width: fit-content;
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 40px;
+        column-gap: 100px;
+    }
+
+    .MP1 > div:nth-child(2) > div {
+        position: relative;
+        width: min(450px, calc(100vw - 30px));
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .react-datepicker {
+        width: min(450px, calc(100vw - 30px));
+        height: auto;
+        aspect-ratio: 1 / 1;
+        font-family: 'A2z';
+        border-radius: 10px;
+    }
+    .MP1 > div:nth-child(2) > div:nth-child(2) > div > div:not(:nth-child(1)) {
+        position: relative;
+        height: 60px;
+        width: min(450px, calc(100vw - 30px));
+
+        margin-bottom: 10px;
+
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 60%, transparent);
+    }
+}
+@media (max-width: 1000px) {
+    .MP1 > div:nth-child(2) {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        width: fit-content;
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 40px;
+    }
+}
+@media (max-width: 480px) {
+    .react-datepicker__day,
+    .react-datepicker__day-name {
+        width: 2.5rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        font-size: 12px;
+    }
+}
+@media (max-width: 358px) {
+    .react-datepicker__day,
+    .react-datepicker__day-name {
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 10px;
+    }
 }

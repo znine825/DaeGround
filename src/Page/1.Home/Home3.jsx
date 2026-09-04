@@ -24,7 +24,7 @@ function Home3() {
     }
 
     return (
-        <div className = 'home3'>
+        <div className = 'Home3'>
             <Title 
                     icon = 'flag' 
                     text = '게시판' 
