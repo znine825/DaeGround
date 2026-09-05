@@ -482,18 +482,21 @@
     font-weight: 400;
 
     color: var(--LM-main-color);
+    text-align: center;
 }
 .pageheader > p:nth-child(2) {
     font-size: 32px;
     font-weight: 600;
 
     color: var(--LM-mainintext-color);
+    text-align: center;
 }
 .pageheader > p:nth-child(3) {
     font-size: 14px;
     font-weight: 400;
 
     color: var(--LM-mainintext-color);
+    text-align: center;
 }
 .pageheader > img {
     position: absolute;

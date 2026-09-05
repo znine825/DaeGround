@@ -269,18 +269,20 @@ function MP5({info, setInfo, page, pageSet}) {
                     </div>
                     <div>
                         <div>
-                            <p>총 이동량</p>
-                            <p>{allco2[2]}m</p>
-                        </div>
-                        <div></div>
-                        <div>
-                            <p>탄소 배출량</p>
-                            <p>{Math.round(allco2[0])}g</p>
-                        </div>
-                        <div></div>
-                        <div>
-                            <p>탄소 절감량</p>
-                            <p>{Math.round(allco2[1] - allco2[0])}g</p>
+                            <div>
+                                <p>총 이동량</p>
+                                <p>{allco2[2]}m</p>
+                            </div>
+                            <div></div>
+                            <div>
+                                <p>탄소 배출량</p>
+                                <p>{Math.round(allco2[0])}g</p>
+                            </div>
+                            <div></div>
+                            <div>
+                                <p>탄소 절감량</p>
+                                <p>{Math.round(allco2[1] - allco2[0])}g</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -334,7 +336,7 @@ function MP5({info, setInfo, page, pageSet}) {
                     <Title 
                         icon = 'calendarCheck'
                         text = '게시하기' 
-                        title = '여행 계획을 업로드해요'
+                        title = '게획 저장하기'
                         subtitle = '다른 사람들도 볼 수 있어요'
                         locate = 'left'/>
                     <p>제목</p>

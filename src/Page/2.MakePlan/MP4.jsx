@@ -409,13 +409,6 @@ function MP4({ info, setInfo, page, pageSet }) {
 
 
 
-    // useEffect(()  => {
-    //     async function test() {
-    //         await setInfo(mockinfo);
-    //         setOnloading(true);
-    //     }
-    //     test();
-    // },[]);
 
     const moveLeftPage = () => {
         alert('여행이 완성되어서 이전단계로 갈 수 없어요.');
@@ -491,7 +484,7 @@ function MP4({ info, setInfo, page, pageSet }) {
             </div>)}
             {!onloading && (
                 <div className="loading">
-                    <p>여행 경로를 생성하고 있어요.</p>
+                    <p>여행 경로를 생성하고 있어요. {bar} / {info.allDay}</p>
 
                     <div className="loadingBar">
                         <div
@@ -501,8 +494,6 @@ function MP4({ info, setInfo, page, pageSet }) {
                             }}
                         />
                     </div>
-
-                    <p>{bar} / {info.allDay}</p>
                 </div>
             )}
             <div className='pageButton'>

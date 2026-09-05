@@ -33,13 +33,13 @@ const phInfo = [
     {
         icon: 'mapPin',
         icontext: '4단계',
-        title: '여행 경로가 완성되었어요',
+        title: '경로를 만들었어요',
         subtitle: '맘에드는지 확인해보세요',
     },
     {
         icon: 'mapPin',
         icontext: '5단계',
-        title: '탄소절감량을 확인해봐요',
+        title: '절감량을 확인해봐요',
         subtitle: '만들어진 경로를 바탕을 얼만큼 절감했는지 계산했어요',
     }
 ]

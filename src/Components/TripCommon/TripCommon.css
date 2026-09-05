@@ -1,6 +1,6 @@
 .wayTitle {
     position: relative;
-    width: 450px;
+    width: min(450px, calc(100vw - 30px));
     height: 40px;
 
 
@@ -42,6 +42,34 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 20px;
+}
+@media (max-width: 450px) {
+    .WayPointGrid {
+        position: relative;
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        width: min(450px, calc(100vw - 30px));
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 20px;
+    }
+}
+@media (max-width: 370px) {
+    .WayPointGrid {
+        position: relative;
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        width: min(370px, calc(100vw - 30px));
+        
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 20px;
+    }
 }
 .wayPoint {
     position: relative;
