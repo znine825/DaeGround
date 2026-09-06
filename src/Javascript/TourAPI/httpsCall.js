@@ -1,11 +1,12 @@
 import { getFunctions, httpsCallable } from "firebase/functions";
 
-export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lclsSystm3) {
-    const functions = getFunctions(undefined, "asia-northeast3");
-    const fn = httpsCallable(functions, 'callTourApi');
+const PROXY_URL = 'http://52.79.201.128:3000/api/tour';
 
+export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lclsSystm3) {
     try {
         const params = {
+            endpoint: 'areaBasedList2',
+            service: 'KorService2',
             numOfRows: 50,
             MobileOS: 'WEB',
             MobileApp: 'DaeGound',
@@ -20,42 +21,44 @@ export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lc
             params.lDongSignguCd = lDongSignguCd;
         }
 
-        const result = await fn({
-            endpoint: 'areaBasedList2',
-            service: 'KorService2',
-            params
-        });
+        const query = new URLSearchParams(params);
 
-        return result.data;
+        const response = await fetch(`${PROXY_URL}?${query.toString()}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        return await response.json();
     } catch (error) {
-        console.error(error.code, error.message);
+        console.error('LocalBasedLoojup 오류:', error);
         return null;
     }
 }
 
 export async function getContentImage(contentId) {
-    const functions = getFunctions(undefined, "asia-northeast3");
-    const fn = httpsCallable(functions, 'callTourApi');
-
     try {
         const params = {
+            endpoint: 'detailImage2',
+            service: 'KorService2',
             MobileOS: 'WEB',
             MobileApp: 'DaeGound',
-            contentId: contentId,
+            contentId,
             numOfRows: 20,
             pageNo: 1
         };
 
+        const query = new URLSearchParams(params);
 
-        const result = await fn({
-            endpoint: 'detailImage2',
-            service: 'KorService2',
-            params
-        });
+        const response = await fetch(`${PROXY_URL}?${query.toString()}`);
 
-        return result.data;
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        return await response.json();
     } catch (error) {
-        console.error('getContentImage 오류:', error.code, error.message);
+        console.error('getContentImage 오류:', error);
         return null;
     }
 }

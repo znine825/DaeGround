@@ -294,31 +294,7 @@
     padding-top: 20px;
     border-bottom: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent)
 }
-@media (max-width: 1300px) {
-    .addtrip > div {
-        padding-top: 30px;
-        height: 100vh !important;
-    }
-}
-@media (max-width: 1075px) {
-    .addtrip > div > *:not(:nth-child(8)) {
-        margin-left: 15px !important;
-    }
-    .addtrip > div > textarea,
-    .addtrip > div > input {
-        width: min(1000px, calc(100vw - 30px)) !important;
-    }
-}
-.addtrip > div > p:nth-child(4),
-.addtrip > div > p:nth-child(7) {
-    font-size: 16px;
-    font-weight: 400;
 
-    margin-top: 5px;
-    margin-left: min(1000px, calc(100vw - 150px));
-
-    color: var(--LM-line-color);
-}
 
 @media (min-width: 1300px) {
     .co2info {

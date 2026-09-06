@@ -83,24 +83,27 @@
 .addtrip {
     position: fixed;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-
-    background: color-mix(in srgb, (--LM-background-color) 20%, transparent);
+    background: color-mix(in srgb, var(--LM-background-color) 20%, transparent);
     backdrop-filter: blur(3px);
+    overflow-y: auto;
+
+    scrollbar-width: none;
 }
+
 .addtrip > div {
-    width: min(1120px, calc(100vw));
-    min-height: 200px;
-
-    background: white;
+    width: min(1120px, 100vw);
+    height: 100vh;
+    margin: auto;
     border-radius: 15px;
-
     padding-bottom: 60px;
-
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+    background: white;
+    padding-top: 30px;
+}
+@media (max-height: 750px) {
+    .addtrip > div {
+        height: 750px !important;
+    }
 }
 .addtrip > div > *:not(:nth-child(8)) {
     margin-left: 60px;
@@ -114,13 +117,14 @@
 .addtrip > div > p:nth-child(5),
 .addtrip > div > p:nth-child(2) {
     position: relative;
-    margin-top: 50px;
+    margin-top: 30px;
 
     font-size: 20px;
     font-weight: 500;
 
     color: var(--LM-mainouttext-color);
 }
+
 .addtrip > div > input {
     height: 40px;
     width: min(1000px, calc(100vw - 75px));
@@ -131,7 +135,9 @@
     border-radius: 15px;
     border: 2px solid #6D6D6D;
 }
-
+.pageButton {
+    margin-top: 50px !important;
+}
 .addtrip > div > textarea {
     height: 200px;
     width: min(1000px, calc(100vw - 75px));
@@ -146,7 +152,6 @@
 @media (max-width: 1300px) {
     .addtrip > div {
         padding-top: 30px;
-        height: 100vh !important;
     }
 }
 @media (max-width: 1075px) {

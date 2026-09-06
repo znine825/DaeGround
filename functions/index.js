@@ -54,9 +54,18 @@ exports.callTourApi = onCall(
             return Array.isArray(items) ? items : [items];
         } catch (error) {
             console.error("callTourApi 오류:", error);
+            // 타임아웃 예외인 경우
+            if (error.name === 'AbortError' || error.type === 'aborted') {
+                throw new HttpsError(
+                    "deadline-exceeded",
+                    "관광 정보 API 서버의 응답이 지연되고 있습니다. 잠시 후 다시 시도해 주세요."
+                );
+            }
+
             if (error instanceof HttpsError) {
                 throw error;
             }
+
             throw new HttpsError(
                 "internal",
                 error.message || "TourAPI 요청 중 오류가 발생했습니다."
