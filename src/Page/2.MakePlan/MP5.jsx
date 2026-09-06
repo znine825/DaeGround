@@ -345,7 +345,7 @@ function MP5({info, setInfo, page, pageSet}) {
                     <p>여행 설명</p>
                     <LimitedTextarea
                         value={text}
-                        onChange={setText}   // state 함수를 그대로 넘김
+                        onChange={setText}  
                         maxLines={5}
                         placeholder="최대 5줄까지 입력 가능"
                         />
