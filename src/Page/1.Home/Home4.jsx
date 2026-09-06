@@ -3,7 +3,6 @@ import { Title, Input, Button, LoadMap, Post, PageHeader } from '../../Component
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import { getAllPosts } from "./../../Javascript/firebase_logic"
 
-import { Link, useNavigate } from 'react-router-dom';
 import './Home4.css'
 function Home4() {
 
@@ -28,7 +27,7 @@ function Home4() {
             <Title 
                     icon = 'flag' 
                     text = '게시판' 
-                    title = '대그리운드 인기 여행 경로' 
+                    title = '인기 여행 경로' 
                     subtitle = '인기 있는 경로를 모아놨어요' 
                     locate = 'middle'/>
             <div>

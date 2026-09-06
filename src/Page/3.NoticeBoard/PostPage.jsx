@@ -222,7 +222,8 @@ function PostPage() {
                         <p>{user.info.name}</p>
                         <p>{post.createdAt.toDate().toLocaleDateString()}</p>
                     </div>
-                    <div>
+                    {/* 일반 포스트 제목 */}
+                    <div className = 'postInfoHeader1'>
                         <p>{post.title}</p>
                         <Icon name = 'chartbar' color = 'var(--LM-mainouttext-color)'/>
                         <p>{post.view}</p>
@@ -231,6 +232,19 @@ function PostPage() {
                         </div>
                         <p>{likerPtks()}</p>
                     </div>
+                    {/* 모바일 포스트 제목 */}
+                    <div className = 'postInfoHeader2'>
+                        <p>{post.title}</p>
+                        <div>
+                            <Icon name = 'chartbar' color = 'var(--LM-mainouttext-color)'/>
+                            <p>{post.view}</p>
+                            <div onClick = {() => likeFuc()}>
+                                <Icon name = 'heart' color = {postlike ? 'red' : 'black'}/>
+                            </div>
+                            <p>{likerPtks()}</p>
+                        </div>
+                    </div>
+
                     <p>{info.allDay == 1 ? '당일 여행' : `${info.allDay - 1}박 ${info.allDay}일`}</p>
                 </div>
                 <p>{post.text}</p>
@@ -279,18 +293,20 @@ function PostPage() {
                     </div>
                     <div>
                         <div>
-                            <p>총 이동량</p>
-                            <p>{allco2[2]}m</p>
-                        </div>
-                        <div></div>
-                        <div>
-                            <p>탄소 배출량</p>
-                            <p>{Math.round(allco2[0])}g</p>
-                        </div>
-                        <div></div>
-                        <div>
-                            <p>탄소 절감량</p>
-                            <p>{Math.round(allco2[1] - allco2[0])}g</p>
+                            <div>
+                                <p>총 이동량</p>
+                                <p>{allco2[2]}m</p>
+                            </div>
+                            <div></div>
+                            <div>
+                                <p>탄소 배출량</p>
+                                <p>{Math.round(allco2[0])}g</p>
+                            </div>
+                            <div></div>
+                            <div>
+                                <p>탄소 절감량</p>
+                                <p>{Math.round(allco2[1] - allco2[0])}g</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -330,7 +346,7 @@ function PostPage() {
                 </div>
             </div>
             <div className = "commentPost">
-                <div>
+                <div className = 'commentPC'>
                     <p>댓글</p>
                     <div>
                         <input placeholder = '댓글 추가...' value={title} maxLength = {10} onChange={(e) => setTitle(e.target.value)}></input>
@@ -338,6 +354,16 @@ function PostPage() {
                             <Button width = '120' height = '38' text = '댓글 달기' fsize = '16' fweight = '500'/>
                         </div>
                     </div>
+                    <p>0/100자</p>
+                </div>
+                <div className = 'commentMobile'>
+                    <div>
+                        <p>댓글</p>
+                        <div onClick  = {() => uploadComment(title)}>
+                            <Button width = '120' height = '38' text = '댓글 달기' fsize = '16' fweight = '500'/>
+                        </div>  
+                    </div>
+                    <input placeholder = '댓글 추가...' value={title} maxLength = {10} onChange={(e) => setTitle(e.target.value)}></input>
                     <p>0/100자</p>
                 </div>
                 {Array.from({ length: comment.length },(_, i) => (

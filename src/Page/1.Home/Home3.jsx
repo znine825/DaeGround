@@ -3,7 +3,6 @@ import { Title, Input, Button, LoadMap, Post, PageHeader } from '../../Component
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import { getAllPosts } from "./../../Javascript/firebase_logic"
 
-import { Link, useNavigate } from 'react-router-dom';
 import './Home3.css'
 function Home3() {
 

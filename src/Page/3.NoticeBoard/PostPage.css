@@ -3,11 +3,14 @@
     left: 50%;
     transform: translate(-50%, 0);
     width: 1300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .postinfobox {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    transform: translate(0, -50%);
 
     width: 1000px;
     height: 169px;
@@ -32,6 +35,24 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+@media (max-width: 1030px) {
+    .postinfobox {
+        width: min(500px, calc(100vw - 30px));
+        height: 438px;
+        transform: translate(0, -25%);
+        display: flex;
+        flex-direction: column;
+    }
+    .postinfobox > div {
+        width: min(440px, calc(100vw - 90px));
+
+        padding-bottom: 30px;
+
+        border-right: 0px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
+    }
+    
 }
 .postinfobox > div > div:nth-child(2),
 .postinfobox > div > div:nth-child(1) {
@@ -105,9 +126,11 @@
 }
 .postinfobox > p {
     position: relative;
-    width: 430px;
+    width: fit-content;
     margin-top: 30px;
     margin-left: 30px;
+
+    padding-right: 30px;
 
     font-size: 14px;
     font-weight: 400;
@@ -117,13 +140,13 @@
     white-space: pre-wrap;
 }
 
+@media (max-width: 1030px) {
+
+}
+
 .co2info {
     position: relative;
-    left: 50%;
     width: 1000px;
-    transform: translate(-50%, 0);
-
-    margin-top: 130px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -157,7 +180,7 @@
     font-size: 12px;
     color: var(--LM-subtext-color);
 }
-.co2info > div > div:nth-child(4) {
+.co2info > div > div:nth-child(4) > div {
     position: relative;
     width: fit-content;
     height: 80px;
@@ -167,25 +190,25 @@
     border: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent);
     border-radius: 10px;
 }
-.co2info > div > div:nth-child(4) {
+.co2info > div > div:nth-child(4) > div {
     display: flex;
     flex-direction: row;
     gap: 40px;
 }
 
-.co2info > div > div:nth-child(4) > div {
+.co2info > div > div:nth-child(4) > div > div {
     margin-top: 20px;
 }
-.co2info > div > div:nth-child(4) > div:nth-child(1) {
+.co2info > div > div:nth-child(4) > div > div:nth-child(1) {
     margin-left: 40px;
 }
-.co2info > div > div:nth-child(4) > div:nth-child(5) {
+.co2info > div > div:nth-child(4) > div > div:nth-child(5) {
     margin-right: 40px;
 }
-.co2info > div > div:nth-child(4) > div:nth-child(odd) {
+.co2info > div > div:nth-child(4) > div > div:nth-child(odd) {
     margin-top: 22px;
 }
-.co2info > div > div:nth-child(4) > div:nth-child(odd) > p:nth-child(1) {
+.co2info > div > div:nth-child(4) > div > div:nth-child(odd) > p:nth-child(1) {
     position: relative;
     width: fit-content;
     left: 50%;
@@ -196,7 +219,7 @@
 
     color: var(--LM-subtext-color);
 }
-.co2info > div > div:nth-child(4) > div:nth-child(odd) > p:nth-child(2) {
+.co2info > div > div:nth-child(4) > div > div:nth-child(odd) > p:nth-child(2) {
     position: relative;
     width: fit-content;
     left: 50%;
@@ -207,7 +230,7 @@
 
     color: var(--LM-mainouttext-color);
 }
-.co2info > div > div:nth-child(4) > div:nth-child(even) {
+.co2info > div > div:nth-child(4) > div > div:nth-child(even) {
     height: 40px;
     width: 1px;
 
@@ -215,11 +238,9 @@
 }
 .commentPost {
     position: relative;
-    width: 1000px;
-    left: 50%;
-    transform: translate(-50%, 0);
+    width: min(1000px, calc(100vw - 30px));
 
-    margin-top: 200px;
+    margin-top: 50px;
 }
 .commentPost > div:nth-child(1) {
     height: fit-content;
@@ -247,7 +268,7 @@
 .commentPost > div:nth-child(1) > p:nth-child(3) {
     position: absolute;
     top: 40px;
-    left: 810px;
+    left: min(810px, calc(100vw - 220px));
 
     font-size: 12px;
     font-weight: 300;
@@ -258,7 +279,7 @@
     position: relative;
     top: 2px;
 
-    width: 776px;
+    width: min(776px, calc(100vw - 224px));
     height: 35px;
 
     border: 2px solid var(--BM-background-color);
@@ -267,8 +288,188 @@
     padding-left: 18px;
     margin-right: 20px;
 }
+
 .commentPost > div:not(:nth-child(1)) {
     padding-bottom: 20px;
     padding-top: 20px;
     border-bottom: 1px solid color-mix(in srgb, var(--LM-line-color) 70%, transparent)
+}
+@media (max-width: 1300px) {
+    .addtrip > div {
+        padding-top: 30px;
+        height: 100vh !important;
+    }
+}
+@media (max-width: 1075px) {
+    .addtrip > div > *:not(:nth-child(8)) {
+        margin-left: 15px !important;
+    }
+    .addtrip > div > textarea,
+    .addtrip > div > input {
+        width: min(1000px, calc(100vw - 30px)) !important;
+    }
+}
+.addtrip > div > p:nth-child(4),
+.addtrip > div > p:nth-child(7) {
+    font-size: 16px;
+    font-weight: 400;
+
+    margin-top: 5px;
+    margin-left: min(1000px, calc(100vw - 150px));
+
+    color: var(--LM-line-color);
+}
+
+@media (min-width: 1300px) {
+    .co2info {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 40px;
+        column-gap: 100px;
+    }
+    .MP5 {
+        position: relative;
+        width: 1000px;
+        height: fit-content;
+        margin-top: 150px;
+    }
+    .kakaoMap {
+        width: 450px;
+        height: 500px;
+
+        border-radius: 10px;
+    }
+    .CO2graph {
+        position: relative;
+        width: 450px;
+    }
+}
+.CO2graph > div {
+    height: 500px !important;
+}
+@media (max-width: 1300px) {
+    .co2info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 40px;
+        column-gap: 100px;
+    }
+    .CO2graph {
+        position: relative;
+        width: 450px;
+    }
+    .co2info > div > div:nth-child(4) {
+        width: min(450px, calc(100vw - 30px));
+        overflow-x: scroll;
+    }
+}
+@media (min-width: 1040px) {
+    .postInfoHeader2 {
+        display: none;
+    }
+}
+@media (max-width: 1040px) {
+    .postInfoHeader1 {
+        display: none !important;
+    }
+    .postInfoHeader2 {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .postInfoHeader2 > div {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+    .postInfoHeader2 > p {
+        position: relative;
+
+        font-size: 32px;
+        font-weight: 600;
+
+        color: var(--LM-mainouttext-color);
+    }
+    .co2info {
+        width: min(450px, calc(100vw - 30px));
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 40px;
+        column-gap: 100px;
+    }
+    .MP5 {
+        position: relative;
+        
+        height: fit-content;
+        margin-top: 50px;
+    }
+    .co2info > div > div:nth-child(4) {
+        width: min(450px, calc(100vw - 30px));
+        overflow-x: scroll;
+    }
+    
+}
+@media (max-width: 450px) {
+    .CO2graph {
+        position: relative;
+        width: min(450px, calc(100vw - 30px));
+    }
+    .co2info > div > div:nth-child(4) {
+        width: min(450px, calc(100vw - 30px));
+        overflow-x: scroll;
+    }
+}
+.commentMobile {
+    display: none;
+}
+@media (max-width: 1020px) {
+    .commentPC {
+        display: none !important;
+    }
+    .commentMobile {
+        display: flex !important;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .commentMobile > div {
+        display: flex;
+        flex-direction: row;
+    }
+    .commentMobile > input {
+        position: relative;
+        top: 2px;
+
+        width: calc(100vw - 30px);
+        height: 35px;
+
+        border: 2px solid var(--BM-background-color);
+        border-radius: 18px;
+
+        padding-left: 18px;
+        margin-right: 20px;
+    }
+    .commentMobile > div:nth-child(1) > p:nth-child(1) {
+        height: fit-content;
+        font-size: 32px;
+        font-weight: 700;
+
+        color: var(--LM-mainouttext-color);
+    }
+    .commentMobile > div {
+        width: calc(100vw - 30px);
+    }
+    .commentMobile > div > div {
+        margin-left: auto;
+    }
+    .commentMobile > p {
+        position: relative;
+        left: calc(100vw - 80px);
+
+        font-size: 12px;
+        font-weight: 300;
+
+        color: var(--LM-subtext-color);
+    }
 }
