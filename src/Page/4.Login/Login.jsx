@@ -43,7 +43,7 @@ function Login() {
                         title = '비밀번호' warning = '비밀번호를 입력해 주세요.'
                         condition = ''/>
                 <div onClick = {() => LoginButton()} >
-                    <Button width = '360' height = '50' text = '로그인' fsize = '16' fweight = '500'/>
+                    <Button width = '300' height = '50' text = '로그인' fsize = '16' fweight = '500'/>
                 </div>
             </div>
         </div>

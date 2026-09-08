@@ -181,7 +181,7 @@ function NoticeBoard() {
                         </div>
                 ))}
             </div>
-            <div className="pagination">
+            <div className="NBpagination">
                 {Array.from(
                     { length: Math.ceil(showPostNumber.length / postsPerPage) },
                     (_, i) => i + 1

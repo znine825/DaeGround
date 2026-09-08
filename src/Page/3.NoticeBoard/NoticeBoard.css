@@ -296,14 +296,14 @@
         margin-left: 34px;
     }
 }
-.pagination {
+.NBpagination {
     display: flex;
     justify-content: center;
     gap: 8px;
     margin: 30px 0;
 }
 
-.pagination button {
+.NBpagination button {
     width: 36px;
     height: 36px;
     border: none;
@@ -311,7 +311,7 @@
     cursor: pointer;
 }
 
-.pagination button.active {
+.NBpagination button.active {
     font-weight: bold;
     text-decoration: underline;
 }

@@ -4,7 +4,7 @@ import termsMarkdown from './TermsOfUse.md?raw';
 import { createPortal } from 'react-dom';
 import { Icon } from '../../Icons/Icons.jsx';
 import 'github-markdown-css/github-markdown-light.css';
-import './TermsOfUse.css';
+import './../TermsOfUse.css';
 
 function TermsOfUse({ setShowTermsOfUse }) {
     return createPortal(
