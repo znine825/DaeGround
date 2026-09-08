@@ -1,6 +1,6 @@
 import { getFunctions, httpsCallable } from "firebase/functions";
 
-const PROXY_URL = 'http://52.79.201.128:3000/api/tour';
+const PROXY_URL = 'https://api.daeground.com/api/tour';
 
 export async function LocalBasedLoojup(lDongSignguCd, lclsSystm1, lclsSystm2, lclsSystm3) {
     try {

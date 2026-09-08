@@ -193,6 +193,7 @@
 }
 @media (min-width: 1300px) {
     .MP3 > div:nth-child(2) {
+        margin-top: 100px;
 
         display: grid;
         grid-template-columns: 1fr 1fr;

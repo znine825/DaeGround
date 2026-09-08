@@ -100,6 +100,15 @@
     background: white;
     padding-top: 30px;
 }
+@media (min-width: 1300px) {
+    .addtrip {
+        padding-top: 20px;
+    }
+    .addtrip > div {
+        height: 750px;
+    }
+    
+}
 @media (max-height: 750px) {
     .addtrip > div {
         height: 750px !important;
