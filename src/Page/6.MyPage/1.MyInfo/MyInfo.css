@@ -7,12 +7,24 @@
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 100%;
+    width: 600px;
     top: 50px;
     
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     row-gap: 80px;
     column-gap: 50px;
 }
-
+@media (max-width: 1300px) {
+    .myinfo {
+        width: fit-content;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+}
+@media (max-width: 600px) {
+    .myinfo > div:nth-child(1) {
+        width: 300px;
+        grid-template-columns: 1fr;
+    }
+}

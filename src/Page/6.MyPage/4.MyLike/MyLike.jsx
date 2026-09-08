@@ -39,8 +39,8 @@ function MyLike() {
     }
 
     return (
-        <div className = 'MyLike'>
-             <div>
+        <div >
+             <div className = 'MyLike'>
                 {showPostNumber
                     .slice(
                         (currentPage - 1) * postsPerPage,

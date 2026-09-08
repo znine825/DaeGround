@@ -10,6 +10,9 @@ import './MyPlan.css'
 
 function Myplan() {
     const [post, setPost] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 9;
+    const [showPostNumber, setShowPostNumber] = useState([]);
 
     useEffect(() => {
         const uid = auth.currentUser?.uid;
@@ -18,6 +21,7 @@ function Myplan() {
         async function startFunction() {
             const userPost = await getPostsByUid(uid);
             setPost(userPost);
+            setShowPostNumber(userPost.map((_, i) => i));
         }
         startFunction()
     }, [])
@@ -29,14 +33,38 @@ function Myplan() {
     console.log(post);
 
     return (
-        <div className="myplan">
-             {post.map((_, i) => (
-                <div key = {i}>
-                    <Post post = {post[i]}/>
-                </div>
-             ))}
+        <div >
+            <div className="myplan">
+                {showPostNumber
+                    .slice(
+                        (currentPage - 1) * postsPerPage,
+                        currentPage * postsPerPage
+                    )
+                    .map((i) => (
+                        <div key={1}>
+                            <Post post={post[i]} />
+                        </div>
+                ))}
+            </div>
+            <div className="pagination">
+                {Array.from(
+                    { length: Math.ceil(post.length / postsPerPage) },
+                    (_, i) => i + 1
+                ).map(page => (
+                    <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={currentPage === page ? "active" : ""}
+                    >
+                        {page}
+                    </button>
+                ))}
+            </div>
+
         </div>
     );
 }
+
+
 
 export default Myplan

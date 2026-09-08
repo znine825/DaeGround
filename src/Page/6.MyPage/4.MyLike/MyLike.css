@@ -1,13 +1,35 @@
 .MyLike {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+
+    left: 50%;
+    transform: translate(-50%, 0);
+
     margin-top: 30px;
-}
-.MyLike > div:nth-child(1) {
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 30px;
     row-gap: 20px;
 }
-
 .pagination {
-    margin-top: 10px;
+    position: relative;
+    width: fit-content;
+    left: 50%;
+    transform: translate(-50%, 100%);
+}
+@media (max-width: 1005px) {
+    .MyLike {
+        left: 50%;
+        transform: translate(-50%, 0);
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 670px) {
+    .MyLike {
+        left: 50%;
+        transform: translate(-50%, 0);
+        grid-template-columns: 1fr;
+    }
 }

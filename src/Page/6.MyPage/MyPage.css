@@ -1,14 +1,3 @@
-.MyPage {
-    position: relative;
-    height: fit-content;
-    width: 1300px;
-    
-    left: 50%;
-    transform: translate(-50%, 0);
-
-    display: flex;
-    flex-direction: row;
-}
 .MyPageheader > div:nth-child(1) {
     position: relative;
     width: fit-content;
@@ -48,7 +37,9 @@
 .menu > p {
     position: relative;
     top: 10px;
-    left: 14px;
+    margin-left: 14px;
+
+    width: fit-content;
 
     height: 19px;
 
@@ -59,7 +50,7 @@
     z-index: 5;
     position: relative;
     top: 7px;
-    left: 7px;
+    margin-left: 7px;
 }
 .Myon {
     background-color: #1DB443;
@@ -77,4 +68,83 @@
     position: relative;
     display: flex;
     flex-direction: column;
+}
+
+@media (min-width: 1300px) {
+    .MyPage {
+        position: relative;
+        height: fit-content;
+        width: 1300px;
+        
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        display: flex;
+        flex-direction: row;
+    }
+    .mobileMyPage {
+        display: none;
+    }
+}
+@media (max-width: 1300px) {
+    .MyPage > div:nth-child(1),
+    .MyPage > div:nth-child(2) {
+        display: none;
+    }
+    .MyPage {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    .mobileMyPage {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        align-items: center;
+    }
+    .mobileMyPage > div:nth-child(2) {
+        width: calc(100vw - 30px);
+
+        overflow: scroll;
+        scrollbar-width: none;
+    }
+    .mobileMyPage > div:nth-child(2) > div {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        width: fit-content;
+
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+    .mobileMyPage > div:nth-child(2) > div > a {
+        width: fit-content;
+
+        border: 1px solid color-mix(in srgb, var(--LM-line-color) 30%, transparent);
+    }
+    .mobileMyPage > div:nth-child(2) > div > a > p {
+        margin-right: 10px;
+    }
+    .outlet {
+        width: calc(100vw - 30px);
+    }
+}
+@media (max-width: 975px) {
+    .MyPage {
+        top: -50px;
+    }
+}
+
+@media (max-width: 485px) {
+
+    .mobileMyPage > div:nth-child(2) > div {
+        position: relative;
+        left: 0%;
+        transform: translate(0%, 0);
+        width: 485px !important;
+    }
+    
 }

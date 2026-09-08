@@ -99,7 +99,30 @@ function MyPage() {
                     <Outlet />
                 </div>
             </div>
+            <div className = "mobileMyPage">
+                <InfoHeader contents = {headerInfo}/>
+                <div>
+                    <div>
+                        <Link className = {`menu ${menu[0]}`}
+                            to = "MyInfo"
+                            onClick = {() => changeMenu(0)}><Icon name = 'profile' color = {(menu[0] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>회원 정보</p></Link>
+                        <Link className = {`menu ${menu[3]}`}
+                            to = "MyPlan"
+                            onClick = {() => changeMenu(3)}><Icon name = 'file' color = {(menu[3] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>게시글</p></Link>
+                        <Link className = {`menu ${menu[4]}`}
+                            to = "MyComment"
+                            onClick = {() => changeMenu(4)}><Icon name = 'comment' color = {(menu[4] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>댓글</p></Link>
+                        <Link className = {`menu ${menu[5]}`}
+                            to = "MyLike"
+                            onClick = {() => changeMenu(5)}><Icon name = 'heart' color = {(menu[5] == 'Myon') ? '#FFFFFF' : '#6D6D6D' } /><p>좋아요</p></Link>
+                    </div>
+                </div>
+                <div className = 'outlet'>
+                    <Outlet />
+                </div>
+            </div>
         </div>
+        
     )
 }
 
