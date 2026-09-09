@@ -162,7 +162,7 @@ function Signup() {
                 <p style = {{display: (privacyCheck && termsofservice) ? 'none' : 'block'}}>필수항목에 동의해주세요.</p>
             </div>
             <div className = 'signButton' onClick = {() => signButton()}>
-                <Button width = '360' height = '50' text = '회원가입' fsize = '16' fweight = '500'/>
+                <Button width = '300' height = '50' text = '회원가입' fsize = '16' fweight = '500'/>
             </div>
 
             
