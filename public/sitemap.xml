@@ -4,9 +4,12 @@
         <loc>https://daeground.com/</loc>
     </url>
     <url>
-        <loc>https://daeground.com/MakePlan</loc>
+        <loc>https://daeground.com/#/MakePlan</loc>
     </url>
     <url>
-        <loc>https://daeground.com/Board</loc>
+        <loc>https://daeground.com/#/NoticeBoard</loc>
+    </url>
+    <url>
+        <loc>https://daeground.com/#/Contact</loc>
     </url>
 </urlset>
