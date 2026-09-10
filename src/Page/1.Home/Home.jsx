@@ -1,7 +1,5 @@
 import { useState, useEffect, use } from "react";
-import { Title, Input, Button, LoadMap, PageHeader } from '../../Components/Common/Common.jsx'
-import { Icon } from './../../Components/Icons/Icons.jsx'
-import { Link, useNavigate } from 'react-router-dom';
+import { motion } from "motion/react";
 import './Home.css'
 import Home1 from './Home1.jsx'
 import Home2 from './Home2.jsx'
@@ -18,7 +16,10 @@ function Home() {
         test();
     })
     return (
-        <div className = 'home'>
+        <motion.div 
+            className = 'home'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}>
             <img src = './Image/bagic/MainBackground.png'/>
             <div>
                 <Home1 />
@@ -40,7 +41,7 @@ function Home() {
             <div>
                 <Home4 />
             </div> 
-        </div>
+        </motion.div>
     )
 }
 

@@ -35,6 +35,7 @@ function Header() {
     };
 
     const [mobileMenu, setMobileMenu] = useState(false);
+    const [onhover, setOnhover] = useState(1);
 
 
     return (
@@ -45,24 +46,39 @@ function Header() {
                     <p>대그라운드</p>
                 </div>
                 <div>
-                    <div>
-                        <Link to = '/'><p>홈</p></Link>
+                    <div className = { onhover == 1 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(1)}}>
+                        <Link to = '/'>
+                            <div></div>
+                            <p>홈</p>
+                        </Link>
                     </div>
-                    <div>
-                        <Link to = '/MakePlan'><p>나만의 여행 만들기</p></Link>
+                    <div className = { onhover == 2 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(2)}}>
+                        <Link to = '/MakePlan'>
+                            <div></div>
+                            <p>나만의 여행 만들기</p>
+                        </Link>
                     </div>
-                    <div>
-                        <Link to = '/NoticeBoard'><p>여행 게시판</p></Link>
+                    <div className = { onhover == 3 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(3)}}>
+                        <Link to = '/NoticeBoard'>
+                            <div></div>
+                            <p>여행 게시판</p>
+                        </Link>
                     </div>
-                    <div>
-                        <Link to = '/Contact'><p>문의하기</p></Link>
+                    <div className = { onhover == 4 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(4)}}>
+                        <Link to = '/Contact'>
+                            <div></div>
+                            <p>문의하기</p>
+                        </Link>
                     </div>
                 </div>
                 <div>
                     {user ? (
                         // 로그인 상태
-                        <div className = 'state_login' onClick = {logOutButton}>
-                            <p>{userName} | 로그아웃</p>
+                        <div className = 'state_login'>
+                            <p>{`${userName}`}</p>
+                            <div className = 'logoutbutton' onClick = {logOutButton}>
+                                <p> | 로그아웃</p>
+                            </div>
                         </div>
                     ) : (
                         // 로그아웃 상태

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Title, Input, Button, LoadMap, Post, PageHeader } from '../../Components/Common/Common.jsx'
+import { Title } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
-import { auth, db } from "./../../Javascript/firebase.js";
+import { db } from "./../../Javascript/firebase.js";
 import { getAllPosts } from "./../../Javascript/firebase_logic"
-import { doc, collection, setDoc, getDocs, getDoc, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
+import { motion } from "motion/react";
 import './Home5.css'
 
 import { Line } from 'react-chartjs-2';
@@ -231,7 +232,11 @@ function Home5() {
                 locate = 'middle'/>
             <div>
                 <div className = 'HomeLeft'>
-                    <div className = {dataNum == 0 ? 'Home5Select' : ''} onClick = {() => changeNum(0)}>
+                    <motion.div
+                        initial={{ opacity: 0, x: -100 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7 }}
+                        className = {dataNum == 0 ? 'Home5Select' : ''} onClick = {() => changeNum(0)}>
                         <div>
                             <Icon name = 'chartbar' color = 'var(--LM-main-color)' />
                         </div>
@@ -242,8 +247,12 @@ function Home5() {
                             </div>
                             <p>절감한 CO₂</p>
                         </div>
-                    </div >
-                    <div className = {dataNum == 1 ? 'Home5Select' : ''} onClick = {() => changeNum(1)}>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -100 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7 }}
+                        className = {dataNum == 1 ? 'Home5Select' : ''} onClick = {() => changeNum(1)}>
                         <div>
                             <Icon name = 'map' color = 'var(--LM-main-color)' />
                         </div>
@@ -254,8 +263,13 @@ function Home5() {
                             </div>
                             <p>게시된 여행 경로</p>
                         </div>
-                    </div>
-                    <div className = {dataNum == 2 ? 'Home5Select' : ''} onClick = {() => changeNum(2)}>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -100 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7 }}
+                        className = {dataNum == 2 ? 'Home5Select' : ''}
+                        onClick = {() => changeNum(2)}>
                         <div>
                             <Icon name = 'profile' color = 'var(--LM-main-color)' />
                         </div>
@@ -266,16 +280,28 @@ function Home5() {
                             </div>
                             <p>에코 여행자</p>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
-                <div className = 'HomeMiddle'>
+                <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ 
+                            duration: 0.7,
+                         }}
+                        className = 'HomeMiddle'>
                     <CarbonChart
                         title = {dataNum == 0 ? '절감한 Co2' : dataNum == 1 ? '일별 게시글' : dataNum == 2 ? '일별 가입자' : ''}
                         dates={chartData[dataNum][0]}
                         carData={chartData[dataNum][1]}
                     />
-                </div>
-                <div className = 'HomeRight'>
+                </motion.div>
+                <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ 
+                            duration: 0.7,
+                        }}
+                        className = 'HomeRight'>
                     <div>
                         <Icon name = 'map' color = 'var(--LM-main-color)' />
                         <p>구별 절감 기여도</p>
@@ -308,7 +334,7 @@ function Home5() {
                         </div>
                         <p>{Object.values(outage)[5] + Object.values(outage)[6] + Object.values(outage)[7]}%</p>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     )

@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-import { Title, Input, Button, LoadMap, PageHeader } from '../../Components/Common/Common.jsx'
-import { Icon } from './../../Components/Icons/Icons.jsx'
-import { Link, useNavigate } from 'react-router-dom';
+import { Title, LoadMap } from '../../Components/Common/Common.jsx'
+import { motion } from "motion/react";
+
 import './Home2.css'
 function Home2() {
 
@@ -44,7 +43,14 @@ function Home2() {
     ]
 
     return (
-        <div className = 'home2'>
+        <motion.div 
+            className = 'home2'
+            initial={{ opacity: 0}}
+            whileInView={{ opacity: 1}}
+            transition={{
+                duration: 0.8,
+                ease: "easeOut"
+            }}>
             <Title 
                     icon = 'flag' 
                     text = '이용방법' 
@@ -52,7 +58,7 @@ function Home2() {
                     subtitle = '5단계로 간단하게 에코 여행을 시작하세요' 
                     locate = 'middle'/>
             <LoadMap contents = {loadMapText}/>
-        </div>
+        </motion.div>
     )
 }
 

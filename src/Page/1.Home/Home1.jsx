@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Title, Input, Button, LoadMap, PageHeader } from '../../Components/Common/Common.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { motion } from "motion/react";
 import './Home1.css'
 function Home1() {
 
