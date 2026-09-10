@@ -21,21 +21,21 @@ function Home2() {
             line: true
         },
         {
-            icon: 'terminal',
+            icon: 'puzzle',
             icontext: '3단계',
             title: '여행 테마 선택',
             subtitle: '여행의 테마를\n선택하세요',
             line: true
         },
         {
-            icon: 'map',
+            icon: 'terminal',
             icontext: '4단계',
             title: 'AI여행 생성',
             subtitle: 'AI가 여행을 만들어요\n원하는 부분을 수정하세요',
             line: true
         },
         {
-            icon: 'map',
+            icon: 'chartbar',
             icontext: '5단계',
             title: '탄소 절감량 확인',
             subtitle: '내가 절약한 탄소량을\n한눈에 확인하세요',

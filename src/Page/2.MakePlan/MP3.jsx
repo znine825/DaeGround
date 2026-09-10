@@ -79,7 +79,7 @@ function MP3({info, setInfo, page, pageSet}) {
             <div>
                 <div>
                     <div>
-                        <Icon name = 'calendarCheck' color = 'var(--LM-main-color)'/>
+                        <Icon name = 'puzzle' color = 'var(--LM-main-color)'/>
                         <p>테마</p>
                         <p>최소 2개 선택, 최대 4개 까지 선택가능</p>
                     </div>
@@ -153,7 +153,7 @@ function MP3({info, setInfo, page, pageSet}) {
                 </div>
                 <div>
                     <div>
-                        <Icon name = 'calendarCheck' color = 'var(--LM-main-color)'/>
+                        <Icon name = 'check' color = 'var(--LM-main-color)'/>
                         <p>선택된 테마</p>
                         <p>{info.theme.length}개</p>
                     </div>

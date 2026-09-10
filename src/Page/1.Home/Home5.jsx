@@ -224,7 +224,7 @@ function Home5() {
     return (
         <div className = 'Home5'>
             <Title 
-                icon = 'flag' 
+                icon = 'chartbar' 
                 text = '실시간 탄소절감 현황' 
                 title = '우리가 함께 줄인 탄소량' 
                 subtitle = '대그라운드 이용자들이 친환경 교통수단을 선택해 절감한 탄소 배출량입니다' 
@@ -233,7 +233,7 @@ function Home5() {
                 <div className = 'HomeLeft'>
                     <div className = {dataNum == 0 ? 'Home5Select' : ''} onClick = {() => changeNum(0)}>
                         <div>
-                            <Icon name = 'profile' color = 'var(--LM-main-color)' />
+                            <Icon name = 'chartbar' color = 'var(--LM-main-color)' />
                         </div>
                         <div>
                             <div>
@@ -245,7 +245,7 @@ function Home5() {
                     </div >
                     <div className = {dataNum == 1 ? 'Home5Select' : ''} onClick = {() => changeNum(1)}>
                         <div>
-                            <Icon name = 'profile' color = 'var(--LM-main-color)' />
+                            <Icon name = 'map' color = 'var(--LM-main-color)' />
                         </div>
                         <div>
                             <div>
@@ -277,7 +277,7 @@ function Home5() {
                 </div>
                 <div className = 'HomeRight'>
                     <div>
-                        <Icon name = 'profile' color = 'var(--LM-main-color)' />
+                        <Icon name = 'map' color = 'var(--LM-main-color)' />
                         <p>구별 절감 기여도</p>
                     </div>
                     <div>

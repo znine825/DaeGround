@@ -138,6 +138,7 @@ function PostPage() {
 
             const temp = JSON.parse(data.content);
             setInfo(temp);
+            console.log(temp);
 
             const tempco2 = [0, 0, 0];
             for (let i = 0; i < temp.allDay; i++) {
@@ -252,7 +253,7 @@ function PostPage() {
             <div className = 'co2info'>
                 <div>
                     <div>
-                        <Icon name = 'calendarCheck' color = 'var(--LM-main-color)'/>
+                        <Icon name = 'chartbar' color = 'var(--LM-main-color)'/>
                         <p>절감된 CO2</p>
                         <p>총 {Math.round(allco2[1] - allco2[0])}g</p>
                     </div>
@@ -288,7 +289,7 @@ function PostPage() {
                         />
                     </div>
                     <div>
-                        <Icon name = 'calendarCheck' color = 'var(--LM-main-color)'/>
+                        <Icon name = 'chartbar' color = 'var(--LM-main-color)'/>
                         <p>통계</p>
                     </div>
                     <div>

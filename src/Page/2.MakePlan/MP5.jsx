@@ -96,6 +96,9 @@ function CO2(way, distance) {
 }
 
 function MP5({info, setInfo, page, pageSet}) {
+
+    
+
     const shortText = (text) => text.length > 6 ? text.slice(0, 6) + '...' : text;
 
     const [day, setDay] = useState(0);
@@ -142,8 +145,6 @@ function MP5({info, setInfo, page, pageSet}) {
         });
     };
 
-    
-
     const [addTrip, setAddTrip] = useState(false);
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
@@ -163,8 +164,8 @@ function MP5({info, setInfo, page, pageSet}) {
             const tempInfo = structuredClone(info);
             for(let i = 0; i < info.allDay; i++) {
                 for(let j = 0; j < 3; j++) {
-                     tempInfo.pathSet[i][j].endWalk = 0;
-                     tempInfo.pathSet[i][j].startWalk = 0;
+                     tempInfo.pathSet[i][j].endWalk.route.legs[0].steps = 0;
+                     tempInfo.pathSet[i][j].startWalk.route.legs[0].steps = 0;
     
                     if (tempInfo.moveType[i][j] == "WALK") {
                         tempInfo.pathSet[i][j].path.route.legs = 0;
@@ -231,7 +232,7 @@ function MP5({info, setInfo, page, pageSet}) {
             <div>
                 <div>
                     <div>
-                        <Icon name = 'calendarCheck' color = 'var(--LM-main-color)'/>
+                        <Icon name = 'chartbar' color = 'var(--LM-main-color)'/>
                         <p>절감된 CO2</p>
                         <p>총 {Math.round(allco2[1] - allco2[0])}g</p>
                     </div>
@@ -264,7 +265,7 @@ function MP5({info, setInfo, page, pageSet}) {
                         />
                     </div>
                     <div>
-                        <Icon name = 'calendarCheck' color = 'var(--LM-main-color)'/>
+                        <Icon name = 'chartbar' color = 'var(--LM-main-color)'/>
                         <p>통계</p>
                     </div>
                     <div>
@@ -334,7 +335,7 @@ function MP5({info, setInfo, page, pageSet}) {
             <div className = 'addtrip'>
                 <div>
                     <Title 
-                        icon = 'calendarCheck'
+                        icon = 'export'
                         text = '게시하기' 
                         title = '게획 저장하기'
                         subtitle = '다른 사람들도 볼 수 있어요'

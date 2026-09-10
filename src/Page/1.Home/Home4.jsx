@@ -25,7 +25,7 @@ function Home4() {
     return (
         <div className = 'Home4'>
             <Title 
-                    icon = 'flag' 
+                    icon = 'heart' 
                     text = '게시판' 
                     title = '인기 여행 경로' 
                     subtitle = '인기 있는 경로를 모아놨어요' 

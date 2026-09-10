@@ -19,25 +19,25 @@ const phInfo = [
         subtitle: '인원과 여행 날짜를 알려주세요',
     },
     {
-        icon: 'mapPin',
+        icon: 'calendarCheck',
         icontext: '2단계',
         title: '대구 어디로 떠나요?',
         subtitle: '정하신 장소 또는 가고 싶은 장소를 골라주세요',
     },
     {
-        icon: 'mapPin',
+        icon: 'puzzle',
         icontext: '3단계',
         title: '어떤 여행을 하고 싶나요?',
         subtitle: '선호하는 여행 테마를 선택해주세요',
     },
     {
-        icon: 'mapPin',
+        icon: 'terminal',
         icontext: '4단계',
         title: '경로를 만들었어요',
         subtitle: '맘에드는지 확인해보세요',
     },
     {
-        icon: 'mapPin',
+        icon: 'chartbar',
         icontext: '5단계',
         title: '절감량을 확인해봐요',
         subtitle: '만들어진 경로를 바탕을 얼만큼 절감했는지 계산했어요',
@@ -60,21 +60,21 @@ const loadMapText = [
         line: true
     },
     {
-        icon: 'terminal',
+        icon: 'puzzle',
         icontext: '3단계',
         title: '여행 테마 선택',
         subtitle: '여행의 테마를\n선택하세요',
         line: true
     },
     {
-        icon: 'map',
+        icon: 'terminal',
         icontext: '4단계',
         title: 'AI여행 생성',
         subtitle: 'AI가 여행을 만들어요\n원하는 부분을 수정하세요',
         line: true
     },
     {
-        icon: 'map',
+        icon: 'chartbar',
         icontext: '5단계',
         title: '탄소 절감량 확인',
         subtitle: '내가 절약한 탄소량을\n한눈에 확인하세요',

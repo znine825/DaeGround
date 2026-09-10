@@ -58,7 +58,7 @@ function MP2({info, setInfo, page, pageSet}) {
             <div>
                 <div>
                     <div>
-                        <Icon name = 'calendarCheck' color = 'var(--LM-main-color)' />
+                        <Icon name = 'map' color = 'var(--LM-main-color)' />
                         <p>대구광역시</p>
                     </div>
                     <div >
@@ -139,7 +139,7 @@ function MP2({info, setInfo, page, pageSet}) {
                 </div>
                 <div>
                     <div>
-                        <Icon name = 'calendarCheck' color = 'var(--LM-main-color)' />
+                        <Icon name = 'check' color = 'var(--LM-main-color)' />
                         <p>선택한 장소</p>
                     </div>
                     <div>

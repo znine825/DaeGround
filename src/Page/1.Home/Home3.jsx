@@ -25,7 +25,7 @@ function Home3() {
     return (
         <div className = 'Home3'>
             <Title 
-                    icon = 'flag' 
+                    icon = 'map' 
                     text = '게시판' 
                     title = '여행 경로 미리보기' 
                     subtitle = '유저가 만든 경로를 모아놨어요' 

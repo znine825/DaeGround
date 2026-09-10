@@ -430,7 +430,7 @@ function MP4({ info, setInfo, page, pageSet }) {
                 <div>
                     <div>
                         <Icon
-                            name='calendarCheck'
+                            name='mapPin'
                             color='var(--LM-main-color)'
                         />
                         <p>이동 경로</p>
@@ -445,7 +445,7 @@ function MP4({ info, setInfo, page, pageSet }) {
                 <div>
                     <div>
                         <Icon
-                            name='calendarCheck'
+                            name='terminal'
                             color='var(--LM-main-color)'
                         />
                         <p>AI 추천 경로</p>

@@ -85,20 +85,12 @@ export function Bus({info, day, num}) {
     }
 
     function getBusStops(text) {
-        const arrowIndex = text.indexOf(" > ");
+        const match = text.match(/\((.+?)\s*>\s*(.+)\)$/);
 
-        if (arrowIndex === -1) return null;
+        if (!match) return null;
 
-        // " > " 앞에서 가장 가까운 "("
-        const startIndex = text.lastIndexOf("(", arrowIndex);
-
-        // " > " 뒤에서 마지막 ")"
-        const endIndex = text.lastIndexOf(")");
-
-        if (startIndex === -1 || endIndex === -1) return null;
-
-        const start = text.slice(startIndex + 1, arrowIndex).trim();
-        const end = text.slice(arrowIndex + 3, endIndex).trim();
+        const start = match[1].trim();
+        const end = match[2].trim();
 
         return [start, end];
     }
