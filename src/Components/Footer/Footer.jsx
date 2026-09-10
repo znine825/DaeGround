@@ -28,6 +28,7 @@ function Footer() {
                         <Link to = '/NoticeBoard'><p>여행 게시판</p></Link>
                         <Link to = '/Contact'><p>문의하기</p></Link>
                     </div>
+                    <div className = 'FTtemp'></div>
                     {/* 우 */}
                     <div>
                         <p>소개</p>
