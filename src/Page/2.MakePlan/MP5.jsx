@@ -190,7 +190,6 @@ function MP5({info, setInfo, page, pageSet}) {
             for (let i = 0; i < tempInfo.allDay; i++) {
                 for (let j = 0; j < 4; j++) {
                     image = await getContentImage(tempInfo.allContentsID[i][j]);
-                    console.log(i, j, image);
                     if (image.length) {
                         const random3 = Math.floor(Math.random() * image.length);
                         tempInfo.contentImage = image[random3].originimgurl;

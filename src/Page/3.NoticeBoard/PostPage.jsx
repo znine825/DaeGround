@@ -138,7 +138,6 @@ function PostPage() {
 
             const temp = JSON.parse(data.content);
             setInfo(temp);
-            console.log(temp);
 
             const tempco2 = [0, 0, 0];
             for (let i = 0; i < temp.allDay; i++) {
@@ -166,9 +165,6 @@ function PostPage() {
             const temp2 = await checkLike(postId);
             setPostlike(temp2);
             setFirstlike(temp2);
-
-            
-            console.log(info);
             setOnLodding(true);
         }
 

@@ -8,7 +8,6 @@ function Bukgu({info, setInfo, day, incolor = '#000', outcolor = '#000', backcol
         const temp = {...info};
         temp['selectRegions'][day] = `북구 ${regionText}`;
         setInfo(temp);
-        console.log(info);
     }
 
     return (

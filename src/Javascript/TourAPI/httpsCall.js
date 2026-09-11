@@ -75,7 +75,5 @@ export async function getTransitRoute(startX, startY, endX, endY, way) {
         endX: endX,
         endY: endY
     });
-
-    console.log(result.data);
     return result.data;
 }

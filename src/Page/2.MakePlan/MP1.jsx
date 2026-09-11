@@ -20,8 +20,6 @@ function MP1({info, setInfo, page, pageSet}) {
         temp['peopleType'] = tempPeople;
         temp['peopleNum'] = count;
         setInfo(temp); 
-
-        console.log(info);
     }
 
     const addPeople = (e) => {

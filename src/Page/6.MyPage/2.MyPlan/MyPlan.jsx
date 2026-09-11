@@ -38,7 +38,6 @@ function Myplan() {
             </div>
         )
     }
-    console.log(post);
 
     return (
         <div >
@@ -49,7 +48,7 @@ function Myplan() {
                         currentPage * postsPerPage
                     )
                     .map((i) => (
-                        <div key={1}>
+                        <div key={i}>
                             <Post post={post[i]} />
                         </div>
                 ))}

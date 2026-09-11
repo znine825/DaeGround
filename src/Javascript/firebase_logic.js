@@ -39,7 +39,6 @@ export async function signUp(email, password, name) {
         await signOut(auth);
         await sendEmailVerification(userCredential.user);
     } catch (error) {
-        console.log(error.message);
     }
 }
 
@@ -220,7 +219,6 @@ export async function getPost(postId) {
         const postSnap = await getDoc(postRef);
 
         if (!postSnap.exists()) {
-            console.log("게시글이 존재하지 않음");
             return null;
         }
 
@@ -230,7 +228,6 @@ export async function getPost(postId) {
         };
 
     } catch (error) {
-        console.error("게시글 불러오기 실패:", error);
         return null;
     }
 }
@@ -242,14 +239,12 @@ export async function getUserInfo(uid) {
             doc(db, "users", uid)
         );
         if (!docSnap.exists()) {
-            console.log("유저가 존재하지 않음");
             return null;
         }
 
         return docSnap.data();
 
     } catch (error) {
-        console.error("유저정보 불러오기 실패:", error);
         return null;
     }
 }

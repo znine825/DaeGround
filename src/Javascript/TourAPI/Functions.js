@@ -143,8 +143,6 @@ export async function fetchCandidatesForAllSlots(
 
         const usedThemes = new Set([currentSlot.subTheme]);
 
-        console.log(`===== 슬롯 ${currentSlot.slot} 검색 시작 =====`);
-        console.log(`현재 테마: ${currentSlot.subTheme}`);
 
         result = await fetchAllSpotsForSlot(
             lDongSignguCd,
@@ -152,7 +150,6 @@ export async function fetchCandidatesForAllSlots(
             callApiFn
         );
 
-        console.log(`지역 검색 결과: ${result.length}개`);
 
         if (result.length === 0) {
             result = await fetchAllSpotsForSlot(
@@ -161,18 +158,13 @@ export async function fetchCandidatesForAllSlots(
                 callApiFn
             );
 
-            console.log(`대구 전체 검색 결과: ${result.length}개`);
         }
 
         if (result.length > 0) {
             candidateLists[i] = result;
             finalSlots[i] = currentSlot;
 
-            console.log(
-                `슬롯 ${currentSlot.slot} 성공: ${currentSlot.subTheme}`
-            );
-
-            console.log(`===== 슬롯 ${currentSlot.slot} 검색 종료 =====`);
+           ;
 
             continue;
         }
@@ -182,9 +174,7 @@ export async function fetchCandidatesForAllSlots(
                 .filter(theme => !usedThemes.has(theme));
 
             if (possibleThemes.length === 0) {
-                console.warn(
-                    `슬롯 ${currentSlot.slot}: ${currentSlot.pool}의 모든 테마 검색 실패`
-                );
+                
 
                 break;
             }
@@ -195,10 +185,6 @@ export async function fetchCandidatesForAllSlots(
                 ];
 
             usedThemes.add(nextTheme);
-
-            console.log(
-                `슬롯 ${currentSlot.slot}: ${nextTheme}로 테마 변경`
-            );
 
             currentSlot = makeSlotWithTheme(
                 currentSlot,
@@ -211,33 +197,18 @@ export async function fetchCandidatesForAllSlots(
                 callApiFn
             );
 
-            console.log(
-                `${nextTheme} 지역 검색 결과: ${result.length}개`
-            );
-
             if (result.length === 0) {
                 result = await fetchAllSpotsForSlot(
                     undefined,
                     currentSlot,
                     callApiFn
                 );
-
-                console.log(
-                    `${nextTheme} 대구 전체 검색 결과: ${result.length}개`
-                );
             }
-
             if (result.length > 0) {
-                console.log(
-                    `슬롯 ${currentSlot.slot} 성공! 최종 테마: ${currentSlot.subTheme}`
-                );
-
                 candidateLists[i] = result;
                 finalSlots[i] = currentSlot;
             }
         }
-
-        console.log(`===== 슬롯 ${slots[i].slot} 검색 종료 =====`);
     }
 
     return {
@@ -266,8 +237,6 @@ export async function generateTripSpots(
     const slots = selectThemeSlots(
         selectedSubThemeNames
     );
-
-    console.log("최초 선택 슬롯:", slots);
 
     const result = await fetchCandidatesForAllSlots(
         lDongSignguCd,
