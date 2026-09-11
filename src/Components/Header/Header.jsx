@@ -154,7 +154,7 @@ function Header() {
                         </div>
                         <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'comment' color = 'var(--LM-main-color)' width = {30} height = {30}/>
-                            <Link to = '/Contact'><p>문의하기</p></Link>
+                            <Link to = '/Contact'><p>공지사항</p></Link>
                         </div>
                     </div>
                 </div>}
