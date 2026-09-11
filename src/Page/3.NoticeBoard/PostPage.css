@@ -421,6 +421,18 @@
         max-width: 100%;
         box-sizing: border-box;
     }
+    .commentMobile > div > p {
+        position: relative;
+
+        font-size: 32px;
+        font-weight: 600;
+
+        color: var(--LM-mainouttext-color);
+    }
+    .commentMobile > div > div {
+        position: relative;
+        margin-left: auto;
+    }
 
     .commentMobile > input {
         position: relative;
