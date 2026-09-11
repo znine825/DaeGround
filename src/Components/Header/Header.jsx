@@ -64,12 +64,12 @@ function Header() {
                             <p>여행 게시판</p>
                         </Link>
                     </div>
-                    <div className = { onhover == 4 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(4)}}>
+                    {/* <div className = { onhover == 4 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(4)}}>
                         <Link to = '/Contact'>
                             <div></div>
                             <p>문의하기</p>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
                 <div>
                     {user ? (

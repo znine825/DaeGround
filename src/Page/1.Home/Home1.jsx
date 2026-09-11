@@ -48,6 +48,14 @@ function Home1() {
         return () => clearTimeout(timer);
     }, [page]);
 
+    const scrolldown = () => {
+        window.scrollTo({
+            top: 700,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
+
     return (
         <div className = 'home1'>
             <div className = 'leftText'>
@@ -62,7 +70,7 @@ function Home1() {
                             <Icon name = 'arrowright' color = 'var(--LM-background-color)' />
                         </div>
                     </div>
-                    <div>
+                    <div onClick = {() => scrolldown()}>
                         <p>둘러보기</p>
                     </div>
                 </div>

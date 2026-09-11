@@ -113,14 +113,14 @@ export function InfoHeader({contents}) {
                 </div>
                 <div>
                     <div>
-                        <Icon name = 'file' color = 'var(--LM-background-color)'/>
+                        <Icon name = 'comment' color = 'var(--LM-background-color)'/>
                     </div>
                     <p>{contents.commentCount}</p>
                     <p>댓글</p>
                 </div>
                 <div>
                     <div>
-                        <Icon name = 'file' color = 'var(--LM-background-color)'/>
+                        <Icon name = 'chartbar' color = 'var(--LM-background-color)'/>
                     </div>
                     <p>{contents.co2}g</p>
                     <p>절감 CO2</p>

@@ -368,10 +368,11 @@
         height: 100px;
     }
     .infoHeader > div:nth-child(1) > div:nth-child(1) {
-        margin-right: 30px;
+        margin-right: 0px
     }
     .infoHeader > div:nth-child(1) > div:nth-child(2) {
         top: 50%;
+        left: 30px;
         transform: translate(0%, -50%);
     }
     .infoHeader > div:nth-child(2) {

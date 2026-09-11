@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Info, InfoHeader, Post } from "./../../../Components/Common/Common.jsx"
+import { Icon } from "./../../../Components/Icons/Icons.jsx"
 import { getPostsByUid, getComments } from "./../../../Javascript/firebase_logic.js"
 import { auth, db } from "./../../../Javascript/firebase";
-import { Icon } from './../../../Components/Icons/Icons.jsx'
 import './MyPlan.css'
 
 
@@ -28,7 +28,15 @@ function Myplan() {
 
     if (!post) {
         return <div>로딩중</div>
-        
+    }
+
+    if (post.length === 0) {
+        return (
+            <div className = 'MPnonePost'>
+                <Icon name = "file" color = "color-mix(in srgb, var(--LM-line-color) 70%, transparent)"/>
+                <p>아직 게시한 게시글이 없어요</p>
+            </div>
+        )
     }
     console.log(post);
 

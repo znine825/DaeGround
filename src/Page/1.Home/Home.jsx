@@ -10,11 +10,11 @@ function Home() {
 
     useEffect(() => {
         async function test() {
-            const response = await fetch("https://apis.data.go.kr/B551011/KorService2/areaBasedList2?serviceKey=19d9c07bfc7bbe1c1fcb724f8911de3d3b3054cd8d58e28d069e12d44ffa3a60&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&arrange=C&contentTypeId=12&lDongRegnCd=26&lDongSignguCd=380&lclsSystm1=NA&lclsSystm2=NA04&lclsSystm3=NA040500");
-            console.log(response.body);
         }
         test();
     })
+
+    
     return (
         <motion.div 
             className = 'home'

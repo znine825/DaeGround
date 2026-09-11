@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { PageHeader, Comment, Button, Post } from './../../../Components/Common/Common.jsx'
 import { getCommentsByUid, getAllPosts, getPost, getUserInfo, addview, toggleLike, checkLike, getComments, addComment } from "./../../../Javascript/firebase_logic"
 import { auth, db } from "../../../Javascript/firebase";
+import { Icon } from "./../../../Components/Icons/Icons.jsx"
 import './MyLike.css'
 function MyLike() {
 
@@ -36,6 +37,15 @@ function MyLike() {
 
     if (!onLodding) {
         return <div>로딩중...</div>;
+    }
+
+    if (showPostNumber.length === 0) {
+        return (
+            <div className = 'MPnonePost'>
+                <Icon name = "heart" color = "color-mix(in srgb, var(--LM-line-color) 70%, transparent)"/>
+                <p>아직 좋아요 누른 게시글이 없어요</p>
+            </div>
+        )
     }
 
     return (
