@@ -26,7 +26,7 @@ function Footer() {
                         <Link to = '/'><p>홈</p></Link>
                         <Link to = '/MakePlan'><p>나만의 여행 만들기</p></Link>
                         <Link to = '/NoticeBoard'><p>여행 게시판</p></Link>
-                        {/* <Link to = '/Contact'><p>문의하기</p></Link> */}
+                        <Link to = '/Contact'><p>공지사항</p></Link>
                     </div>
                     <div className = 'FTtemp'></div>
                     {/* 우 */}

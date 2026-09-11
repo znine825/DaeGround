@@ -34,6 +34,14 @@ function Header() {
         signOut(auth);
     };
 
+    const scrollreset = () => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
+
     const [mobileMenu, setMobileMenu] = useState(false);
     const [onhover, setOnhover] = useState(1);
 
@@ -46,30 +54,30 @@ function Header() {
                     <p>대그라운드</p>
                 </div>
                 <div>
-                    <div className = { onhover == 1 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(1)}}>
+                    <div className = { onhover == 1 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(1); scrollreset()}}>
                         <Link to = '/'>
                             <div></div>
                             <p>홈</p>
                         </Link>
                     </div>
-                    <div className = { onhover == 2 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(2)}}>
+                    <div className = { onhover == 2 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(2); scrollreset()}}>
                         <Link to = '/MakePlan'>
                             <div></div>
                             <p>나만의 여행 만들기</p>
                         </Link>
                     </div>
-                    <div className = { onhover == 3 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(3)}}>
+                    <div className = { onhover == 3 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(3); scrollreset()}}>
                         <Link to = '/NoticeBoard'>
                             <div></div>
                             <p>여행 게시판</p>
                         </Link>
                     </div>
-                    {/* <div className = { onhover == 4 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(4)}}>
+                    <div className = { onhover == 4 ? 'HoverHeader' : '' } onClick = {() => {setOnhover(4)}}>
                         <Link to = '/Contact'>
                             <div></div>
-                            <p>문의하기</p>
+                            <p>공지사항</p>
                         </Link>
-                    </div> */}
+                    </div>
                 </div>
                 <div>
                     {user ? (

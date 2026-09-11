@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Icon } from './../../Components/Icons/Icons.jsx'
 import { useNavigate } from 'react-router-dom';
 import { motion } from "motion/react";
-import './Home1.css'
+import './Home1.css';
 function Home1() {
 
     const [page, setPage] = useState(5);

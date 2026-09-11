@@ -1,0 +1,77 @@
+.Contact {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: min(1300px, calc(100vw - 30px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ContactTitle {
+    position: relative;
+    width: min(1300px, calc(100vw - 30px));
+    margin-top: 30px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 0.8fr 100px;
+    text-align: center;
+
+    border-top: 3px solid var(--LM-line-color);
+}
+.ContactTitle > p {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+} 
+.ContactContent {
+    position: relative;
+    width: min(1300px, calc(100vw - 30px));
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 0.8fr 100px;
+
+    border-top: 1px solid var(--LM-line-color);
+}
+.ContactContent > div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+}
+.ContactContent > p:nth-child(2) {
+    text-align: center;
+}
+.ContactContent > div:nth-child(1) > p,
+.ContactContent > p {
+    font-size: 14px;
+    font-weight: 300;
+}
+.ContactContent > div:nth-child(1) > div {
+    width: fit-content;
+    height: fit-content;
+    margin-right: 10px;
+    background-color: #222222;
+}
+.ContactContent > div:nth-child(1) > p {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ContactContent > div:nth-child(1):hover {
+    cursor: pointer;
+}
+.ContactContent > div:nth-child(1) > div > p {
+    font-size: 12px;
+    font-weight: 200;
+
+    white-space: nowrap;
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    color: var(--LM-mainintext-color);
+}

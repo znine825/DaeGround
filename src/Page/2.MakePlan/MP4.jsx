@@ -407,11 +407,16 @@ function MP4({ info, setInfo, page, pageSet }) {
         }
     }, [info.pathSet, subday, mapReady]);
 
-
-
+    const scrollreset = () => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
 
     const moveLeftPage = () => {
-        alert('여행이 완성되어서 이전단계로 갈 수 없어요.');
+        alert('지금은 이전단계로 갈 수 없어요.');
         return false;
     };
 
@@ -420,6 +425,7 @@ function MP4({ info, setInfo, page, pageSet }) {
             if (prev < 5) return prev + 1;
             return prev;
         });
+        scrollreset();
     };
 
     return (

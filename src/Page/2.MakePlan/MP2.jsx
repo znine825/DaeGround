@@ -26,11 +26,20 @@ function MP2({info, setInfo, page, pageSet}) {
         setRegions(e);
     }
 
+    const scrollreset = () => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
+
     const moveLeftPage = () => {
         pageSet((prev) => {
             if (prev > 1) return prev - 1;
             return prev;
         });
+        scrollreset();
     };
 
     const moveRightPage = () => {
@@ -44,6 +53,7 @@ function MP2({info, setInfo, page, pageSet}) {
             if (prev < 5) return prev + 1;
             return prev;
         });
+        scrollreset();
     }; 
 
     const clearRigon = (e) => {

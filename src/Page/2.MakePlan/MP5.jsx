@@ -138,11 +138,20 @@ function MP5({info, setInfo, page, pageSet}) {
         setDay(e);
     }
 
+    const scrollreset = () => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
+
     const moveLeftPage = () => {
         pageSet((prev) => {
             if (prev > 1) return prev - 1;
             return prev;
         });
+        scrollreset();
     };
 
     const [addTrip, setAddTrip] = useState(false);
@@ -153,7 +162,7 @@ function MP5({info, setInfo, page, pageSet}) {
         setAddTrip(true);
 
         window.scrollTo({
-            top: 270,
+            top: 0,
             left: 0,
             behavior: 'smooth'
         });
