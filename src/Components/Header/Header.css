@@ -21,16 +21,14 @@
     display: flex;
     flex-direction: row;
 }
-.header > div:nth-child(1) > div:nth-child(1) > div {
+.header > div:nth-child(1) > div:nth-child(1) > svg {
     position: relative;
     height: 40px;
-    width: 40px;
+    width: 35px;
 
     margin-top: 15px;
     margin-right: 15px;
 
-    border-radius: 10px;
-    background-color: #1DB443;
 }
 .header > div:nth-child(1) > div:nth-child(1) > p {
     position: relative;

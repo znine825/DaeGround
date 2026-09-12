@@ -1,9 +1,25 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react";
 import { Icon } from './../Icons/Icons.jsx'
 import { Bus, Walk } from '../TripCommon/TripCommon.jsx'
 import { getPostsByUid, getComments } from "./../../Javascript/firebase_logic.js"
 import './Common.css'
+
+export function Logo({width = 35, height = 40}) {
+    return (
+        <svg width={`${width}`} height={`${height}`} viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 1.3C0 0.582029 0.58203 0 1.3 0H28H29.8667C32.7017 0 35 2.29827 35 5.13333V27.8667C35 30.7017 32.7017 33 29.8667 33H28H1C0.447715 33 0 32.5523 0 32V17.875V1.3Z" fill="#34C759"/>
+            <path d="M3 11C3 9.89543 3.89543 9 5 9H30C31.1046 9 32 9.89543 32 11V27C32 28.6569 30.6569 30 29 30H5C3.89543 30 3 29.1046 3 28V11Z" fill="white"/>
+            <path d="M3 4C3 3.44772 3.44772 3 4 3H29.3529C30.8149 3 32 4.18513 32 5.64706C32 5.84198 31.842 6 31.6471 6H4C3.44772 6 3 5.55228 3 5V4Z" fill="white"/>
+            <path d="M3 40L6.11111 30H9L6 40H3Z" fill="#34C759"/>
+            <path d="M32 40L28.8889 30H26L28.8889 40H32Z" fill="#34C759"/>
+            <circle cx="8" cy="26" r="2" fill="#34C759"/>
+            <circle cx="27" cy="26" r="2" fill="#34C759"/>
+            <path d="M27.5 35.5L7.5 35.5L7 37.5L28 37.5L27.5 35.5Z" fill="#34C759" stroke="#34C759"/>
+        </svg>
+    )
+}
 
 
 export function Title({icon, text, title, subtitle, locate}) {
@@ -75,17 +91,41 @@ export function LoadMap({contents}) {
     )
 }
 
-export function Info({ title, subtitle, icon }) {
+export function Info({ title, subtitle, warning, icon, set = false, value, setValue }) {
+
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    };
+
     return (
         <div className = 'infoComponent'>
              <div>
                 <div></div>
                 <Icon name = {icon} color = 'var(--LM-main-color)'/>
              </div>
+             {!set && 
              <div>
                 <p>{title}</p>
                 <p>{subtitle}</p>
-             </div>
+             </div>}
+             {set && 
+             <div>
+                <motion.p
+                    initial={{ y: 0}}
+                    whileInView={{ y: -20}}
+                    transition={{
+                        duration: 0.2,
+                        ease: "easeOut" }}>{title}</motion.p>
+                <motion.input 
+                    value = {value}
+                    onChange = {handleChange}
+                    placeholder = {warning}
+                    initial={{ y: 20}}
+                    whileInView={{ y: 0}}
+                    transition={{
+                        duration: 0.2,
+                        ease: "easeOut" }}/>
+             </div>}
         </div>
     )
 }

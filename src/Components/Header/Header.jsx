@@ -4,6 +4,7 @@ import { auth } from "./../../Javascript/firebase.js";
 import { getUserInfo } from "./../../Javascript/firebase_logic.js"
 import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from './../Icons/Icons.jsx'
+import { Logo } from './../Common/Common.jsx'
 import './Header.css'
 
 function Header() {
@@ -50,7 +51,7 @@ function Header() {
         <header className = 'header'>
             <div className = 'pcHeader'>
                 <div>
-                    <div></div>
+                    <Logo />
                     <p>대그라운드</p>
                 </div>
                 <div>
@@ -172,3 +173,6 @@ function Header() {
 }
 
 export default Header
+
+
+

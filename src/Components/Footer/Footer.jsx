@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import PrivacyPage from '../../Components/Files/PrivacyPolicy/PrivacyPolicy.jsx'
 import TermsOfUse from '../../Components/Files/TermsOfUse/TermsOfUse.jsx'
+import { Logo } from './../Common/Common.jsx'
 import './Footer.css'
 
 function Footer() {
@@ -15,7 +16,7 @@ function Footer() {
                     {/* 좌 */}
                     <div>
                         <div>
-                            <div></div>
+                            <Logo />
                             <p>대그라운드</p>
                         </div>
                         <p>탄소절감을 확인할 수 있는 <br/> 친환경 여행 경로 추천 서비스</p>

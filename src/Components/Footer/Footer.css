@@ -79,12 +79,9 @@
     font-weight: 300;
     color: var(--LM-subtext-color)
 }
-.ftcontent > div:nth-child(1) > div > div {
+.ftcontent > div:nth-child(1) > div > svg {
     width: 30px;
     height: 30px;
-
-    border-radius: 10px;
-    background-color: var(--LM-main-color);
 
 }
 .ftcontent > div:nth-child(1) > div > p {
