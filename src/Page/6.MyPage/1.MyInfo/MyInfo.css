@@ -1,5 +1,7 @@
 .myinfo {
     position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
     width: 975px;
     height: 700px;
 
@@ -20,7 +22,7 @@
     column-gap: 50px;
 }
 .myinfo > div:nth-child(1) > div {
-    height: 80px;
+    height: 60px;
 }
 .myinfo > div:nth-child(2) {
     width: min(1000px, 100%);

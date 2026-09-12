@@ -1,6 +1,7 @@
 .loginputGrid {
-    position: absolute;
-    top: 275px;
+    position: relative;
+
+    margin-top: 225px;
     left: 50%;
     transform: translate(-50%, 0);
     width: fit-content;
@@ -17,4 +18,7 @@
     top: 120px;
     left: 50%;
     transform: translate(-50%, 0);
+}
+.login {
+    height: fit-content;
 }
