@@ -147,6 +147,16 @@ export async function checkLike(postId) {
     }
 }
 
+// 게시글 삭제
+
+export async function deletePost(postid) {
+    const db = getFirestore();
+    const batch = writeBatch(db);
+
+    batch.delete(doc(db, "posts", postid));
+    await batch.commit();
+}
+
 
 // 회원 탈퇴
 export async function withdrawAccount() {
