@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { app, auth } from "./../../../Javascript/firebase.js";
-import { getPostsByUid, getCommentsByUid, addComment } from "./../../../Javascript/firebase_logic.js";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { app, auth, db } from "./../../../Javascript/firebase.js";
+import { getPostsByUid, getCommentsByUid, addComment, withdrawAccount } from "./../../../Javascript/firebase_logic.js";
+import { Link, useNavigate } from 'react-router-dom';
 import { Info, InfoHeader, Button, Input } from "./../../../Components/Common/Common.jsx"
 
 import './MyInfo.css'
-
-
 
 function MyInfo() {
 
     const [userData, setUserData] = useState(null);
     const [postCount, setPostCount] = useState([]);
     const [commentCount, setCommentCount] = useState([]);
+    const [userUid, setUserUid] = useState(null);
 
     const [setting, setSetting] = useState(false);
     const [name, setName] = useState('');
@@ -20,24 +20,18 @@ function MyInfo() {
     const [number, setNumber] = useState('');
     const [area, setArea] = useState('');
     const [gender, setGender] = useState('');
-    const [signCheck, setSignCheck] = useState([true, true, true, true]);
+    const [signCheck, setSignCheck] = useState([true, true]);
 
-    
+    let tempCheck = [true, true];
+    let lastCheck = true;
 
-    const checkInfo = () => {
+    const navigate = useNavigate();
 
-        const checkName = /^[a-zA-Z0-9가-힣]{2,8}$/;
-        if (!checkName.test(name)) {
-            tempCheck[1] = false;
-            setName('');
-            lastCheck = false;
-        }
-    }
     useEffect(() => {
         const uid = auth.currentUser?.uid;
 
         if (!uid) return;
-
+        setUserUid(uid);
         async function fetchData() {
             const db = getFirestore();
             try {
@@ -62,6 +56,46 @@ function MyInfo() {
 
         fetchData();
     }, []);
+
+    const checkInfo = () => {
+        const checkName = /^[a-zA-Z0-9가-힣]{2,8}$/;
+        if (!checkName.test(name)) {
+            tempCheck[0] = false;
+            setName('');
+            lastCheck = false;
+        }
+
+        const checkNumber = /^\d{11}$/;
+        if (!checkNumber.test(number)) {
+            tempCheck[1] = false;
+            setNumber('');
+            lastCheck = false;
+        }
+
+        if(lastCheck) {
+            async function temp() {
+                const userRef = doc(db, "users", userUid);
+                await updateDoc(userRef, {
+                    "info.name": name,
+                    "info.realname": realname,
+                    "info.phonenumber": number,
+                    "info.residentialarea": area,
+                    "info.gender": gender
+                });
+                alert('정보 수정이 완료 되었습니다.');
+    
+                console.log(name);
+                navigate(0);
+            }
+            temp();
+
+        } else {
+            lastCheck = true;
+            setSignCheck(tempCheck);
+            alert('잘못된 정보가 있습니다.');
+        }
+    }
+
     
     useEffect(() => {
         if (!userData) return;
@@ -97,7 +131,7 @@ function MyInfo() {
                 <div onClick = {() => setSetting(true)}>
                     <Button width = '150' height = '50' text = '정보수정' fsize = '16' fweight = '500' />
                 </div>
-                <div>
+                <div onClick = {() => withdrawAccount()}>
                     <Button width = '150' height = '50' text = '회원탈퇴' fsize = '16' fweight = '500' />
                 </div>
             </div>}
@@ -106,7 +140,7 @@ function MyInfo() {
                 <div onClick = {() => setSetting(false)}>
                     <Button width = '150' height = '50' text = '취소' fsize = '16' fweight = '500' />
                 </div>
-                <div>
+                <div onClick = {() =>{checkInfo(); setSetting(false)}}>
                     <Button width = '150' height = '50' text = '저장하기' fsize = '16' fweight = '500' />
                 </div>
             </div>}

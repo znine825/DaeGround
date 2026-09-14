@@ -3,6 +3,8 @@ import { auth, db } from "./firebase";
 import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, collection, setDoc, getDocs, getDoc, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { collectionGroup, serverTimestamp, runTransaction, increment, query, orderBy, where, writeBatch, getFirestore } from 'firebase/firestore';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 // 회원가입
 export async function signUp(email, password, name) {
@@ -150,6 +152,7 @@ export async function checkLike(postId) {
 
 // 회원 탈퇴
 export async function withdrawAccount() {
+    const navigate = useNavigate();
     const db = getFirestore();
     const user = auth.currentUser;
     const uid = user.uid;

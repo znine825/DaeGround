@@ -112,7 +112,6 @@ async function fetchAllSpotsForSlot(lDongSignguCd, slot, callApiFn) {
                 error
             );
         }
-        await new Promise(resolve => setTimeout(resolve, 1000));
     }
     return results;
 }
@@ -258,3 +257,4 @@ export async function generateTripSpots(
         spot: finalSpots[i]
     }));
 }
+ 
