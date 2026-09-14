@@ -516,8 +516,7 @@ function MP4({ info, setInfo, page, pageSet }) {
                 )}
 
                 <div></div>
-
-                {page !== 5 && (
+                {onloading && page !== 5 && (
                     <div onClick={moveRightPage}>
                         <Button
                             width='150'

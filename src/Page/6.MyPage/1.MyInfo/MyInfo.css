@@ -3,7 +3,7 @@
     left: 50%;
     transform: translate(-50%, 0);
     width: 975px;
-    height: 700px;
+    height: fit-content;
 
     display: flex;
     flex-direction: column;
@@ -18,14 +18,14 @@
     
     display: grid;
     grid-template-columns: 1fr 1fr;
-    row-gap: 80px;
+    row-gap: 60px;
     column-gap: 50px;
 }
 .myinfo > div:nth-child(1) > div {
     height: 60px;
 }
 .myinfo > div:nth-child(2) {
-    width: min(1000px, 100%);
+    width: min(1000px, calc(100vw - 30px));
     display: flex;
     flex-direction: row;
 }
