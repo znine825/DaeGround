@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPost, getUserInfo, addview, toggleLike, checkLike, getComments, addComment } from "./../../Javascript/firebase_logic"
+import { getPost, getUserInfo, addview, toggleLike, checkLike, getComments, addComment, deletePost } from "./../../Javascript/firebase_logic"
+import { app, auth } from "./../../Javascript/firebase.js";
 import { PageHeader, Comment, Button } from './../../Components/Common/Common.jsx'
 import { Bus, Walk } from './../../Components/TripCommon/TripCommon.jsx'
 import { Icon } from './../../Components/Icons/Icons.jsx'
+import { useNavigate } from 'react-router-dom';
 import './PostPage.css'
 
 import { Line } from 'react-chartjs-2';
@@ -104,9 +106,13 @@ function PostPage() {
     const [postlike, setPostlike] = useState(false);
     const [firstlike, setFirstlike] = useState();
 
+    const [checkPostHost, setCheckPostHost] = useState(false);
+    const [showSetting, setShowSetting] = useState(false);
+
     const [onLodding, setOnLodding] = useState(false);
 
     const [title, setTitle] = useState("");
+    const navigate = useNavigate();
 
     function likerPtks() {
         if (firstlike) {
@@ -127,11 +133,17 @@ function PostPage() {
         setPostlike(!postlike);
     }
 
-
+    const uid = auth.currentUser?.uid;
     useEffect(() => {
         async function loadPost() {
             const data = await getPost(postId);
             setPost(data);
+
+            if (!uid) return;
+
+            if (uid == data.authorUid) {
+                setCheckPostHost(true);
+            }
 
             const userdata = await getUserInfo(data.authorUid);
             setUser(userdata);
@@ -169,7 +181,7 @@ function PostPage() {
         }
 
         loadPost();
-    }, [postId]);
+    }, [postId, uid]);
 
     const [reload, setReload] = useState(true);
 
@@ -185,12 +197,10 @@ function PostPage() {
         await addComment(postId, text);
         setReload(!reload);
     }
-
     
     if (!onLodding) {
         return <div>로딩중...</div>;
     }
-    
     
     const ph = {
         image: info.contentImage,
@@ -201,12 +211,17 @@ function PostPage() {
 
         heigth: 300
     };
+    async function delPost() {
+        
+        await deletePost(postId);
+        navigate('/NoticeBoard');
+
+    }
 
     const changeDay = (e) => {
         setDay(e);
     }
     const shortText = (text) => text.length > 6 ? text.slice(0, 6) + '...' : text;
-    
 
     return (
         <div className = 'postpage'>
@@ -228,6 +243,16 @@ function PostPage() {
                             <Icon name = 'heart' color = {postlike ? 'red' : 'black'}/>
                         </div>
                         <p>{likerPtks()}</p>
+                        {checkPostHost &&
+                        <div onClick = {() => {setShowSetting(!showSetting)}}>
+                            <Icon name = 'setting' color = 'var(--LM-line-color)'/>
+                        </div>}
+                        {showSetting && 
+                        <div className = 'PostSetting'>
+                            <div onClick = {() => delPost()}>
+                                <p>게시글 삭제</p>
+                            </div>
+                        </div>}
                     </div>
                     {/* 모바일 포스트 제목 */}
                     <div className = 'postInfoHeader2'>
@@ -239,6 +264,16 @@ function PostPage() {
                                 <Icon name = 'heart' color = {postlike ? 'red' : 'black'}/>
                             </div>
                             <p>{likerPtks()}</p>
+                            {/* {checkPostHost &&
+                            <div onClick = {() => {setShowSetting(!showSetting)}}>
+                                <Icon name = 'setting' color = 'var(--LM-line-color)'/>
+                            </div>}
+                            {showSetting && 
+                            <div className = 'PostSetting'>
+                                <div onClick = {() => delPost()}>
+                                    <p>게시글 삭제</p>
+                                </div>
+                            </div>} */}
                         </div>
                     </div>
 
