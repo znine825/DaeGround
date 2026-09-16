@@ -110,9 +110,7 @@ function Header() {
                 </div>
             </div>
             <motion.div 
-                className="mobileHeader"
-                initial={{ x: '100%'}}
-                whileInView={{ x: 0}}>
+                className="mobileHeader">
                 {mobileMenu && <div className = "HeaderMenu">
                     <motion.div
                     initial={{ opacity: 0}}
