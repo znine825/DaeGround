@@ -5,6 +5,7 @@ import { getUserInfo } from "./../../Javascript/firebase_logic.js"
 import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from './../Icons/Icons.jsx'
 import { Logo } from './../Common/Common.jsx'
+import { motion } from "motion/react";
 import './Header.css'
 
 function Header() {
@@ -108,11 +109,26 @@ function Header() {
                     </div>
                 </div>
             </div>
-            <div className="mobileHeader">
+            <motion.div 
+                className="mobileHeader"
+                initial={{ x: '100%'}}
+                whileInView={{ x: 0}}>
                 {mobileMenu && <div className = "HeaderMenu">
-                    <div>
-                    </div>
-                    <div className = "HeaderMenuRight">
+                    <motion.div
+                    initial={{ opacity: 0}}
+                    whileInView={{ opacity: 1}}
+                    transition={{
+                        duration: 0.3
+                    }}>
+                    </motion.div>
+                    <motion.div 
+                        className = "HeaderMenuRight"
+                        initial={{ x: '100%'}}
+                        whileInView={{ x: 0}}
+                        transition={{
+                            duration: 0.3,
+                            ease: "in"
+                        }}>
                         <div>
                             <div>
                                 <Link to = '/Mypage/MyInfo'>
@@ -174,7 +190,7 @@ function Header() {
                             <Icon name = 'logout' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link><p>로그아웃</p></Link>
                         </div>}
-                    </div>
+                    </motion.div>
                 </div>}
                 
                 <div className = 'HeaderTitle'>
@@ -184,7 +200,7 @@ function Header() {
                 <div className = 'HeaderMenuIcon' onClick = {() => {setMobileMenu(!mobileMenu)}}>
                     <Icon name = 'menu' color = 'var(--LM-mainouttext-color)'/>
                 </div>
-            </div>
+            </motion.div>
         </header>
     );
 }
