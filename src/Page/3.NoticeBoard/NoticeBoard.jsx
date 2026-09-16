@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import { getPost, getAllPosts, getUserInfo, addview, toggleLike, checkLike, getComments, addComment } from "./../../Javascript/firebase_logic"
-import { PageHeader, Post, Comment, Button } from './../../Components/Common/Common.jsx'
-import { Icon } from './../../Components/Icons/Icons.jsx'
-import './NoticeBoard.css'
+import { getPost, getAllPosts, getUserInfo, addview, toggleLike, checkLike, getComments, addComment } from "./../../Javascript/firebase_logic";
+import { PageHeader, Post, Comment, Button } from './../../Components/Common/Common.jsx';
+import { Icon } from './../../Components/Icons/Icons.jsx';
+import './NoticeBoard.css';
 
 function NoticeBoard() {
 
     const [allPost, setAllPost] = useState(null);
-    const [onLodding, setOnLodding] = useState(false);
+    const [onLoading, setOnLoading] = useState(false);
 
     const [showRegion, setShowRegion] = useState(false);
-    const [RegionNumber, serRegionNumber] = useState(0);
+    const [regionNumber, setRegionNumber] = useState(0);
     const RegionName = ['전체', '동구', '중구', '서구', '남구', '북구', '수성구', '달서구', '달성군'];
 
     const [showType, setShowType] = useState(false);
-    const [TypeNumber, serTypeNumber] = useState(0);
+    const [typeNumber, setTypeNumber] = useState(0);
     const TypeName = ['날짜', '좋아요', '조회수'];
 
     const [sortStandard, setSortStandard] = useState(1); // 0 오름차순, 1 내림차순
@@ -27,57 +27,54 @@ function NoticeBoard() {
     const postsPerPage = 16;
 
     function typetrans(text) {
-        if (text == '날짜')  return "createdAt";
-        if (text == '좋아요')  return "likeCount";
-        if (text == '조회수')  return "view";
+        if (text === '날짜') return "createdAt";
+        if (text === '좋아요') return "likeCount";
+        if (text === '조회수') return "view";
     }
-    
-
-    useEffect (() => {
-        async function loading() {
-            const allPost = await getAllPosts(typetrans(TypeName[TypeNumber]), sortStandard);
-            setAllPost(allPost);
-            setOnLodding(true);
-        }
-        loading();
-    },[TypeNumber, sortStandard])
 
     useEffect(() => {
-        if (allPost == null) return;
+        async function loading() {
+            setOnLoading(false);
+            const allPost = await getAllPosts(typetrans(TypeName[typeNumber]), sortStandard);
+            setAllPost(allPost);
+            setOnLoading(true);
+        }
+        loading();
+    }, [typeNumber, sortStandard]);
 
-        const list = [];
+    useEffect(() => {
+        if (!allPost) return;
+
+        const filteredIndices = [];
+        const keyword = search.trim().toLowerCase();
+        const selectedRegion = RegionName[regionNumber];
 
         for (let i = 0; i < allPost.length; i++) {
             const post = allPost[i];
 
-            if (search !== "" && !post.title.includes(search)) {
+            if (keyword !== "" && !post.title?.toLowerCase().includes(keyword)) {
                 continue;
             }
 
-            if (RegionName[RegionNumber] !== "전체") {
-                const json = JSON.parse(post.content);
-
-                if (!json.selectRegions.some(region =>
-                    region.includes(RegionName[RegionNumber])
-                )) {
+            if (selectedRegion !== "전체") {
+                try {
+                    const json = typeof post.content === "string" ? JSON.parse(post.content) : post.content;
+                    if (!json.selectRegions?.some(region => region.includes(selectedRegion))) {
+                        continue;
+                    }
+                } catch (e) {
+                    console.error("Content JSON 파싱 에러:", e);
                     continue;
                 }
             }
 
-            list.push(i);
+            filteredIndices.push(i);
         }
 
-        
-        setShowPostNumber(list);
+        setShowPostNumber(filteredIndices);
         setCurrentPage(1);
 
-        if (RegionName[RegionNumber] === "전체") {
-            setShowPostNumber(allPost.map((_, i) => i));
-            setCurrentPage(1);
-            return;
-        }
-    }, [allPost, RegionNumber, search, toggleSearch]);
-
+    }, [allPost, regionNumber, search, toggleSearch]);
 
     const ph = {
         image: './Image/bagic/PageHeader.png',
@@ -85,102 +82,114 @@ function NoticeBoard() {
         iconText: '게시판',
         title: '여행 게시판',
         subtitle: '다른사람들이 만든 다양한 경로를 볼 수 있어요',
-
         heigth: 250
     };
 
-    const toggleRegion = () => {
-        setShowRegion(!showRegion);
-    }
+    const toggleRegion = () => setShowRegion(!showRegion);
+    const toggleType = () => setShowType(!showType);
 
-    const toggleType = () => {
-        setShowType(!showType);
-    }
+    const changeRegion = (i) => {
+        setRegionNumber(i);
+        setShowRegion(false);
+    };
 
-    const changeRegion = (e) => {
-        serRegionNumber(e);
-        setShowRegion(!showRegion);
-    }
-
-    const changeType = (e) => {
-        serTypeNumber(e);
-        setShowType(!showType);
-    }
+    const changeType = (i) => {
+        setTypeNumber(i);
+        setShowType(false);
+    };
 
     const toggleSortStandard = () => {
-        setSortStandard(!sortStandard);
-    }
+        setSortStandard(prev => (prev === 1 ? 0 : 1));
+    };
 
-    if(!onLodding) {
-        return (
-            <div>로딩중...</div>
-        )
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            setToggleSearch(!toggleSearch);
+        }
+    };
+
+    if (!onLoading) {
+        return <div>로딩중...</div>;
     }
 
     return (
-        <div className = 'noticeboard'>
-            <PageHeader contents = {ph}/>
-            <div className = 'searchbar'>
+        <div className='noticeboard'>
+            <PageHeader contents={ph} />
+            
+            <div className='searchbar'>
                 <div>
-                    <Icon name = 'mapPin' color = 'var(--LM-mainouttext-color)'/>
-                    <input value = {search} onChange={(e) => setSearch(e.target.value)} placeholder = '여행 제목으로 검색...'/>
-                    <div onClick = {() => {setToggleSearch(!toggleSearch)}}>
-                        <Icon name = 'search' color = 'var(--LM-mainouttext-color)'/>
+                    <Icon name='mapPin' color='var(--LM-mainouttext-color)' />
+                    <input 
+                        value={search} 
+                        onChange={(e) => setSearch(e.target.value)} 
+                        onKeyDown={handleKeyDown}
+                        placeholder='여행 제목으로 검색...'
+                    />
+                    <div onClick={() => setToggleSearch(!toggleSearch)} style={{ cursor: 'pointer' }}>
+                        <Icon name='search' color='var(--LM-mainouttext-color)' />
                     </div>
                 </div>
+
                 <div>
-                    <Icon name = 'map' color = 'var(--LM-mainouttext-color)'/>
+                    <Icon name='map' color='var(--LM-mainouttext-color)' />
                     <p>대구광역시</p>
-                    <div onClick = {() => toggleRegion()}>
-                        <p>{RegionName[RegionNumber]}</p>
-                        <Icon name = 'down' color = 'var(--LM-mainouttext-color)'/>
+                    <div onClick={toggleRegion}>
+                        <p>{RegionName[regionNumber]}</p>
+                        <Icon name='down' color='var(--LM-mainouttext-color)' />
                     </div>
                     {showRegion && (
-                        <div className = 'Menu MRegion'>
+                        <div className='Menu MRegion'>
                             {RegionName.map((name, i) => (
-                                name != RegionName[RegionNumber] && (
-                                <div onClick = {() => changeRegion(i)}>
-                                    <p>{name}</p>
-                                </div>
+                                i !== regionNumber && (
+                                    <div key={i} onClick={() => changeRegion(i)}>
+                                        <p>{name}</p>
+                                    </div>
                                 )
                             ))}
                         </div>
                     )}
                 </div>
+
                 <div>
-                    <Icon name = 'map' color = 'var(--LM-mainouttext-color)'/>
-                    <div onClick = {() => toggleType()}>
-                        <p>{TypeName[TypeNumber]}</p>
-                        <Icon name = 'down' color = 'var(--LM-mainouttext-color)'/>
+                    <Icon name='map' color='var(--LM-mainouttext-color)' />
+                    <div onClick={toggleType}>
+                        <p>{TypeName[typeNumber]}</p>
+                        <Icon name='down' color='var(--LM-mainouttext-color)' />
                     </div>
-                    <div className = 'sortType' onClick = {() => toggleSortStandard()}>
-                        <p>{!sortStandard ? '오름차순' : '내림차순'}</p>
+                    <div className='sortType' onClick={toggleSortStandard}>
+                        <p>{sortStandard === 0 ? '오름차순' : '내림차순'}</p>
                     </div>
                     {showType && (
-                        <div className = 'Menu MsortType'>
+                        <div className='Menu MsortType'>
                             {TypeName.map((name, i) => (
-                                name != TypeName[TypeNumber] && (
-                                <div onClick = {() => changeType(i)}>
-                                    <p>{name}</p>
-                                </div>
+                                i !== typeNumber && (
+                                    <div key={i} onClick={() => changeType(i)}>
+                                        <p>{name}</p>
+                                    </div>
                                 )
                             ))}
                         </div>
                     )}
                 </div>
             </div>
+
             <div>
-                {showPostNumber
-                    .slice(
-                        (currentPage - 1) * postsPerPage,
-                        currentPage * postsPerPage
-                    )
-                    .map((postIndex) => (
-                        <div key={postIndex}>
-                            <Post post={allPost[postIndex]} />
-                        </div>
-                ))}
+                {showPostNumber.length === 0 ? (
+                    <div className = 'nonePostlist'>
+                        <Icon name = 'map' color = 'var(--LM-line-color)' />
+                        <p>경로 검색 결과가 없습니다</p>
+                    </div>
+                ) : (
+                    showPostNumber
+                        .slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage)
+                        .map((postIndex) => (
+                            <div key={postIndex}>
+                                <Post post={allPost[postIndex]} />
+                            </div>
+                        ))
+                )}
             </div>
+
             <div className="NBpagination">
                 {Array.from(
                     { length: Math.ceil(showPostNumber.length / postsPerPage) },
@@ -196,7 +205,7 @@ function NoticeBoard() {
                 ))}
             </div>
         </div>
-    )
+    );
 }
 
-export default NoticeBoard
+export default NoticeBoard;
