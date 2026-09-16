@@ -68,6 +68,9 @@
     }
 }
 @media (max-width: 1300px) {
+    .home {
+        margin-top: 50px;
+    }
     .home > img {
         position: absolute;
         width: 100%;

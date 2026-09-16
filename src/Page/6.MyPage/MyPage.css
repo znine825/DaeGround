@@ -132,11 +132,6 @@
         width: calc(100vw - 30px);
     }
 }
-@media (max-width: 975px) {
-    .MyPage {
-        top: -50px;
-    }
-}
 
 @media (max-width: 485px) {
 

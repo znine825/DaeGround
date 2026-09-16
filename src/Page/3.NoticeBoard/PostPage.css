@@ -379,12 +379,15 @@
         overflow-x: scroll;
     }
 }
-@media (min-width: 1040px) {
+@media (min-width: 1030px) {
     .postInfoHeader2 {
         display: none;
     }
 }
-@media (max-width: 1040px) {
+@media (max-width: 1030px) {
+    .postinfobox > p {
+        width: calc(100% - 30px) !important;
+    }
     .postInfoHeader1 {
         display: none !important;
     }

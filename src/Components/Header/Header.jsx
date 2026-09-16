@@ -116,13 +116,15 @@ function Header() {
                         <div>
                             <div>
                                 <Link to = '/Mypage/MyInfo'>
-                                    <Icon name = 'profile' color = 'black' width = {50} height = {50} />
+                                    <div className  = 'HMprofile'>
+                                        <Icon name = 'profile' color = 'var(--LM-line-color)' strc = {1.5} width = {45} height = {45} />
+                                    </div>
                                 </Link>
                             </div>
                             {user ? (
                                 // 로그인 상태
-                                <div className = 'state_login' onClick = {logOutButton}>
-                                    <p>{userName} | 로그아웃</p>
+                                <div className = 'state_login'>
+                                    <p>{`${userName}`}</p>
                                 </div>
                             ) : (
                                 // 로그아웃 상태
@@ -140,23 +142,38 @@ function Header() {
                                 <Icon name = 'close' color = 'black' />
                             </div>
                         </div>
-                        <div></div>
-                        <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
+                        <div className = 'HMline'>
+                            <p>서비스</p>
+                            <div></div>
+                        </div>
+                        <div className = 'MHmenu' onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'house' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link to = '/'><p>홈</p></Link>
                         </div>
-                        <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
+                        <div className = 'MHmenu' onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'map' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link to = '/MakePlan'><p>나만의 여행 만들기</p></Link>
                         </div>
-                        <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
+                        <div className = 'MHmenu' onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'calendarCheck' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link to = '/NoticeBoard'><p>여행 게시판</p></Link>
                         </div>
-                        <div onClick = {() => {setMobileMenu(!mobileMenu)}}>
+                        <div className = 'MHmenu' onClick = {() => {setMobileMenu(!mobileMenu)}}>
                             <Icon name = 'comment' color = 'var(--LM-main-color)' width = {30} height = {30}/>
                             <Link to = '/Contact'><p>공지사항</p></Link>
                         </div>
+                        <div className = 'HMline'>
+                            <p>기타</p>
+                            <div></div>
+                        </div>
+                        <div className = 'MHmenu' onClick = {() => {setMobileMenu(!mobileMenu)}}>
+                            <Icon name = 'profile' color = 'var(--LM-main-color)' width = {30} height = {30}/>
+                            <Link to = '/Mypage/MyInfo'><p>마이페이지</p></Link>
+                        </div>
+                        { user && <div className = 'MHmenu' onClick = {() => {setMobileMenu(!mobileMenu); logOutButton()}}>
+                            <Icon name = 'logout' color = 'var(--LM-main-color)' width = {30} height = {30}/>
+                            <Link><p>로그아웃</p></Link>
+                        </div>}
                     </div>
                 </div>}
                 
